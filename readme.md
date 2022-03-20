@@ -4,7 +4,11 @@
 python3 -m venv env # create virtual environment.
 source env/bin/activate # activate it.
 pip install -r requirements.txt # install requirements.
+
 xattr -cr finesse/kat # sign macos binary.
+chmod +x finesse_macos/kat
+
+# see https://stackoverflow.com/a/67634217 for M1 Macs.
 ```
 
 # running
@@ -12,7 +16,6 @@ xattr -cr finesse/kat # sign macos binary.
 ```sh
 source env/bin/activate
 
-chmod +x finesse_macos/kat # if using macOS.
 export KATINI=kat.ini
 
 # depending on OS:
