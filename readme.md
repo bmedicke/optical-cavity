@@ -17,7 +17,7 @@ export KATINI=kat.ini
 
 # depending on OS:
 export FINESSE_DIR=finesse_linux
-export FINESSE_DIR=finesse_linux
+export FINESSE_DIR=finesse_macos
 
 jupyter-lab setup-test.ipynb
 ```
