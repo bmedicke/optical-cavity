@@ -14,7 +14,11 @@ source env/bin/activate
 
 chmod +x finesse/kat
 export KATINI=kat.ini
+
+# depending on OS:
 export FINESSE_DIR=finesse_linux
+export FINESSE_DIR=finesse_linux
+
 jupyter-lab setup-test.ipynb
 ```
 
