@@ -12,7 +12,7 @@ xattr -cr finesse/kat # sign macos binary.
 ```sh
 source env/bin/activate
 
-chmod +x finesse/kat
+chmod +x finesse_macos/kat # if using macOS.
 export KATINI=kat.ini
 
 # depending on OS:
