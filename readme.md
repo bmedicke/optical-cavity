@@ -34,7 +34,7 @@ jupyter-lab setup-test.ipynb
     * Finesse is a fast interferometer simulation program. F
   * [Finesse 2 pdf manual](http://www.gwoptics.org/finesse/download/manual.pdf)
 
-# upgrading
+# upgrading/alternative install
 
 ```sh
 pip install --upgrade pip black pykat
