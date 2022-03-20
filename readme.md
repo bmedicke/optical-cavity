@@ -12,8 +12,8 @@ pip install -r requirements.txt # install requirements.
 source env/bin/activate
 
 chmod +x finesse/kat
-export KATINI=finesse/kat.ini
-export FINESSE_DIR=finesse
+export KATINI=kat.ini
+export FINESSE_DIR=finesse_linux
 jupyter-lab setup-test.ipynb
 ```
 
