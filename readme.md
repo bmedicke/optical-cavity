@@ -1,3 +1,5 @@
+![](https://github.com/bmedicke/optical-cavity/blob/2134b36ef828406b8309c86800d338a1c2179ad0/cavity.png?raw=true)
+
 # setup
 
 ```sh
