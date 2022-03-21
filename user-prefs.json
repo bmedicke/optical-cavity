@@ -1,0 +1,12 @@
+{
+  "black": {
+    "line_length": 78
+  },
+  "preferences": {
+    "default_formatter": {
+      "python": [
+        "black"
+      ]
+    }
+  }
+}
