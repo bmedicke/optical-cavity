@@ -43,4 +43,7 @@ pip install --upgrade pip black pykat
 pip install --upgrade jupyterlab jupyterlab_code_formatter
 pip install --upgrade jupyterlab_vim jupyterlab-spellchecker
 pip install --upgrade jupyterlab-git nbdime # for git-diffs.
+
+# for pdf generation in jupyterlab:
+apt install texlive-xetex
 ```
