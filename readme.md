@@ -39,10 +39,12 @@ jupyter-lab setup-test.ipynb
 # upgrading/alternative install
 
 ```sh
-pip install --upgrade pip black pykat
+pip install --upgrade pip wheel black
+pip install --upgrade --no-cache-dir pykat
 pip install --upgrade jupyterlab jupyterlab_code_formatter
 pip install --upgrade jupyterlab_vim jupyterlab-spellchecker
 pip install --upgrade jupyterlab-git nbdime # for git-diffs.
+pip install --upgrade ipympl # for %matplotlib widget
 
 # for pdf generation in jupyterlab:
 apt install texlive-xetex
