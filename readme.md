@@ -47,3 +47,10 @@ pip install --upgrade jupyterlab-git nbdime # for git-diffs.
 # for pdf generation in jupyterlab:
 apt install texlive-xetex
 ```
+
+# related repos
+
+* [quantum_cryptography](https://github.com/bmedicke/quantum_cryptography/)
+  * [lightsensor notebook](https://github.com/bmedicke/quantum_cryptography/blob/main/notebooks/Test_Lightsensor.ipynb)
+  * [bob notebook](https://github.com/bmedicke/quantum_cryptography/blob/main/notebooks/Bob.ipynb)
+  * [qcrypt lib](https://github.com/bmedicke/quantum_cryptography/blob/main/notebooks/qcrypt/hardware/lightsensor.py)
