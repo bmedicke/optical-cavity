@@ -1,3 +1,3 @@
 export KATINI=kat.ini
 export FINESSE_DIR=finesse_linux
-jupyter-lab setup-test.ipynb --allow-root --ip=0.0.0.0
+jupyter-lab 00-setup-test-and-basics.ipynb --allow-root --ip=0.0.0.0
