@@ -30,7 +30,7 @@ jupyter-lab setup-test.ipynb
 # used libraries
 
 * jupyterlab
-* pykat
+* [pykat](https://git.ligo.org/finesse/pykat.git)
   * Python interface to Finesse 2
   * requires finesse ([setup](https://git.ligo.org/finesse/pykat) for env vars)
     * Finesse is a fast interferometer simulation program. F
