@@ -71,7 +71,7 @@ ptyprocess==0.7.0
 pure-eval==0.2.2
 pycparser==2.21
 Pygments==2.11.2
-PyKat==1.2.81
+-e git+https://github.com/bmedicke/pykat.git@b82ba985ba9375497b0db7c839eebad11d107108#egg=PyKat
 pyparsing==3.0.7
 pyrsistent==0.18.1
 python-dateutil==2.8.2
