@@ -17,8 +17,7 @@ function App() {
   },[wavelength])
 
   useEffect(() => {
-    console.log((wavenumber*10*distance*10)/10 % (2*Math.PI))
-    setPhaseShift((wavenumber*10*distance*10)/10 % (2*Math.PI))
+    setPhaseShift((wavenumber*10*distance)/10 % (2*Math.PI))
   },[wavenumber, distance])
  
   return (
