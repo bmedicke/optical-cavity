@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useEffect, useState} from 'react'
+import {i} from 'mathjs'
 
 function App() {
   const [distance, setDistance] = useState(200)
@@ -8,9 +9,12 @@ function App() {
   const [power, setPower] = useState(1) // in W
   const [reflm1, setReflm1] = useState(0.9)
   const [reflm2, setReflm2] = useState(0.9)
+  const [opticalGain, setOpticalGain] = useState(0)
 
   const [wavenumber, setWavenumber] = useState(undefined)
   const [phaseShift, setPhaseShift] = useState(undefined)
+const [trans1, setTrans1] = useState(0)
+const [trans2, setTrans2] = useState(0)
 
   useEffect(() => {
     setWavenumber(2*Math.PI/wavelength)
@@ -20,6 +24,18 @@ function App() {
     setPhaseShift((wavenumber*10*distance)/10 % (2*Math.PI))
   },[wavenumber, distance])
  
+  useEffect(() => {
+    setReflm1(x => {setTrans1(Math.sqrt(1.0 - Math.pow(x, 2))); return x})
+    setReflm2(x => {setTrans2(Math.sqrt(1.0 - Math.pow(x, 2))); return x})
+  },[reflm1, reflm2])
+
+  // TODO correctly implement i
+  useEffect(() => {
+    console.log(i)
+    console.log(`Optical Gain: ${trans1/(1-Math.pow((reflm1* reflm2*Math.E, 2*i*wavenumber*distance)))}`)
+    setOpticalGain(trans1/(1-Math.pow((reflm1* reflm2*Math.E, 2*i*wavenumber*distance))))
+  }, [reflm1, reflm2, trans1, wavenumber, distance])
+
   return (
     <div className="App">
       <div className="controls">
@@ -53,7 +69,18 @@ function App() {
 
         <label>Phase Shift: 
         <input type="text" value={phaseShift} disabled /> 
+        rad
         </label>
+
+        <label>Transmission Mirror 1: 
+        <input type="text" value={trans1} disabled /> 
+        </label>
+
+        <label>Transmission Mirror 2: 
+        <input type="text" value={trans2} disabled /> 
+        </label>
+
+
       </div>
     </div>
   );
