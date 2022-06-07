@@ -199,6 +199,9 @@ function App() {
             <input type="text" value={m2transmittance} disabled />
           </label>
         </div>
+        <button onClick={() => setShowformulas((v) => !v)}>
+          formulae & unit signs
+        </button>
       </div>
     </MathJaxContext>
   )
