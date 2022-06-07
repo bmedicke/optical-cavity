@@ -73,7 +73,8 @@ function App() {
       <div className="App">
         <div className="controls">
           <label>
-            Laser Power:
+            Laser Power
+            <MathJax>{`\\(P\\)`}</MathJax>
             <input
               type="number"
               min="0"
@@ -86,7 +87,8 @@ function App() {
           </label>
 
           <label>
-            Cavity Length:
+            Cavity Length
+            <MathJax>{`\\(L\\)`}</MathJax>
             <input
               type="number"
               value={cavitylength}
@@ -98,7 +100,8 @@ function App() {
           </label>
 
           <label>
-            <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>:
+            <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>
+            <MathJax>{`\\(\\lambda\\)`}</MathJax>
             <input
               type="number"
               min="0"
@@ -113,8 +116,9 @@ function App() {
           <label>
             <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
               Reflectivity
-            </a>{' '}
-            Mirror 1:
+            </a>
+            <MathJax>{`\\(r_n\\)`}</MathJax>
+            Mirror 1
             <input
               type="number"
               value={m1reflectivity}
@@ -126,10 +130,7 @@ function App() {
           </label>
 
           <label>
-            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
-              Reflectivity
-            </a>{' '}
-            Mirror 2:
+            Mirror 2
             <input
               type="number"
               value={m2reflectivity}
@@ -143,7 +144,7 @@ function App() {
         <hr />
         <div className="results">
           <label>
-            <a href="https://en.wikipedia.org/wiki/Wavenumber">Angular Wave Number</a>:
+            <a href="https://en.wikipedia.org/wiki/Wavenumber">Angular Wave Number</a>
             <MathJax>
               {`\\(
             k = \\frac{2\\pi}{\\lambda}
