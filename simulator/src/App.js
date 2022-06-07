@@ -3,6 +3,9 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { i } from 'mathjs'
 import { useEffect, useState } from 'react'
 
+const deg2rad = (degrees) => degrees * (Math.PI / 180)
+const rad2deg = (rad) => rad * (180 / Math.PI)
+
 function App() {
   // configurable variables:
   const [cavitylength, setCavitylength] = useState(200)
@@ -108,7 +111,10 @@ function App() {
           </label>
 
           <label>
-            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">Reflectivity</a> Mirror 1:
+            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
+              Reflectivity
+            </a>{' '}
+            Mirror 1:
             <input
               type="number"
               value={m1reflectivity}
@@ -120,7 +126,10 @@ function App() {
           </label>
 
           <label>
-            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">Reflectivity</a> Mirror 2:
+            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
+              Reflectivity
+            </a>{' '}
+            Mirror 2:
             <input
               type="number"
               value={m2reflectivity}
@@ -134,42 +143,49 @@ function App() {
         <hr />
         <div className="results">
           <label>
-            <a href="https://en.wikipedia.org/wiki/Wavenumber">Wave Number</a>:
-            <input type="text" value={wavenumber} disabled />
-          </label>
-          <MathJax>
-            {`\\(
+            <a href="https://en.wikipedia.org/wiki/Wavenumber">Angular Wave Number</a>:
+            <MathJax>
+              {`\\(
             k = \\frac{2\\pi}{\\lambda}
             \\)`}
-          </MathJax>
+            </MathJax>
+            <input type="text" value={wavenumber} disabled />
+          </label>
           <hr />
           <label>
-            <a href="https://en.wikipedia.org/wiki/Phase_(waves)#Phase_shift">Phase Shift</a>:
-            <input type="text" value={phaseshift} disabled />
-            rad
-          </label>
-          <MathJax>
-            {`\\(
+            <a href="https://en.wikipedia.org/wiki/Phase_(waves)#Phase_shift">
+              Phase Shift
+            </a>
+            <MathJax>
+              {`\\(
             \\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi
             \\)`}
-          </MathJax>
+            </MathJax>
+            <input type="text" value={phaseshift} disabled />
+            rad
+            <br />
+            <input type="text" value={rad2deg(phaseshift)} disabled />
+            deg
+          </label>
           <hr />
 
           <label>
-            Transmittance Mirror 1:
+            <a href="https://de.wikipedia.org/wiki/Transmission_(Physik)">
+              Transmittance
+            </a>
+            <MathJax>
+              {`\\(
+            t_n = \\sqrt{1 - r_n^2}
+            \\)`}
+            </MathJax>
+            Mirror 1 (fixed)
             <input type="text" value={m1transmittance} disabled />
           </label>
 
           <label>
-            Transmittance Mirror 2:
+            Mirror 2 (piezo)
             <input type="text" value={m2transmittance} disabled />
           </label>
-
-          <MathJax>
-            {`\\(
-            t_n = \\sqrt{1 - r_n^2}
-            \\)`}
-          </MathJax>
         </div>
       </div>
     </MathJaxContext>
