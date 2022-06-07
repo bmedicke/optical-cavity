@@ -71,7 +71,7 @@ function App() {
         <label>
           Cavity Length:
           <input
-            type="value"
+            type="number"
             value={distance}
             min="0"
             max="100000"
