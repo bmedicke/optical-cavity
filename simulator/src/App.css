@@ -16,3 +16,11 @@
   margin: 1em 0.3em 1em 0.3em;
   width: 30%;
 }
+
+.cavitystatus{
+padding: 1rem 0;
+}
+
+.locked{
+  color: red;
+}

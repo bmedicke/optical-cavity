@@ -23,6 +23,11 @@ function App() {
   const [m2transmittance, setM2transmittance] = useState(0)
 
   const [showformulas, setShowformulas] = useState(false)
+  const [isLocked, setIsLocked] = useState(false)
+
+  useEffect(() =>{
+    setIsLocked((phaseshift % 180 === 0 && cavitylength > 0))
+  },[phaseshift])
 
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
@@ -213,9 +218,13 @@ function App() {
           )}
           <input type="text" value={opticalgainRessonance} disabled />
         </label>
+        <br/>
         <button onClick={() => setShowformulas((v) => !v)}>
           formulae & unit signs
         </button>
+        <div class={`cavitystatus ${isLocked && 'locked'}`}>
+          Cavity {isLocked ? "is locked" : "is out of phase"}
+        </div>
       </div>
     </MathJaxContext>
   )
