@@ -22,6 +22,8 @@ function App() {
   const [m1transmittance, setM1transmittance] = useState(0)
   const [m2transmittance, setM2transmittance] = useState(0)
 
+  const [showformulas, setShowformulas] = useState(false)
+
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
   }, [wavelength])
@@ -75,7 +77,7 @@ function App() {
         <div className="controls">
           <label>
             Laser Power
-            <MathJax>{`\\(P\\)`}</MathJax>
+            {showformulas && <MathJax>{`\\(P\\)`}</MathJax>}
             <input
               type="number"
               min="0"
@@ -89,7 +91,7 @@ function App() {
 
           <label>
             Cavity Length
-            <MathJax>{`\\(L\\)`}</MathJax>
+            {showformulas && <MathJax>{`\\(L\\)`}</MathJax>}
             <input
               type="number"
               value={cavitylength}
@@ -102,7 +104,7 @@ function App() {
 
           <label>
             <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>
-            <MathJax>{`\\(\\lambda\\)`}</MathJax>
+            {showformulas && <MathJax>{`\\(\\lambda\\)`}</MathJax>}
             <input
               type="number"
               min="0"
@@ -118,7 +120,7 @@ function App() {
             <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
               Reflectivity
             </a>
-            <MathJax>{`\\(r_n\\)`}</MathJax>
+            {showformulas && <MathJax>{`\\(r_n\\)`}</MathJax>}
             Mirror 1 (fixed)
             <input
               type="number"
@@ -148,11 +150,13 @@ function App() {
             <a href="https://en.wikipedia.org/wiki/Wavenumber">
               Angular Wave Number
             </a>
-            <MathJax>
-              {`\\(
+            {showformulas && (
+              <MathJax>
+                {`\\(
             k = \\frac{2\\pi}{\\lambda}
             \\)`}
-            </MathJax>
+              </MathJax>
+            )}
             <input type="text" value={wavenumber} disabled />
           </label>
           <hr />
@@ -160,11 +164,13 @@ function App() {
             <a href="https://en.wikipedia.org/wiki/Phase_(waves)#Phase_shift">
               Phase Shift
             </a>
-            <MathJax>
-              {`\\(
+            {showformulas && (
+              <MathJax>
+                {`\\(
             \\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi
             \\)`}
-            </MathJax>
+              </MathJax>
+            )}
             <input type="text" value={phaseshift} disabled />
             rad
             <br />
@@ -177,11 +183,13 @@ function App() {
             <a href="https://de.wikipedia.org/wiki/Transmission_(Physik)">
               Transmittance
             </a>
-            <MathJax>
-              {`\\(
+            {showformulas && (
+              <MathJax>
+                {`\\(
             t_n = \\sqrt{1 - r_n^2}
             \\)`}
-            </MathJax>
+              </MathJax>
+            )}
             Mirror 1 (fixed)
             <input type="text" value={m1transmittance} disabled />
           </label>
