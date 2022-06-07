@@ -64,7 +64,7 @@ function App() {
     //       ))
     // )
     setOpticalgainRessonance(
-      m1transmittance/(1.0-m1reflectivity*m2reflectivity)
+      m1transmittance / (1.0 - m1reflectivity * m2reflectivity)
     )
   }, [
     m1reflectivity,
@@ -203,7 +203,14 @@ function App() {
           </label>
         </div>
         <label>
-          Optical Gain max
+          Optical Gain at resonance
+          {showformulas && (
+            <MathJax>
+              {`\\(
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\)`}
+            </MathJax>
+          )}
           <input type="text" value={opticalgainRessonance} disabled />
         </label>
         <button onClick={() => setShowformulas((v) => !v)}>
