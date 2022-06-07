@@ -129,6 +129,7 @@ function App() {
           />
         </label>
       </div>
+      <hr />
       <div className="results">
         <label>
           Wave Number:
