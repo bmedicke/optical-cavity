@@ -142,11 +142,18 @@ function App() {
             k = \\frac{2\\pi}{\\lambda}
             \\)`}
           </MathJax>
+          <hr />
           <label>
             Phase Shift:
             <input type="text" value={phaseshift} disabled />
             rad
           </label>
+          <MathJax>
+            {`\\(
+            \\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi
+            \\)`}
+          </MathJax>
+          <hr />
 
           <label>
             Transmittance Mirror 1:
@@ -157,6 +164,12 @@ function App() {
             Transmittance Mirror 2:
             <input type="text" value={m2transmittance} disabled />
           </label>
+
+          <MathJax>
+            {`\\(
+            t_n = \\sqrt{1 - r_n^2}
+            \\)`}
+          </MathJax>
         </div>
       </div>
     </MathJaxContext>
