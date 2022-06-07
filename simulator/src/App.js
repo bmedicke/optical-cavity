@@ -3,53 +3,66 @@ import { useEffect, useState } from 'react'
 import { i } from 'mathjs'
 
 function App() {
-  const [distance, setDistance] = useState(200)
+  // configurable variables:
+  const [cavitylength, setCavitylength] = useState(200)
+  const [laserpower, setLaserpower] = useState(1) // in W.
+  const [m1reflectivity, setM1reflectivity] = useState(0.9)
+  const [m2reflectivity, setM2reflectivity] = useState(0.9)
+  const [opticalgain, setOpticalgain] = useState(0)
   const [wavelength, setWavelength] = useState(200)
-  const [power, setPower] = useState(1) // in W
-  const [reflm1, setReflm1] = useState(0.9)
-  const [reflm2, setReflm2] = useState(0.9)
-  const [opticalGain, setOpticalGain] = useState(0)
 
+  // calculated variables:
   const [wavenumber, setWavenumber] = useState(undefined)
-  const [phaseShift, setPhaseShift] = useState(undefined)
-  const [trans1, setTrans1] = useState(0)
-  const [trans2, setTrans2] = useState(0)
+  const [phaseshift, setPhaseshift] = useState(undefined)
+  const [m1transmittance, setM1transmittance] = useState(0)
+  const [m2transmittance, setM2transmittance] = useState(0)
 
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
   }, [wavelength])
 
   useEffect(() => {
-    setPhaseShift(((wavenumber * 10 * distance) / 10) % (2 * Math.PI))
-  }, [wavenumber, distance])
+    setPhaseshift(((wavenumber * 10 * cavitylength) / 10) % (2 * Math.PI))
+  }, [wavenumber, cavitylength])
 
   useEffect(() => {
-    setReflm1((x) => {
-      setTrans1(Math.sqrt(1.0 - Math.pow(x, 2)))
+    setM1reflectivity((x) => {
+      setM1transmittance(Math.sqrt(1.0 - Math.pow(x, 2)))
       return x
     })
-    setReflm2((x) => {
-      setTrans2(Math.sqrt(1.0 - Math.pow(x, 2)))
+    setM2reflectivity((x) => {
+      setM2transmittance(Math.sqrt(1.0 - Math.pow(x, 2)))
       return x
     })
-  }, [reflm1, reflm2])
+  }, [m1reflectivity, m2reflectivity])
 
   // TODO correctly implement i
   useEffect(() => {
-    console.log(i)
     console.log(
       `Optical Gain: ${
-        trans1 /
+        m1transmittance /
         (1 -
-          Math.pow((reflm1 * reflm2 * Math.E, 2 * i * wavenumber * distance)))
+          Math.pow(
+            (m1reflectivity * m2reflectivity * Math.E,
+            2 * i * wavenumber * cavitylength)
+          ))
       }`
     )
-    setOpticalGain(
-      trans1 /
+    setOpticalgain(
+      m1transmittance /
         (1 -
-          Math.pow((reflm1 * reflm2 * Math.E, 2 * i * wavenumber * distance)))
+          Math.pow(
+            (m1reflectivity * m2reflectivity * Math.E,
+            2 * i * wavenumber * cavitylength)
+          ))
     )
-  }, [reflm1, reflm2, trans1, wavenumber, distance])
+  }, [
+    m1reflectivity,
+    m2reflectivity,
+    m1transmittance,
+    wavenumber,
+    cavitylength,
+  ])
 
   return (
     <div className="App">
@@ -61,22 +74,22 @@ function App() {
             min="0"
             max="5000"
             step="1"
-            onChange={(e) => setPower(e.target.value)}
-            value={power}
+            onChange={(e) => setLaserpower(e.target.value)}
+            value={laserpower}
           />
-          Watts
+          W
         </label>
 
         <label>
           Cavity Length:
           <input
             type="number"
-            value={distance}
+            value={cavitylength}
             min="0"
             max="100000"
-            onChange={(e) => setDistance(e.target.value)}
+            onChange={(e) => setCavitylength(e.target.value)}
           />
-          {distance}
+          nm
         </label>
 
         <label>
@@ -89,29 +102,30 @@ function App() {
             onChange={(e) => setWavelength(e.target.value)}
             value={wavelength}
           />
+          nm
         </label>
 
         <label>
-          M1 Refl:
+          Reflectivity Mirror 1:
           <input
             type="number"
-            value={reflm1}
+            value={m1reflectivity}
             min="0"
             max="1"
             step="0.01"
-            onChange={(e) => setReflm1(e.target.value)}
+            onChange={(e) => setM1reflectivity(e.target.value)}
           />
         </label>
 
         <label>
-          M2 Refl:
+          Reflectivity Mirror 2:
           <input
             type="number"
-            value={reflm2}
+            value={m2reflectivity}
             min="0"
             max="1"
             step="0.01"
-            onChange={(e) => setReflm2(e.target.value)}
+            onChange={(e) => setM2reflectivity(e.target.value)}
           />
         </label>
       </div>
@@ -123,18 +137,18 @@ function App() {
 
         <label>
           Phase Shift:
-          <input type="text" value={phaseShift} disabled />
+          <input type="text" value={phaseshift} disabled />
           rad
         </label>
 
         <label>
-          Transmission Mirror 1:
-          <input type="text" value={trans1} disabled />
+          Transmittance Mirror 1:
+          <input type="text" value={m1transmittance} disabled />
         </label>
 
         <label>
-          Transmission Mirror 2:
-          <input type="text" value={trans2} disabled />
+          Transmittance Mirror 2:
+          <input type="text" value={m2transmittance} disabled />
         </label>
       </div>
     </div>
