@@ -95,7 +95,7 @@ function App() {
           </label>
 
           <label>
-            Wavelength:
+            <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>:
             <input
               type="number"
               min="0"
@@ -108,7 +108,7 @@ function App() {
           </label>
 
           <label>
-            Reflectivity Mirror 1:
+            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">Reflectivity</a> Mirror 1:
             <input
               type="number"
               value={m1reflectivity}
@@ -120,7 +120,7 @@ function App() {
           </label>
 
           <label>
-            Reflectivity Mirror 2:
+            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">Reflectivity</a> Mirror 2:
             <input
               type="number"
               value={m2reflectivity}
@@ -134,7 +134,7 @@ function App() {
         <hr />
         <div className="results">
           <label>
-            Wave Number:
+            <a href="https://en.wikipedia.org/wiki/Wavenumber">Wave Number</a>:
             <input type="text" value={wavenumber} disabled />
           </label>
           <MathJax>
@@ -144,7 +144,7 @@ function App() {
           </MathJax>
           <hr />
           <label>
-            Phase Shift:
+            <a href="https://en.wikipedia.org/wiki/Phase_(waves)#Phase_shift">Phase Shift</a>:
             <input type="text" value={phaseshift} disabled />
             rad
           </label>
