@@ -13,7 +13,7 @@ function App() {
   const [laserpower, setLaserpower] = useState(1) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
-  const [opticalgain, setOpticalgain] = useState(0)
+  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
   const [wavelength, setWavelength] = useState(200)
 
   // calculated variables:
@@ -45,23 +45,26 @@ function App() {
 
   // TODO correctly implement i
   useEffect(() => {
-    console.log(
-      `Optical Gain: ${
-        m1transmittance /
-        (1 -
-          Math.pow(
-            (m1reflectivity * m2reflectivity * Math.E,
-            2 * i * wavenumber * cavitylength)
-          ))
-      }`
-    )
-    setOpticalgain(
-      m1transmittance /
-        (1 -
-          Math.pow(
-            (m1reflectivity * m2reflectivity * Math.E,
-            2 * i * wavenumber * cavitylength)
-          ))
+    // console.log(
+    //   `Optical Gain: ${
+    //     m1transmittance /
+    //     (1 -
+    //       math.pow(
+    //         (m1reflectivity * m2reflectivity * Math.E,
+    //         2 * i * wavenumber * cavitylength)
+    //       ))
+    //   }`
+    // )
+    // setOpticalgain(
+    //   m1transmittance /
+    //     (1 -
+    //       Math.pow(
+    //         (m1reflectivity * m2reflectivity * Math.E,
+    //         2 * i * wavenumber * cavitylength)
+    //       ))
+    // )
+    setOpticalgainRessonance(
+      m1transmittance/(1.0-m1reflectivity*m2reflectivity)
     )
   }, [
     m1reflectivity,
@@ -199,6 +202,10 @@ function App() {
             <input type="text" value={m2transmittance} disabled />
           </label>
         </div>
+        <label>
+          Optical Gain max
+          <input type="text" value={opticalgainRessonance} disabled />
+        </label>
         <button onClick={() => setShowformulas((v) => !v)}>
           formulae & unit signs
         </button>
