@@ -93,7 +93,7 @@ function App() {
         </label>
 
         <label>
-          Lambda:
+          Wavelength:
           <input
             type="number"
             min="0"
