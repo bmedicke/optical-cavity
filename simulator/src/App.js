@@ -1,6 +1,7 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { i } from 'mathjs'
+import { useEffect, useState } from 'react'
 
 function App() {
   // configurable variables:
@@ -65,94 +66,100 @@ function App() {
   ])
 
   return (
-    <div className="App">
-      <div className="controls">
-        <label>
-          Laser Power:
-          <input
-            type="number"
-            min="0"
-            max="5000"
-            step="1"
-            onChange={(e) => setLaserpower(e.target.value)}
-            value={laserpower}
-          />
-          W
-        </label>
+    <MathJaxContext>
+      <div className="App">
+        <div className="controls">
+          <label>
+            Laser Power:
+            <input
+              type="number"
+              min="0"
+              max="5000"
+              step="1"
+              onChange={(e) => setLaserpower(e.target.value)}
+              value={laserpower}
+            />
+            W
+          </label>
 
-        <label>
-          Cavity Length:
-          <input
-            type="number"
-            value={cavitylength}
-            min="0"
-            max="100000"
-            onChange={(e) => setCavitylength(e.target.value)}
-          />
-          nm
-        </label>
+          <label>
+            Cavity Length:
+            <input
+              type="number"
+              value={cavitylength}
+              min="0"
+              max="100000"
+              onChange={(e) => setCavitylength(e.target.value)}
+            />
+            nm
+          </label>
 
-        <label>
-          Wavelength:
-          <input
-            type="number"
-            min="0"
-            max="1000"
-            step="0.1"
-            onChange={(e) => setWavelength(e.target.value)}
-            value={wavelength}
-          />
-          nm
-        </label>
+          <label>
+            Wavelength:
+            <input
+              type="number"
+              min="0"
+              max="1000"
+              step="0.1"
+              onChange={(e) => setWavelength(e.target.value)}
+              value={wavelength}
+            />
+            nm
+          </label>
 
-        <label>
-          Reflectivity Mirror 1:
-          <input
-            type="number"
-            value={m1reflectivity}
-            min="0"
-            max="1"
-            step="0.01"
-            onChange={(e) => setM1reflectivity(e.target.value)}
-          />
-        </label>
+          <label>
+            Reflectivity Mirror 1:
+            <input
+              type="number"
+              value={m1reflectivity}
+              min="0"
+              max="1"
+              step="0.01"
+              onChange={(e) => setM1reflectivity(e.target.value)}
+            />
+          </label>
 
-        <label>
-          Reflectivity Mirror 2:
-          <input
-            type="number"
-            value={m2reflectivity}
-            min="0"
-            max="1"
-            step="0.01"
-            onChange={(e) => setM2reflectivity(e.target.value)}
-          />
-        </label>
+          <label>
+            Reflectivity Mirror 2:
+            <input
+              type="number"
+              value={m2reflectivity}
+              min="0"
+              max="1"
+              step="0.01"
+              onChange={(e) => setM2reflectivity(e.target.value)}
+            />
+          </label>
+        </div>
+        <hr />
+        <div className="results">
+          <label>
+            Wave Number:
+            <input type="text" value={wavenumber} disabled />
+          </label>
+          <MathJax>
+            {`\\(
+            k = \\frac{2\\pi}{\\lambda}
+            \\)`}
+          </MathJax>
+          <label>
+            Phase Shift:
+            <input type="text" value={phaseshift} disabled />
+            rad
+          </label>
+
+          <label>
+            Transmittance Mirror 1:
+            <input type="text" value={m1transmittance} disabled />
+          </label>
+
+          <label>
+            Transmittance Mirror 2:
+            <input type="text" value={m2transmittance} disabled />
+          </label>
+        </div>
       </div>
-      <hr />
-      <div className="results">
-        <label>
-          Wave Number:
-          <input type="text" value={wavenumber} disabled />
-        </label>
-
-        <label>
-          Phase Shift:
-          <input type="text" value={phaseshift} disabled />
-          rad
-        </label>
-
-        <label>
-          Transmittance Mirror 1:
-          <input type="text" value={m1transmittance} disabled />
-        </label>
-
-        <label>
-          Transmittance Mirror 2:
-          <input type="text" value={m2transmittance} disabled />
-        </label>
-      </div>
-    </div>
+    </MathJaxContext>
   )
 }
 
