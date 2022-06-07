@@ -3,6 +3,7 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { i } from 'mathjs'
 import { useEffect, useState } from 'react'
 
+// TODO: extract to utils file or use mathjs:
 const deg2rad = (degrees) => degrees * (Math.PI / 180)
 const rad2deg = (rad) => rad * (180 / Math.PI)
 
@@ -118,7 +119,7 @@ function App() {
               Reflectivity
             </a>
             <MathJax>{`\\(r_n\\)`}</MathJax>
-            Mirror 1
+            Mirror 1 (fixed)
             <input
               type="number"
               value={m1reflectivity}
@@ -130,7 +131,7 @@ function App() {
           </label>
 
           <label>
-            Mirror 2
+            Mirror 2 (piezo)
             <input
               type="number"
               value={m2reflectivity}
@@ -144,7 +145,9 @@ function App() {
         <hr />
         <div className="results">
           <label>
-            <a href="https://en.wikipedia.org/wiki/Wavenumber">Angular Wave Number</a>
+            <a href="https://en.wikipedia.org/wiki/Wavenumber">
+              Angular Wave Number
+            </a>
             <MathJax>
               {`\\(
             k = \\frac{2\\pi}{\\lambda}
