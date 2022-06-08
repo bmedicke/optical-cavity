@@ -14,8 +14,8 @@ function App() {
   const [wavelength, setWavelength] = useState(200)
 
   // calculated variables:
-  const [wavenumber, setWavenumber] = useState(undefined)
-  const [phaseshift, setPhaseshift] = useState(undefined)
+  const [wavenumber, setWavenumber] = useState(0)
+  const [phaseshift, setPhaseshift] = useState(0)
   const [m1transmittance, setM1transmittance] = useState(0)
   const [m2transmittance, setM2transmittance] = useState(0)
 
@@ -204,7 +204,7 @@ function App() {
               \\)`}
           </MathJax>
         )}
-        <div class={`cavitystatus ${isLocked && 'locked'}`}>
+        <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
         </div>
         <button onClick={() => setShowformulas((v) => !v)}>
