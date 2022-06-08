@@ -74,7 +74,7 @@ function App() {
             />
             W
           </label>
-          <Power watts={laserpower} />
+          <Power power={laserpower} />
 
           <label>
             Cavity Length
