@@ -1,3 +1,4 @@
+import styles from './Visualizations.module.scss'
 import { useEffect } from 'react'
 
 const Power = (props) => {
@@ -31,9 +32,7 @@ const Power = (props) => {
     <div>
       <canvas
         id="power"
-        width="100"
-        height="100"
-        style={{ backgroundColor: 'black' }}
+        className={styles.power}
       ></canvas>
     </div>
   )
