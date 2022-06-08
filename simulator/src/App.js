@@ -191,7 +191,7 @@ function App() {
           {showformulas && (
             <MathJax>
               {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
               \\)`}
             </MathJax>
           )}
@@ -201,7 +201,7 @@ function App() {
         {showformulas && (
           <MathJax>
             {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
           </MathJax>
         )}
