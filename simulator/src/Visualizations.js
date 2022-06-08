@@ -19,7 +19,7 @@ const Power = (props) => {
       x = i
       y =
         ((Math.sin((x / canvas.width) * 2 * Math.PI) * (canvas.height / 2)) /
-          (100 + context.lineWidth / 2)) *
+          (100 + context.lineWidth * 4)) *
           scale +
         canvas.height / 2
       context.lineTo(x, y)
