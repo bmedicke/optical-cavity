@@ -1,6 +1,6 @@
 import './App.css'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { Power } from './Visualizations'
+import { Power, Phaseshift } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 
@@ -74,7 +74,7 @@ function App() {
             />
             W
           </label>
-          <Power watts={laserpower} />
+          <Power power={laserpower} />
 
           <label>
             Cavity Length
@@ -164,6 +164,7 @@ function App() {
             <input type="text" value={rad2deg(phaseshift)} disabled />
             deg
           </label>
+          <Phaseshift phaseshift={phaseshift} />
           <hr />
 
           <label>
