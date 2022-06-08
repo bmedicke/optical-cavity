@@ -26,7 +26,7 @@ function App() {
   const [isLocked, setIsLocked] = useState(false)
 
   useEffect(() => {
-    setIsLocked(phaseshift % 180 === 0 && cavitylength > 0)
+    setIsLocked(rad2deg(phaseshift) % 180 === 0 && cavitylength > 0)
   }, [phaseshift])
 
   useEffect(() => {
