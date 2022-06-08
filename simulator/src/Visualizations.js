@@ -40,4 +40,25 @@ const Power = (props) => {
   )
 }
 
-export { Power }
+const Phaseshift = (props) => {
+  useEffect(() => {
+    var canvas = document.getElementById('phaseshift')
+    var context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    context.lineWidth = 2
+
+    context.strokeStyle = 'green'
+    draw_sine(canvas, context, 50, 0)
+
+    context.strokeStyle = 'red'
+    draw_sine(canvas, context, 50, props.phaseshift)
+  }, [props.phaseshift])
+
+  return (
+    <div>
+      <canvas id="phaseshift" className={styles.power}></canvas>
+    </div>
+  )
+}
+export { Power, Phaseshift }
