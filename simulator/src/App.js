@@ -1,11 +1,8 @@
 import './App.css'
+import './Visualizations/Power'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { i } from 'mathjs'
+import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-
-// TODO: extract to utils file or use mathjs:
-const deg2rad = (degrees) => degrees * (Math.PI / 180)
-const rad2deg = (rad) => rad * (180 / Math.PI)
 
 function App() {
   // configurable variables:
@@ -27,7 +24,7 @@ function App() {
 
   useEffect(() => {
     setIsLocked(rad2deg(phaseshift) % 180 === 0 && cavitylength > 0)
-  }, [phaseshift])
+  }, [phaseshift, cavitylength])
 
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
@@ -48,26 +45,7 @@ function App() {
     })
   }, [m1reflectivity, m2reflectivity])
 
-  // TODO correctly implement i
   useEffect(() => {
-    // console.log(
-    //   `Optical Gain: ${
-    //     m1transmittance /
-    //     (1 -
-    //       math.pow(
-    //         (m1reflectivity * m2reflectivity * Math.E,
-    //         2 * i * wavenumber * cavitylength)
-    //       ))
-    //   }`
-    // )
-    // setOpticalgain(
-    //   m1transmittance /
-    //     (1 -
-    //       Math.pow(
-    //         (m1reflectivity * m2reflectivity * Math.E,
-    //         2 * i * wavenumber * cavitylength)
-    //       ))
-    // )
     setOpticalgainRessonance(
       m1transmittance / (1.0 - m1reflectivity * m2reflectivity)
     )
