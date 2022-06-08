@@ -1,8 +1,8 @@
 import './App.css'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
+import { Power } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-import { Power } from './Visualizations'
 
 function App() {
   // configurable variables:
