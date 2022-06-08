@@ -1,13 +1,13 @@
 import './App.css'
-import './Visualizations/Power'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
+import { Power } from './Visualizations'
 
 function App() {
   // configurable variables:
   const [cavitylength, setCavitylength] = useState(200)
-  const [laserpower, setLaserpower] = useState(1) // in W.
+  const [laserpower, setLaserpower] = useState(50) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
   const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
@@ -67,13 +67,14 @@ function App() {
             <input
               type="number"
               min="0"
-              max="5000"
+              max="100"
               step="1"
               onChange={(e) => setLaserpower(e.target.value)}
               value={laserpower}
             />
             W
           </label>
+          <Power watts={laserpower} />
 
           <label>
             Cavity Length

@@ -2,12 +2,14 @@
   height: 100vh;
 }
 
-.controls, .results {
+.controls,
+.results {
   display: flex;
   flex-flow: column wrap;
 }
 
-.controls input, .results input {
+.controls input,
+.results input {
   padding: 0.2em;
   margin: 0.2em;
 }
@@ -17,10 +19,10 @@
   width: 30%;
 }
 
-.cavitystatus{
-padding: 1rem 0;
+.cavitystatus {
+  padding: 1rem 0;
 }
 
-.locked{
+.locked {
   color: red;
 }
