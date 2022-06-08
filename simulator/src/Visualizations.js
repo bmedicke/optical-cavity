@@ -7,7 +7,7 @@ const Power = (props) => {
     var context = canvas.getContext('2d')
     context.clearRect(0, 0, canvas.width, canvas.height)
 
-    context.lineWidth = 1
+    context.lineWidth = 2
     context.strokeStyle = 'green'
 
     var scale = props.watts
