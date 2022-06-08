@@ -11,6 +11,7 @@ function App() {
   const [laserpower, setLaserpower] = useState(50) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
+  const [opticalgain, setOpticalgain] = useState(0)
   const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
   const [wavelength, setWavelength] = useState(200)
 
@@ -50,13 +51,26 @@ function App() {
     setOpticalgainRessonance(
       m1transmittance / (1.0 - m1reflectivity * m2reflectivity)
     )
+
   }, [
     m1reflectivity,
     m2reflectivity,
-    m1transmittance,
-    wavenumber,
-    cavitylength,
+    m1transmittance
   ])
+
+  useEffect(() => {
+     const reflectivitysum = math.multiply(m1reflectivity,m2reflectivity) //r1*r2
+     const base = math.multiply(math.e,reflectivitysum) //r1*r2*e
+
+    //  const exponent = math.multiply(2,math.multiply(math.multiply(math.i,2),wavenumber),cavitylength)
+    const exponent = math.multiply(math.multiply(math.complex(),wavenumber),cavitylength) // 2ikl
+    const exponentiation = math.pow(base,exponent) 
+    const divisor = math.subtract(1.0,exponentiation)
+
+    console.log(math.divide(m1transmittance,divisor))
+    console.log(`Exponentiation: ${exponentiation}`)
+  },
+     [m1transmittance,cavitylength,m1reflectivity,m2reflectivity,wavenumber])
 
   return (
     <MathJaxContext>
