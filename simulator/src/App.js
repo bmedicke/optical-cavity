@@ -3,6 +3,7 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { Power, Phaseshift } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
+import * as math from 'mathjs'
 
 function App() {
   // configurable variables:
