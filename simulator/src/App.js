@@ -11,8 +11,6 @@ function App() {
   const [laserpower, setLaserpower] = useState(50) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
-  const [opticalgain, setOpticalgain] = useState(0)
-  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
   const [wavelength, setWavelength] = useState(200)
 
   // calculated variables:
@@ -21,9 +19,13 @@ function App() {
   const [m1transmittance, setM1transmittance] = useState(0)
   const [m2transmittance, setM2transmittance] = useState(0)
   const [euler, setEuler] = useState(0) // TODO, think of a better name for this.
+  const [opticalgain, setOpticalgain] = useState(0)
+  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
+  const [reflectedgain, setReflectedgain] = useState(0)
+  const [transmittedgain, setTransmittedgain] = useState(0)
 
-  const [showformulas, setShowformulas] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
+  const [showformulas, setShowformulas] = useState(false)
 
   useEffect(() => {
     setIsLocked(rad2deg(phaseshift) % 180 === 0 && cavitylength > 0)
@@ -67,6 +69,15 @@ function App() {
     const divisor = math.subtract(1.0, foo)
     const result = math.divide(m1transmittance, divisor)
     setOpticalgain(result.re)
+
+    const numerator = math.add(
+      -m1reflectivity,
+      math.multiply(m2reflectivity, euler)
+    )
+    const denomerator = math.subtract(1, foo)
+
+    setReflectedgain(math.divide(numerator, denomerator).re)
+    console.log(math.divide(numerator, denomerator).re)
   }, [m1transmittance, m1reflectivity, m2reflectivity, euler])
 
   return (
