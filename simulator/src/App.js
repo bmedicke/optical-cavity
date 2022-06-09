@@ -51,26 +51,29 @@ function App() {
     setOpticalgainRessonance(
       m1transmittance / (1.0 - m1reflectivity * m2reflectivity)
     )
-
-  }, [
-    m1reflectivity,
-    m2reflectivity,
-    m1transmittance
-  ])
+  }, [m1reflectivity, m2reflectivity, m1transmittance])
 
   useEffect(() => {
-     const reflectivitysum = math.multiply(m1reflectivity,m2reflectivity) //r1*r2
-     const base = math.multiply(math.e,reflectivitysum) //r1*r2*e
+    const reflectivitysum = math.multiply(m1reflectivity, m2reflectivity) //r1*r2
 
-    //  const exponent = math.multiply(2,math.multiply(math.multiply(math.i,2),wavenumber),cavitylength)
-    const exponent = math.multiply(math.multiply(math.complex(),wavenumber),cavitylength) // 2ikl
-    const exponentiation = math.pow(base,exponent) 
-    const divisor = math.subtract(1.0,exponentiation)
+    const exponent = math.multiply(
+      math.multiply(math.multiply(2, math.complex(0, 1)), wavenumber),
+      cavitylength
+    )
+    // 2ikl
+    const base = math.e
+    const exponentiation = math.pow(base, exponent)
 
-    console.log(math.divide(m1transmittance,divisor))
-    console.log(`Exponentiation: ${exponentiation}`)
-  },
-     [m1transmittance,cavitylength,m1reflectivity,m2reflectivity,wavenumber])
+    const foo = math.multiply(exponentiation, reflectivitysum)
+    const divisor = math.subtract(1.0, foo)
+    const result = math.divide(m1transmittance, divisor)
+  }, [
+    m1transmittance,
+    cavitylength,
+    m1reflectivity,
+    m2reflectivity,
+    wavenumber,
+  ])
 
   return (
     <MathJaxContext>
