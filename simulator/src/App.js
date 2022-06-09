@@ -19,6 +19,7 @@ function App() {
   const [m1transmittance, setM1transmittance] = useState(0)
   const [m2transmittance, setM2transmittance] = useState(0)
   const [euler, setEuler] = useState(0) // TODO, think of a better name for this.
+  // TODO use abs() for gains:
   const [opticalgain, setOpticalgain] = useState(0)
   const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
   const [reflectedgain, setReflectedgain] = useState(0)
@@ -239,6 +240,27 @@ function App() {
             </MathJax>
           )}
           <input type="text" value={opticalgain} disabled />
+        </label>
+        <br />
+        {showformulas && (
+          // TODO: fix formula
+          <MathJax>
+            {`\\(
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\)`}
+          </MathJax>
+        )}
+        <label>
+          Reflected Gain
+          {showformulas && (
+            // TODO: fix formula
+            <MathJax>
+              {`\\(
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\)`}
+            </MathJax>
+          )}
+          <input type="text" value={reflectedgain} disabled />
         </label>
         <br />
         {showformulas && (
