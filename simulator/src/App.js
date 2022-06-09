@@ -20,6 +20,7 @@ function App() {
   const [phaseshift, setPhaseshift] = useState(0)
   const [m1transmittance, setM1transmittance] = useState(0)
   const [m2transmittance, setM2transmittance] = useState(0)
+  const [euler, setEuler] = useState(0) // TODO, think of a better name for this.
 
   const [showformulas, setShowformulas] = useState(false)
   const [isLocked, setIsLocked] = useState(false)
@@ -34,6 +35,13 @@ function App() {
 
   useEffect(() => {
     setPhaseshift(((wavenumber * 10 * cavitylength) / 10) % (2 * Math.PI))
+
+    const exponent = math.multiply(
+      math.multiply(math.multiply(2, math.complex(0, 1)), wavenumber),
+      cavitylength
+    )
+    const exponentiation = math.pow(math.e, exponent)
+    setEuler(exponentiation)
   }, [wavenumber, cavitylength])
 
   useEffect(() => {
@@ -55,26 +63,11 @@ function App() {
 
   useEffect(() => {
     const reflectivitysum = math.multiply(m1reflectivity, m2reflectivity) //r1*r2
-
-    const exponent = math.multiply(
-      math.multiply(math.multiply(2, math.complex(0, 1)), wavenumber),
-      cavitylength
-    )
-    // 2ikl
-    const base = math.e
-    const exponentiation = math.pow(base, exponent)
-
-    const foo = math.multiply(exponentiation, reflectivitysum)
+    const foo = math.multiply(euler, reflectivitysum)
     const divisor = math.subtract(1.0, foo)
     const result = math.divide(m1transmittance, divisor)
     setOpticalgain(result.re)
-  }, [
-    m1transmittance,
-    cavitylength,
-    m1reflectivity,
-    m2reflectivity,
-    wavenumber,
-  ])
+  }, [m1transmittance, m1reflectivity, m2reflectivity, euler])
 
   return (
     <MathJaxContext>
@@ -238,6 +231,7 @@ function App() {
         </label>
         <br />
         {showformulas && (
+          // TODO: fix formula
           <MathJax>
             {`\\(
               \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
