@@ -67,6 +67,7 @@ function App() {
     const foo = math.multiply(exponentiation, reflectivitysum)
     const divisor = math.subtract(1.0, foo)
     const result = math.divide(m1transmittance, divisor)
+    setOpticalgain(result.re)
   }, [
     m1transmittance,
     cavitylength,
@@ -215,6 +216,25 @@ function App() {
             </MathJax>
           )}
           <input type="text" value={opticalgainRessonance} disabled />
+        </label>
+        <br />
+        {showformulas && (
+          <MathJax>
+            {`\\(
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\)`}
+          </MathJax>
+        )}
+        <label>
+          Optical Gain
+          {showformulas && (
+            <MathJax>
+              {`\\(
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\)`}
+            </MathJax>
+          )}
+          <input type="text" value={opticalgain} disabled />
         </label>
         <br />
         {showformulas && (
