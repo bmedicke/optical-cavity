@@ -81,6 +81,32 @@ function App() {
     console.log(math.divide(numerator, denomerator).re)
   }, [m1transmittance, m1reflectivity, m2reflectivity, euler])
 
+  useEffect(() => {
+    const exponent = math.multiply(
+      math.multiply(wavenumber, cavitylength),
+      math.i
+    )
+    const exponentiation = math.pow(math.e, exponent)
+    const numerator = math.multiply(
+      math.multiply(m1transmittance, m2transmittance),
+      exponentiation
+    )
+    const denomerator = math.subtract(
+      1,
+      math.multiply(math.multiply(m1reflectivity, m2reflectivity), euler)
+    )
+    const result = math.divide(numerator, denomerator)
+    console.log(result)
+  }, [
+    m1transmittance,
+    m2transmittance,
+    cavitylength,
+    wavenumber,
+    m1reflectivity,
+    m2reflectivity,
+    euler,
+  ])
+
   return (
     <MathJaxContext>
       <div className="App">
