@@ -96,7 +96,7 @@ function App() {
       math.multiply(math.multiply(m1reflectivity, m2reflectivity), euler)
     )
     const result = math.divide(numerator, denomerator)
-    console.log(result)
+    setTransmittedgain(result.re)
   }, [
     m1transmittance,
     m2transmittance,
@@ -297,6 +297,20 @@ function App() {
               \\)`}
           </MathJax>
         )}
+         <label>
+          Transmitted Gain
+          {showformulas && (
+            // TODO: fix formula
+            <MathJax>
+              {`\\(
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\)`}
+            </MathJax>
+          )}
+          <input type="text" value={transmittedgain} disabled />
+        </label>
+        <br />
+        
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
         </div>
