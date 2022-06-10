@@ -1,6 +1,6 @@
 import './App.css'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { Power, Phaseshift } from './Visualizations'
+import { Power, Phaseshift, OpticalGain } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import * as math from 'mathjs'
@@ -26,6 +26,8 @@ function App() {
 
   const [isLocked, setIsLocked] = useState(false)
   const [isMaximallyOutOfPhase, setIsMaximallyOutOfPhase] = useState(false)
+
+  // ui controls:
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
 
@@ -71,8 +73,8 @@ function App() {
     const reflectivitysum = math.multiply(m1reflectivity, m2reflectivity) //r1*r2
     const foo = math.multiply(epow2ikl, reflectivitysum)
     const divisor = math.subtract(1.0, foo)
-    const result = math.divide(m1transmittance, divisor)
-    setOpticalgain(math.abs(result))
+    const result = math.abs(math.divide(m1transmittance, divisor).re)
+    setOpticalgain(result)
 
     const numerator = math.add(
       -m1reflectivity,
@@ -278,6 +280,9 @@ function App() {
           )}
           <input type="text" value={opticalgain} disabled />
         </label>
+        {showvisualizations && (
+          <OpticalGain power={laserpower} opticalgain={opticalgain} />
+        )}
 
         <hr />
 

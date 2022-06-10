@@ -35,7 +35,25 @@ const Power = (props) => {
 
   return (
     <div>
-      <canvas id="power" className={styles.power}></canvas>
+      <canvas id="power" className={styles.small_visualization}></canvas>
+    </div>
+  )
+}
+
+const OpticalGain = (props) => {
+  useEffect(() => {
+    var canvas = document.getElementById('opticalgain')
+    var context = canvas.getContext('2d')
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    context.lineWidth = 2
+
+    context.strokeStyle = 'green'
+    draw_sine(canvas, context, props.opticalgain * props.power)
+  }, [props.opticalgain, props.power])
+  return (
+    <div>
+      <canvas id="opticalgain" className={styles.small_visualization}></canvas>
     </div>
   )
 }
@@ -57,8 +75,8 @@ const Phaseshift = (props) => {
 
   return (
     <div>
-      <canvas id="phaseshift" className={styles.power}></canvas>
+      <canvas id="phaseshift" className={styles.small_visualization}></canvas>
     </div>
   )
 }
-export { Power, Phaseshift }
+export { Power, Phaseshift, OpticalGain }
