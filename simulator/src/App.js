@@ -8,7 +8,7 @@ import * as math from 'mathjs'
 function App() {
   // configurable variables:
   const [cavitylength, setCavitylength] = useState(200)
-  const [laserpower, setLaserpower] = useState(50) // in W.
+  const [laserpower, setLaserpower] = useState(40) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
   const [wavelength, setWavelength] = useState(200)
