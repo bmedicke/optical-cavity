@@ -1,7 +1,5 @@
 import styles from './Visualizations.module.scss'
-import { useEffect } from 'react'
-
-// TODO: use ref() instead of getelementbyid.
+import { useEffect, useRef } from 'react'
 
 function draw_sine(canvas, context, scale, phaseshift = 0) {
   context.beginPath()
@@ -23,9 +21,11 @@ function draw_sine(canvas, context, scale, phaseshift = 0) {
 }
 
 const Power = (props) => {
+  const ref = useRef(null)
+
   useEffect(() => {
-    var canvas = document.getElementById('power')
-    var context = canvas.getContext('2d')
+    const canvas = ref.current
+    const context = canvas.getContext('2d')
     context.clearRect(0, 0, canvas.width, canvas.height)
 
     context.lineWidth = 2
@@ -35,14 +35,20 @@ const Power = (props) => {
 
   return (
     <div>
-      <canvas id="power" className={styles.small_visualization}></canvas>
+      <canvas
+        ref={ref}
+        id="power"
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
 
 const Gain = (props) => {
+  const ref = useRef(null)
+
   useEffect(() => {
-    var canvas = document.getElementById('gain')
+    var canvas = ref.current
     var context = canvas.getContext('2d')
     context.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -55,14 +61,20 @@ const Gain = (props) => {
   }, [props.gain, props.power])
   return (
     <div>
-      <canvas id="gain" className={styles.small_visualization}></canvas>
+      <canvas
+        ref={ref}
+        id="gain"
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
 
 const Phaseshift = (props) => {
+  const ref = useRef(null)
+
   useEffect(() => {
-    var canvas = document.getElementById('phaseshift')
+    var canvas = ref.current
     var context = canvas.getContext('2d')
     context.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -77,7 +89,11 @@ const Phaseshift = (props) => {
 
   return (
     <div>
-      <canvas id="phaseshift" className={styles.small_visualization}></canvas>
+      <canvas
+        ref={ref}
+        id="phaseshift"
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
