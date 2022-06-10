@@ -59,7 +59,7 @@ function App() {
 
   useEffect(() => {
     setOpticalgainRessonance(
-      m1transmittance / (1.0 - m1reflectivity * m2reflectivity)
+      math.abs(m1transmittance / (1.0 - m1reflectivity * m2reflectivity))
     )
   }, [m1reflectivity, m2reflectivity, m1transmittance])
 
@@ -68,7 +68,7 @@ function App() {
     const foo = math.multiply(epow2ikl, reflectivitysum)
     const divisor = math.subtract(1.0, foo)
     const result = math.divide(m1transmittance, divisor)
-    setOpticalgain(result.re)
+    setOpticalgain(math.abs(result))
 
     const numerator = math.add(
       -m1reflectivity,
@@ -94,7 +94,7 @@ function App() {
       math.multiply(math.multiply(m1reflectivity, m2reflectivity), epow2ikl)
     )
     const result = math.divide(numerator, denomerator)
-    setTransmittedgain(result.re)
+    setTransmittedgain(math.abs(result))
   }, [
     m1transmittance,
     m2transmittance,
