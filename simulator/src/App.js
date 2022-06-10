@@ -235,6 +235,7 @@ function App() {
             <input type="text" value={m2transmittance} disabled />
           </label>
         </div>
+        <hr />
         <label>
           Optical Gain at resonance
           {showformulas && (
@@ -246,34 +247,19 @@ function App() {
           )}
           <input type="text" value={opticalgainRessonance} disabled />
         </label>
-        <br />
-        {showformulas && (
-          <MathJax>
-            {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
-              \\)`}
-          </MathJax>
-        )}
+        <hr />
         <label>
           Optical Gain
           {showformulas && (
             <MathJax>
               {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
             </MathJax>
           )}
           <input type="text" value={opticalgain} disabled />
         </label>
-        <br />
-        {showformulas && (
-          // TODO: fix formula
-          <MathJax>
-            {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
-              \\)`}
-          </MathJax>
-        )}
+        <hr />
         <label>
           Reflected Gain
           {showformulas && (
@@ -286,15 +272,7 @@ function App() {
           )}
           <input type="text" value={reflectedgain} disabled />
         </label>
-        <br />
-        {showformulas && (
-          // TODO: fix formula
-          <MathJax>
-            {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
-              \\)`}
-          </MathJax>
-        )}
+        <hr />
         <label>
           Transmitted Gain
           {showformulas && (
@@ -307,7 +285,7 @@ function App() {
           )}
           <input type="text" value={transmittedgain} disabled />
         </label>
-        <br />
+        <hr />
 
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
