@@ -18,8 +18,7 @@ function App() {
   const [phaseshift, setPhaseshift] = useState(0)
   const [m1transmittance, setM1transmittance] = useState(0)
   const [m2transmittance, setM2transmittance] = useState(0)
-  const [euler, setEuler] = useState(0) // TODO, think of a better name for this.
-  // TODO use abs() for gains:
+  const [epow2ikl, setEpow2ikl] = useState(0) // e^(i*k*l).
   const [opticalgain, setOpticalgain] = useState(0)
   const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
   const [reflectedgain, setReflectedgain] = useState(0)
@@ -44,7 +43,7 @@ function App() {
       cavitylength
     )
     const exponentiation = math.pow(math.e, exponent)
-    setEuler(exponentiation)
+    setEpow2ikl(exponentiation)
   }, [wavenumber, cavitylength])
 
   useEffect(() => {
@@ -66,20 +65,19 @@ function App() {
 
   useEffect(() => {
     const reflectivitysum = math.multiply(m1reflectivity, m2reflectivity) //r1*r2
-    const foo = math.multiply(euler, reflectivitysum)
+    const foo = math.multiply(epow2ikl, reflectivitysum)
     const divisor = math.subtract(1.0, foo)
     const result = math.divide(m1transmittance, divisor)
     setOpticalgain(result.re)
 
     const numerator = math.add(
       -m1reflectivity,
-      math.multiply(m2reflectivity, euler)
+      math.multiply(m2reflectivity, epow2ikl)
     )
     const denomerator = math.subtract(1, foo)
 
-    setReflectedgain(math.divide(numerator, denomerator).re)
-    console.log(math.divide(numerator, denomerator).re)
-  }, [m1transmittance, m1reflectivity, m2reflectivity, euler])
+    setReflectedgain(math.abs(math.divide(numerator, denomerator)))
+  }, [m1transmittance, m1reflectivity, m2reflectivity, epow2ikl])
 
   useEffect(() => {
     const exponent = math.multiply(
@@ -93,7 +91,7 @@ function App() {
     )
     const denomerator = math.subtract(
       1,
-      math.multiply(math.multiply(m1reflectivity, m2reflectivity), euler)
+      math.multiply(math.multiply(m1reflectivity, m2reflectivity), epow2ikl)
     )
     const result = math.divide(numerator, denomerator)
     setTransmittedgain(result.re)
@@ -104,7 +102,7 @@ function App() {
     wavenumber,
     m1reflectivity,
     m2reflectivity,
-    euler,
+    epow2ikl,
   ])
 
   return (
@@ -297,7 +295,7 @@ function App() {
               \\)`}
           </MathJax>
         )}
-         <label>
+        <label>
           Transmitted Gain
           {showformulas && (
             // TODO: fix formula
@@ -310,7 +308,7 @@ function App() {
           <input type="text" value={transmittedgain} disabled />
         </label>
         <br />
-        
+
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
         </div>
