@@ -25,11 +25,14 @@ function App() {
   const [transmittedgain, setTransmittedgain] = useState(0)
 
   const [isLocked, setIsLocked] = useState(false)
+  const [isMaximallyOutOfPhase, setIsMaximallyOutOfPhase] = useState(false)
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
 
   useEffect(() => {
-    setIsLocked(rad2deg(phaseshift) % 180 === 0 && cavitylength > 0)
+    const locked = rad2deg(phaseshift) % 180 === 0 && cavitylength > 0
+    setIsLocked(locked)
+    setIsMaximallyOutOfPhase(!locked && rad2deg(phaseshift) % 90 === 0)
   }, [phaseshift, cavitylength])
 
   useEffect(() => {
@@ -308,6 +311,7 @@ function App() {
 
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
+          {isMaximallyOutOfPhase && ' (maximally)'}
         </div>
       </div>
     </MathJaxContext>
