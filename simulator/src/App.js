@@ -1,6 +1,6 @@
 import './App.css'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { Power, Phaseshift, Gain } from './Visualizations'
+import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import * as math from 'mathjs'
@@ -8,7 +8,7 @@ import * as math from 'mathjs'
 function App() {
   // configurable variables:
   const [cavitylength, setCavitylength] = useState(200)
-  const [laserpower, setLaserpower] = useState(50) // in W.
+  const [laserpower, setLaserpower] = useState(40) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
   const [wavelength, setWavelength] = useState(200)
@@ -155,11 +155,12 @@ function App() {
               type="number"
               min="0"
               max="1000"
-              step="0.1"
+              step="1"
               onChange={(e) => setWavelength(e.target.value)}
               value={wavelength}
             />
             nm
+            {showvisualizations && <Wavelength wavelength={wavelength} />}
           </label>
 
           <label>
