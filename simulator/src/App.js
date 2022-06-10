@@ -26,6 +26,7 @@ function App() {
 
   const [isLocked, setIsLocked] = useState(false)
   const [showformulas, setShowformulas] = useState(false)
+  const [showvisualizations, setShowvisualizations] = useState(true)
 
   useEffect(() => {
     setIsLocked(rad2deg(phaseshift) % 180 === 0 && cavitylength > 0)
@@ -109,6 +110,12 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div className="controls">
+          <button onClick={() => setShowvisualizations((v) => !v)}>
+            {showvisualizations ? 'Hide' : 'Show'} Visualizations
+          </button>
+          <button onClick={() => setShowformulas((v) => !v)}>
+            {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
+          </button>
           <label>
             Laser Power
             {showformulas && <MathJax>{`\\(P\\)`}</MathJax>}
@@ -122,7 +129,7 @@ function App() {
             />
             W
           </label>
-          <Power power={laserpower} />
+          {showvisualizations && <Power power={laserpower} />}
 
           <label>
             Cavity Length
@@ -216,7 +223,7 @@ function App() {
             <input type="text" value={rad2deg(phaseshift)} disabled />
             deg
           </label>
-          <Phaseshift phaseshift={phaseshift} />
+          {showvisualizations && <Phaseshift phaseshift={phaseshift} />}
 
           <hr />
 
@@ -302,9 +309,6 @@ function App() {
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
         </div>
-        <button onClick={() => setShowformulas((v) => !v)}>
-          formulae & unit signs
-        </button>
       </div>
     </MathJaxContext>
   )
