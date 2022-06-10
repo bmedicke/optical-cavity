@@ -155,7 +155,7 @@ function App() {
               type="number"
               min="0"
               max="1000"
-              step="0.1"
+              step="1"
               onChange={(e) => setWavelength(e.target.value)}
               value={wavelength}
             />
