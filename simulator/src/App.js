@@ -132,9 +132,8 @@ function App() {
               onChange={(e) => setLaserpower(e.target.value)}
               value={laserpower}
             />
-            W
+            W{showvisualizations && <Power power={laserpower} />}
           </label>
-          {showvisualizations && <Power power={laserpower} />}
 
           <label>
             Cavity Length
@@ -227,8 +226,8 @@ function App() {
             <br />
             <input type="text" value={rad2deg(phaseshift)} disabled />
             deg
+            {showvisualizations && <Phaseshift phaseshift={phaseshift} />}
           </label>
-          {showvisualizations && <Phaseshift phaseshift={phaseshift} />}
 
           <hr />
 
@@ -265,6 +264,9 @@ function App() {
             </MathJax>
           )}
           <input type="text" value={opticalgainRessonance} disabled />
+          {showvisualizations && (
+            <Gain power={laserpower} gain={opticalgainRessonance} />
+          )}
         </label>
 
         <hr />
@@ -279,10 +281,8 @@ function App() {
             </MathJax>
           )}
           <input type="text" value={opticalgain} disabled />
+          {showvisualizations && <Gain power={laserpower} gain={opticalgain} />}
         </label>
-        {showvisualizations && (
-          <Gain power={laserpower} gain={opticalgain} />
-        )}
 
         <hr />
 
@@ -296,6 +296,9 @@ function App() {
             </MathJax>
           )}
           <input type="text" value={reflectedgain} disabled />
+          {showvisualizations && (
+            <Gain power={laserpower} gain={reflectedgain} />
+          )}
         </label>
 
         <hr />
@@ -310,6 +313,9 @@ function App() {
             </MathJax>
           )}
           <input type="text" value={transmittedgain} disabled />
+          {showvisualizations && (
+            <Gain power={laserpower} gain={transmittedgain} />
+          )}
         </label>
 
         <hr />
