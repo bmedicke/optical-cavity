@@ -1,6 +1,6 @@
 import './App.css'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { Power, Phaseshift, Gain } from './Visualizations'
+import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import * as math from 'mathjs'
@@ -160,6 +160,7 @@ function App() {
               value={wavelength}
             />
             nm
+            {showvisualizations && <Wavelength wavelength={wavelength} />}
           </label>
 
           <label>

@@ -72,6 +72,49 @@ const Power = (props) => {
   )
 }
 
+const Wavelength = (props) => {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    var canvas = ref.current
+    var context = canvas.getContext('2d')
+    const scaleWavelength = 632
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    context.lineWidth = 2
+    var c = wavelength2rgb(props.wavelength)
+    context.strokeStyle = `rgb(${c.r},${c.g},${c.b})`
+
+    var frequency = (1 / props.wavelength) * scaleWavelength
+    context.beginPath()
+
+    var x = 0
+    for (var i = 0; i < canvas.width; i++) {
+      const y =
+        ((Math.sin((x / canvas.width) * frequency * 2 * Math.PI) *
+          (canvas.height / 2)) /
+          (100 + context.lineWidth * 4)) *
+          50 +
+        canvas.height / 2
+      context.moveTo(x, y)
+      x = i
+      context.lineTo(x, y)
+    }
+
+    context.stroke()
+  }, [props.wavelength])
+
+  return (
+    <div>
+      <canvas
+        ref={ref}
+        id="wavelength"
+        className={styles.small_visualization}
+      ></canvas>
+    </div>
+  )
+}
+
 const Gain = (props) => {
   const ref = useRef(null)
 
@@ -125,4 +168,4 @@ const Phaseshift = (props) => {
     </div>
   )
 }
-export { Power, Phaseshift, Gain }
+export { Power, Phaseshift, Gain, Wavelength }
