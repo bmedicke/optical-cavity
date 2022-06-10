@@ -179,7 +179,9 @@ function App() {
             />
           </label>
         </div>
+
         <hr />
+
         <div className="results">
           <label>
             <a href="https://en.wikipedia.org/wiki/Wavenumber">
@@ -194,7 +196,9 @@ function App() {
             )}
             <input type="text" value={wavenumber} disabled />
           </label>
+
           <hr />
+
           <label>
             <a href="https://en.wikipedia.org/wiki/Phase_(waves)#Phase_shift">
               Phase Shift
@@ -213,6 +217,7 @@ function App() {
             deg
           </label>
           <Phaseshift phaseshift={phaseshift} />
+
           <hr />
 
           <label>
@@ -235,7 +240,9 @@ function App() {
             <input type="text" value={m2transmittance} disabled />
           </label>
         </div>
+
         <hr />
+
         <label>
           Optical Gain at resonance
           {showformulas && (
@@ -247,9 +254,11 @@ function App() {
           )}
           <input type="text" value={opticalgainRessonance} disabled />
         </label>
+
         <hr />
+
         <label>
-          Optical Gain
+          Current Optical Gain
           {showformulas && (
             <MathJax>
               {`\\(
@@ -259,32 +268,35 @@ function App() {
           )}
           <input type="text" value={opticalgain} disabled />
         </label>
+
         <hr />
+
         <label>
           Reflected Gain
           {showformulas && (
-            // TODO: fix formula
             <MathJax>
               {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{2ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
             </MathJax>
           )}
           <input type="text" value={reflectedgain} disabled />
         </label>
+
         <hr />
+
         <label>
           Transmitted Gain
           {showformulas && (
-            // TODO: fix formula
             <MathJax>
               {`\\(
-              \\left|\\dfrac{E_\\mathrm{cav}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
+              \\left|\\dfrac{E_\\mathrm{transmitted}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1 t_2 e^{ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
             </MathJax>
           )}
           <input type="text" value={transmittedgain} disabled />
         </label>
+
         <hr />
 
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
