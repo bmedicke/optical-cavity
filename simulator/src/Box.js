@@ -12,7 +12,7 @@ const Box = ({
   hideCanvas=false,
   isResult=false,
   rgb={r: 255, g: 255, b: 255},
-  canvasplot=<canvas style={{backgroundColor: `rgb(${rgb.r},${rgb.g},${rgb.b})`, height: "200px", width: "200px", backgroundImage: 'url("/maniac.jpeg")',backgroundSize: "cover",
+  canvasplot=<canvas style={{backgroundColor: `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`, height: "200px", width: "200px", backgroundImage: 'url("/maniac.jpeg")',backgroundSize: "cover",
 backgroundBlendMode: "luminosity"}}></canvas>
 }) => {
   

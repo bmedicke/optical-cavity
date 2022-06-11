@@ -124,7 +124,7 @@ function App() {
     <MathJaxContext>
       <div className="App">
 
-    <div style={{height: "100vh", display: 'flex', flexFlow: 'row wrap', overflowX: 'auto', background: '#333', justifyContent: 'flex-start'}} className='variable-wrapper'>
+    <div style={{height: "100vh", display: 'flex', flexFlow: 'row wrap', overflowX: 'auto', background: `linear-gradient(90deg, black 30%, rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b},0.4) 50%, black 70%)`, justifyContent: 'center'}} className='variable-wrapper'>
 
     <Box label='laser power' rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
     <Box label="cavity length" rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
