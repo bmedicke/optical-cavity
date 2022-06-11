@@ -9,6 +9,7 @@ const Box = ({
   setF={function(){}},
   unit="AU",
   value,
+  hideCanvas=false,
   isResult=false,
   canvasplot=<canvas style={{backgroundColor: "red", height: "200px", width: "200px"}}></canvas>
 }) => {
@@ -19,7 +20,7 @@ const Box = ({
     background: "#222",
     display: "inline-flex",
     flexDirection: "column",
-    margin: "0 2.5px",
+    margin: "2.5px 2.5px",
     justifyContent: "space-evenly",
     alignItems: "center",
     width: size,
@@ -47,8 +48,8 @@ const Box = ({
        {unit}</span>
        
       </label>
-    {canvasplot}
-      {!isResult && <input
+    {!hideCanvas && canvasplot}
+      {!isResult&& <input
         type="range"
         value={value}
         step={step}
