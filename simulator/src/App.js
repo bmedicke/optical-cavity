@@ -115,23 +115,26 @@ function App() {
   return (
     <MathJaxContext>
       <div className="App">
-    <div style={{height: "100vh", display: 'flex', flexWrap: 'wrap', overflowX: 'auto'}} className='variable-wrapper'>
-    <Box label='laser power' min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
-    <Box label="cavity length" min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
-    <Box label="wave length" min="0" max="1000" step="1" unit="nm" value={wavelength} canvasplot={<Wavelength wavelength={wavelength}/>} setF={e => setWavelength(e.target.value)} />
-    <Box label="reflectivity mirror 1" min="0" max="1" step="0.01" unit="" value={m1reflectivity}  setF={e => setM1reflectivity(e.target.value)} />
-    <Box label="reflectivity mirror 2" min="0" max="1" step="0.01" unit="" value={m2reflectivity}  setF={e => setM2reflectivity(e.target.value)} />
-    <Box label="angular wavenumber" isResult unit="" value={wavenumber} />
-    <Box label="phase shift (rad)" isResult unit="rad" value={phaseshift} />
-    <Box label="phase shift (deg)" isResult unit="deg" value={rad2deg(phaseshift)} />
-    <Box label="transmittance mirror 1" isResult unit="" value={m1transmittance} />
-    <Box label="transmittance mirror 2" isResult unit="" value={m2transmittance} />
-    <Box label="optical gain at ressonance" isResult canvasplot={<Gain power={laserpower} gain={opticalgainRessonance}/>} unit="" value={opticalgainRessonance} />
-    <Box label="current optical gain" isResult unit="" canvasplot={<Gain power={laserpower} gain={opticalgain}/>} value={opticalgain} />
-    <Box label="reflected gain" isResult unit="" canvasplot={<Gain power={laserpower} gain={reflectedgain}/>} value={reflectedgain} />
-    <Box label="transmitted gain" isResult unit="" canvasplot={<Gain power={laserpower} gain={transmittedgain}/>} value={transmittedgain} />
+
+    <div style={{height: "100vh", display: 'flex', flexFlow: 'row wrap', overflowX: 'auto', background: '#333', justifyContent: 'flex-start'}} className='variable-wrapper'>
+
+    <Box label='laser power' hideCanvas={!showvisualizations} min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
+    <Box label="cavity length" hideCanvas={!showvisualizations} min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
+    <Box label="wave length" hideCanvas={!showvisualizations} min="0" max="1000" step="1" unit="nm" value={wavelength} canvasplot={<Wavelength wavelength={wavelength}/>} setF={e => setWavelength(e.target.value)} />
+    <Box label="reflectivity mirror 1" hideCanvas={!showvisualizations} min="0" max="1" step="0.01" unit="" value={m1reflectivity}  setF={e => setM1reflectivity(e.target.value)} />
+    <Box label="reflectivity mirror 2" hideCanvas={!showvisualizations} min="0" max="1" step="0.01" unit="" value={m2reflectivity}  setF={e => setM2reflectivity(e.target.value)} />
+    <Box label="angular wavenumber" hideCanvas={!showvisualizations} isResult unit="" value={wavenumber} />
+    <Box label="phase shift (rad)" hideCanvas={!showvisualizations} isResult unit="rad" value={phaseshift} />
+    <Box label="phase shift (deg)" hideCanvas={!showvisualizations} isResult unit="deg" value={rad2deg(phaseshift)} />
+    <Box label="transmittance mirror 1" hideCanvas={!showvisualizations} isResult unit="" value={m1transmittance} />
+    <Box label="transmittance mirror 2" hideCanvas={!showvisualizations} isResult unit="" value={m2transmittance} />
+    <Box label="optical gain at ressonance" hideCanvas={!showvisualizations} isResult canvasplot={<Gain power={laserpower} gain={opticalgainRessonance}/>} unit="" value={opticalgainRessonance} />
+    <Box label="current optical gain" hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={opticalgain}/>} value={opticalgain} />
+    <Box label="reflected gain" hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={reflectedgain}/>} value={reflectedgain} />
+    <Box label="transmitted gain" hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={transmittedgain}/>} value={transmittedgain} />
 
     </div>
+    <button onTouch={() => {}} onClick={() => {setShowvisualizations(x => !x)}}>test</button>
         <div className="controls">
           //TODO Visualizations controls
           <button onClick={() => setShowvisualizations((v) => !v)}>
