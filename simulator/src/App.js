@@ -116,9 +116,10 @@ function App() {
     <MathJaxContext>
       <div className="App">
     <div className='variable-wrapper'>
-    <Box label='laser power' min="0" max="100" step="1" unit="nm" value={laserpower} setF={e => setLaserpower(e.target.value)}/>
+    <Box label='laser power' min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
     <Box label="cavity length" min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
-    
+    <Box label="wave length" min="0" max="1000" step="1" unit="nm" value={wavelength} canvasplot={<Wavelength wavelength={wavelength}/>} setF={e => setWavelength(e.target.value)} />
+
     </div>
 
         
@@ -131,20 +132,7 @@ function App() {
           </button>
         
 
-          <label>
-            <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>
-            {showformulas && <MathJax>{`\\(\\lambda\\)`}</MathJax>}
-            <input
-              type="number"
-              min="0"
-              max="1000"
-              step="1"
-              onChange={(e) => setWavelength(e.target.value)}
-              value={wavelength}
-            />
-            nm
-            {showvisualizations && <Wavelength wavelength={wavelength} />}
-          </label>
+          
 
           <label>
             <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
