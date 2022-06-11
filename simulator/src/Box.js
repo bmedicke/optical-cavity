@@ -11,9 +11,11 @@ const Box = ({
   value,
   hideCanvas=false,
   isResult=false,
-  canvasplot=<canvas style={{backgroundColor: "red", height: "200px", width: "200px"}}></canvas>
+  rgb={r: 255, g: 255, b: 255},
+  canvasplot=<canvas style={{backgroundColor: `rgb(${rgb.r},${rgb.g},${rgb.b})`, height: "200px", width: "200px", backgroundImage: 'url("/maniac.jpeg")',backgroundSize: "cover",
+backgroundBlendMode: "luminosity"}}></canvas>
 }) => {
-
+  
   let size = "500px";
   //TODO Box with Canvas for same layout
   const stylingBox = {
@@ -29,7 +31,7 @@ const Box = ({
     //height: "400px"
   };
 
-  useEffect(() => {console.log(isResult)},[isResult])
+  useEffect(() => {console.log("BLINKKK")},[value])
   return (
     <div className="box" style={stylingBox}>
       <label style={{ color: "white", textAlign: "center", width: "100%"}}>
