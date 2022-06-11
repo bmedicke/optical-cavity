@@ -133,6 +133,7 @@ function App() {
 
     </div>
         <div className="controls">
+          //TODO Visualizations controls
           <button onClick={() => setShowvisualizations((v) => !v)}>
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
           </button>
@@ -140,123 +141,7 @@ function App() {
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
-
-        <hr />
-
-        <div className="results">
-          
-
-          <hr />
-
-          <label>
-            <a href="https://en.wikipedia.org/wiki/Phase_(waves)#Phase_shift">
-              Phase Shift
-            </a>
-            {showformulas && (
-              <MathJax>
-                {`\\(
-            \\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi
-            \\)`}
-              </MathJax>
-            )}
-            <input type="text" value={phaseshift} disabled />
-            rad
-            <br />
-            <input type="text" value={rad2deg(phaseshift)} disabled />
-            deg
-            {showvisualizations && <Phaseshift phaseshift={phaseshift} />}
-          </label>
-
-          <hr />
-
-          <label>
-            <a href="https://de.wikipedia.org/wiki/Transmission_(Physik)">
-              Transmittance
-            </a>
-            {showformulas && (
-              <MathJax>
-                {`\\(
-            t_n = \\sqrt{1 - r_n^2}
-            \\)`}
-              </MathJax>
-            )}
-            Mirror 1 (fixed)
-            <input type="text" value={m1transmittance} disabled />
-          </label>
-
-          <label>
-            Mirror 2 (piezo)
-            <input type="text" value={m2transmittance} disabled />
-          </label>
-
-
-        <label>
-          Optical Gain at resonance
-          {showformulas && (
-            <MathJax>
-              {`\\(
-              \\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|
-              \\)`}
-            </MathJax>
-          )}
-          <input type="text" value={opticalgainRessonance} disabled />
-          {showvisualizations && (
-            <Gain power={laserpower} gain={opticalgainRessonance} />
-          )}
-        </label>
-
-        <hr />
-
-        <label>
-          Current Optical Gain
-          {showformulas && (
-            <MathJax>
-              {`\\(
-              \\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
-              \\)`}
-            </MathJax>
-          )}
-          <input type="text" value={opticalgain} disabled />
-          {showvisualizations && <Gain power={laserpower} gain={opticalgain} />}
-        </label>
-
-        <hr />
-
-        <label>
-          Reflected Gain
-          {showformulas && (
-            <MathJax>
-              {`\\(
-              \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{2ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
-              \\)`}
-            </MathJax>
-          )}
-          <input type="text" value={reflectedgain} disabled />
-          {showvisualizations && (
-            <Gain power={laserpower} gain={reflectedgain} />
-          )}
-        </label>
-
-        <hr />
-
-        <label>
-          Transmitted Gain
-          {showformulas && (
-            <MathJax>
-              {`\\(
-              \\left|\\dfrac{E_\\mathrm{transmitted}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1 t_2 e^{ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
-              \\)`}
-            </MathJax>
-          )}
-          <input type="text" value={transmittedgain} disabled />
-          {showvisualizations && (
-            <Gain power={laserpower} gain={transmittedgain} />
-          )}
-        </label>
-
-        <hr />
-        </div>
-
+        
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
