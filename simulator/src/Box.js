@@ -8,7 +8,8 @@ const Box = ({
   label = "defaultLabel",
   setF,
   unit="AU",
-  value
+  value,
+  canvasplot=<canvas style={{backgroundColor: "red", height: "200px", width: "200px"}}></canvas>
 }) => {
 
   let size = "500px";
@@ -41,7 +42,7 @@ const Box = ({
        {unit}</span>
        
       </label>
-     <Power power={value}/>
+    {canvasplot}
       <input
         type="range"
         value={value}
@@ -85,5 +86,22 @@ label>
               onChange={(e) => setCavitylength(e.target.value)}
             />
             nm
+          </label>
+          */
+
+          /*
+          <label>
+            <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>
+            {showformulas && <MathJax>{`\\(\\lambda\\)`}</MathJax>}
+            <input
+              type="number"
+              min="0"
+              max="1000"
+              step="1"
+              onChange={(e) => setWavelength(e.target.value)}
+              value={wavelength}
+            />
+            nm
+            {showvisualizations && <Wavelength wavelength={wavelength} />}
           </label>
           */
