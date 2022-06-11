@@ -115,14 +115,23 @@ function App() {
   return (
     <MathJaxContext>
       <div className="App">
-    <div className='variable-wrapper'>
+    <div style={{height: "50vh", display: 'flex', flexWrap: 'wrap', overflowX: 'auto'}} className='variable-wrapper'>
     <Box label='laser power' min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
     <Box label="cavity length" min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
     <Box label="wave length" min="0" max="1000" step="1" unit="nm" value={wavelength} canvasplot={<Wavelength wavelength={wavelength}/>} setF={e => setWavelength(e.target.value)} />
+    <Box label="reflectivity mirror 1" min="0" max="1" step="0.01" unit="" value={m1reflectivity}  setF={e => setM1reflectivity(e.target.value)} />
+    <Box label="reflectivity mirror 2" min="0" max="1" step="0.01" unit="" value={m2reflectivity}  setF={e => setM2reflectivity(e.target.value)} />
+    <Box label="angular wavenumber" isResult unit="" value={wavenumber} />
+    <Box label="phase shift (rad)" isResult unit="rad" value={phaseshift} />
+    <Box label="phase shift (deg)" isResult unit="deg" value={rad2deg(phaseshift)} />
+    <Box label="transmittance mirror 1" isResult unit="" value={m1transmittance} />
+    <Box label="transmittance mirror 2" isResult unit="" value={m2transmittance} />
+    <Box label="optical gain at ressonance" isResult unit="" value={opticalgainRessonance} />
+    <Box label="current optical gain" isResult unit="" value={opticalgain} />
+    <Box label="reflected gain" isResult unit="" value={reflectedgain} />
+    <Box label="transmitted gain" isResult unit="" value={transmittedgain} />
 
     </div>
-
-        
         <div className="controls">
           <button onClick={() => setShowvisualizations((v) => !v)}>
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
@@ -130,55 +139,12 @@ function App() {
           <button onClick={() => setShowformulas((v) => !v)}>
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
-        
-
-          
-
-          <label>
-            <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
-              Reflectivity
-            </a>
-            {showformulas && <MathJax>{`\\(r_n\\)`}</MathJax>}
-            Mirror 1 (fixed)
-            <input
-              type="number"
-              value={m1reflectivity}
-              min="0"
-              max="1"
-              step="0.01"
-              onChange={(e) => setM1reflectivity(e.target.value)}
-            />
-          </label>
-
-          <label>
-            Mirror 2 (piezo)
-            <input
-              type="number"
-              value={m2reflectivity}
-              min="0"
-              max="1"
-              step="0.01"
-              onChange={(e) => setM2reflectivity(e.target.value)}
-            />
-          </label>
         </div>
 
         <hr />
 
         <div className="results">
-          <label>
-            <a href="https://en.wikipedia.org/wiki/Wavenumber">
-              Angular Wave Number
-            </a>
-            {showformulas && (
-              <MathJax>
-                {`\\(
-            k = \\frac{2\\pi}{\\lambda}
-            \\)`}
-              </MathJax>
-            )}
-            <input type="text" value={wavenumber} disabled />
-          </label>
+          
 
           <hr />
 
