@@ -116,8 +116,8 @@ function App() {
     <MathJaxContext>
       <div className="App">
     <div className='variable-wrapper'>
-    <Box label='laser power' min="0" max="100" step="1" value={laserpower} setF={e => setLaserpower(e.target.value)}/>
-
+    <Box label='laser power' min="0" max="100" step="1" unit="nm" value={laserpower} setF={e => setLaserpower(e.target.value)}/>
+    <Box label="cavity length" min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
     
     </div>
 
@@ -129,19 +129,7 @@ function App() {
           <button onClick={() => setShowformulas((v) => !v)}>
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
-         
-          <label>
-            Cavity Length
-            {showformulas && <MathJax>{`\\(L\\)`}</MathJax>}
-            <input
-              type="number"
-              value={cavitylength}
-              min="0"
-              max="100000"
-              onChange={(e) => setCavitylength(e.target.value)}
-            />
-            nm
-          </label>
+        
 
           <label>
             <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>
