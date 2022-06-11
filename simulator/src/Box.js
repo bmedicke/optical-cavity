@@ -7,6 +7,7 @@ const Box = ({
   step = "0.1",
   label = "defaultLabel",
   setF,
+  unit="AU",
   value
 }) => {
 
@@ -37,7 +38,7 @@ const Box = ({
           onChange={setF}
           value={value}
         />
-       nm</span>
+       {unit}</span>
        
       </label>
      <Power power={value}/>
@@ -71,3 +72,18 @@ Laser Power
 W{showvisualizations && <Power power={laserpower} />}
 </label>
  */
+
+/* 
+label>
+            Cavity Length
+            {showformulas && <MathJax>{`\\(L\\)`}</MathJax>}
+            <input
+              type="number"
+              value={cavitylength}
+              min="0"
+              max="100000"
+              onChange={(e) => setCavitylength(e.target.value)}
+            />
+            nm
+          </label>
+          */
