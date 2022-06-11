@@ -120,6 +120,13 @@ function App() {
     epow2ikl,
   ])
 
+  const btnStyle= {
+    background: "black",
+    padding: "1rem",
+    color: "white",
+    width: "50%",
+   }
+
   return (
     <MathJaxContext>
       <div className="App">
@@ -142,16 +149,15 @@ function App() {
     <Box label="transmitted gain" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={transmittedgain}/>} value={transmittedgain} />
 
     </div>
-    <button onTouch={() => {}} onClick={() => {setShowvisualizations(x => !x)}}>test</button>
-        <div className="controls">
-          //TODO Visualizations controls
-          <button onClick={() => setShowvisualizations((v) => !v)}>
+        <div style={{display: 'flex', flexFlow: "row wrap" }} className="controls">
+          <button style={btnStyle} onClick={() => setShowvisualizations((v) => !v)}>
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
           </button>
-          <button onClick={() => setShowformulas((v) => !v)}>
+          <button style={btnStyle} onClick={() => setShowformulas((v) => !v)}>
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
+        
         
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
