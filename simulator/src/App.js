@@ -115,7 +115,7 @@ function App() {
   return (
     <MathJaxContext>
       <div className="App">
-    <div style={{height: "50vh", display: 'flex', flexWrap: 'wrap', overflowX: 'auto'}} className='variable-wrapper'>
+    <div style={{height: "100vh", display: 'flex', flexWrap: 'wrap', overflowX: 'auto'}} className='variable-wrapper'>
     <Box label='laser power' min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
     <Box label="cavity length" min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
     <Box label="wave length" min="0" max="1000" step="1" unit="nm" value={wavelength} canvasplot={<Wavelength wavelength={wavelength}/>} setF={e => setWavelength(e.target.value)} />
@@ -126,10 +126,10 @@ function App() {
     <Box label="phase shift (deg)" isResult unit="deg" value={rad2deg(phaseshift)} />
     <Box label="transmittance mirror 1" isResult unit="" value={m1transmittance} />
     <Box label="transmittance mirror 2" isResult unit="" value={m2transmittance} />
-    <Box label="optical gain at ressonance" isResult unit="" value={opticalgainRessonance} />
-    <Box label="current optical gain" isResult unit="" value={opticalgain} />
-    <Box label="reflected gain" isResult unit="" value={reflectedgain} />
-    <Box label="transmitted gain" isResult unit="" value={transmittedgain} />
+    <Box label="optical gain at ressonance" isResult canvasplot={<Gain power={laserpower} gain={opticalgainRessonance}/>} unit="" value={opticalgainRessonance} />
+    <Box label="current optical gain" isResult unit="" canvasplot={<Gain power={laserpower} gain={opticalgain}/>} value={opticalgain} />
+    <Box label="reflected gain" isResult unit="" canvasplot={<Gain power={laserpower} gain={reflectedgain}/>} value={reflectedgain} />
+    <Box label="transmitted gain" isResult unit="" canvasplot={<Gain power={laserpower} gain={transmittedgain}/>} value={transmittedgain} />
 
     </div>
         <div className="controls">
