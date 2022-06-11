@@ -1,7 +1,7 @@
 import styles from './Visualizations.module.scss'
 import { useEffect, useRef } from 'react'
 
-const wavelength2rgb = (wl) => {
+export const wavelength2rgb = (wl) => {
   console.log(wl)
   var color
   const s = wl < 420 ? 0.3 + (0.7 * (wl - 380.0)) / (420.0 - 380.0) : 1.0
