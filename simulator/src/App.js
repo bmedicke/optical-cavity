@@ -4,6 +4,7 @@ import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import * as math from 'mathjs'
+import Box from './Box.js'
 
 function App() {
   // configurable variables:
@@ -114,6 +115,13 @@ function App() {
   return (
     <MathJaxContext>
       <div className="App">
+    <div className='variable-wrapper'>
+    <Box label='laser power' min="0" max="100" step="1" value={laserpower} setF={e => setLaserpower(e.target.value)}/>
+
+    
+    </div>
+
+        
         <div className="controls">
           <button onClick={() => setShowvisualizations((v) => !v)}>
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
@@ -121,20 +129,7 @@ function App() {
           <button onClick={() => setShowformulas((v) => !v)}>
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
-          <label>
-            Laser Power
-            {showformulas && <MathJax>{`\\(P\\)`}</MathJax>}
-            <input
-              type="number"
-              min="0"
-              max="100"
-              step="1"
-              onChange={(e) => setLaserpower(e.target.value)}
-              value={laserpower}
-            />
-            W{showvisualizations && <Power power={laserpower} />}
-          </label>
-
+         
           <label>
             Cavity Length
             {showformulas && <MathJax>{`\\(L\\)`}</MathJax>}
@@ -251,9 +246,7 @@ function App() {
             Mirror 2 (piezo)
             <input type="text" value={m2transmittance} disabled />
           </label>
-        </div>
 
-        <hr />
 
         <label>
           Optical Gain at resonance
@@ -320,6 +313,7 @@ function App() {
         </label>
 
         <hr />
+        </div>
 
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
