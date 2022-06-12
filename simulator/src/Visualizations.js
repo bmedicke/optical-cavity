@@ -1,7 +1,7 @@
 import styles from './Visualizations.module.scss'
 import { useEffect, useRef } from 'react'
 
-export const wavelength2rgb = (wl) => {
+const wavelength2rgb = (wl) => {
   var color
   const s = wl < 420 ? 0.3 + (0.7 * (wl - 380.0)) / (420.0 - 380.0) : 1.0
   if (wl >= 380 && wl < 440) {
@@ -26,6 +26,10 @@ export const wavelength2rgb = (wl) => {
     g: Math.pow(g, gamma) * 255,
     b: Math.pow(b, gamma) * 255,
   }
+}
+
+const rgb2string = (rgb, alpha = 1.0) => {
+  return `rgba(${rgb.r},${rgb.g},${rgb.b}, ${alpha})`
 }
 
 function draw_sine(canvas, context, scale, phaseshift = 0) {
@@ -167,4 +171,4 @@ const Phaseshift = (props) => {
     </div>
   )
 }
-export { Power, Phaseshift, Gain, Wavelength }
+export { Power, Phaseshift, Gain, Wavelength, wavelength2rgb, rgb2string }

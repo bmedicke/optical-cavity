@@ -1,3 +1,4 @@
+import { rgb2string } from './Visualizations'
 import { useEffect } from 'react'
 
 const Box = ({
@@ -15,7 +16,7 @@ const Box = ({
     <canvas
       // TODO use style from Visualization.css
       style={{
-        backgroundColor: `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`,
+        backgroundColor: rgb2string(rgb, 0.3),
         height: '200px',
         width: '200px',
         backgroundImage: 'url("/maniac.jpeg")',

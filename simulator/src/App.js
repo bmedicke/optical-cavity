@@ -5,7 +5,7 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-import { wavelength2rgb } from './Visualizations.js'
+import { wavelength2rgb, rgb2string } from './Visualizations.js'
 
 function App() {
   // configurable variables:
@@ -134,7 +134,10 @@ function App() {
             display: 'flex',
             flexFlow: 'row wrap',
             overflowX: 'auto',
-            background: `linear-gradient(90deg, black 30%, rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b},0.4) 50%, black 70%)`,
+            background: `linear-gradient(90deg, black 30%, ${rgb2string(
+              wavelengthColor,
+              0.4
+            )} 50%, black 70%)`,
             justifyContent: 'center',
           }}
           className="variable-wrapper"
