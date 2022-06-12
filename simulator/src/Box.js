@@ -16,7 +16,7 @@ const Box = ({
     <canvas
       // TODO use style from Visualization.css
       style={{
-        backgroundColor: rgb2string(rgb, 0.3),
+        backgroundColor: rgb2string(rgb, 0.1),
         height: '200px',
         width: '200px',
         backgroundImage: 'url("/maniac.jpeg")',
@@ -27,20 +27,18 @@ const Box = ({
   ),
 }) => {
   //TODO Box with Canvas for same layout
-  const stylingBox = {
-    background: '#222',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    margin: '2.5px 2.5px',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    width: '400px',
-    minWidth: '300px',
-  }
 
-  useEffect(() => {
-    console.log('box component changed')
-  }, [value])
+  const stylingBox = {
+    background: "#fff",
+    display: "inline-flex",
+    flexDirection: "column",
+    margin: "2.5px 2.5px",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    width: "220px",
+    minWidth: "220px",
+    alignItems: "center",
+  };
 
   return (
     <div className="box" style={stylingBox}>
