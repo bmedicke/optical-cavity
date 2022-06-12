@@ -93,8 +93,8 @@ function App() {
   }, [m1reflectivity, m2reflectivity, m1transmittance])
 
   useEffect(() => {
-    const reflectivitysum = math.multiply(m1reflectivity, m2reflectivity) //r1*r2
-    const foo = math.multiply(epow2ikl, reflectivitysum)
+    const reflectivityproduct = math.multiply(m1reflectivity, m2reflectivity) //r1*r2
+    const foo = math.multiply(epow2ikl, reflectivityproduct)
     const divisor = math.subtract(1.0, foo)
     const result = math.divide(m1transmittance, divisor).re
     setOpticalgain(result)
