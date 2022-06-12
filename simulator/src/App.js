@@ -165,7 +165,7 @@ rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
   }
    const bottomStyle={
     height: "40%",
-    background: "url(./galaxy.gif)",
+    background: "url(/galaxy.gif)",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundBlendMode: isLocked ? "luminosity" : "multiply",
