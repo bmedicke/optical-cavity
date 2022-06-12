@@ -29,16 +29,15 @@ const Box = ({
   //TODO Box with Canvas for same layout
 
   const stylingBox = {
-    background: "#fff",
-    display: "inline-flex",
-    flexDirection: "column",
-    margin: "2.5px 2.5px",
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "220px",
-    minWidth: "220px",
-    alignItems: "center",
-  };
+    background: '#fff',
+    display: 'inline-flex',
+    flexDirection: 'column',
+    margin: '2.5px 2.5px',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '220px',
+    minWidth: '220px',
+  }
 
   return (
     <div className="box" style={stylingBox}>
