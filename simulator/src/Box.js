@@ -1,70 +1,85 @@
-import { useEffect, useState } from "react";
-import { Power } from './Visualizations.js'
+import { useEffect } from 'react'
 
 const Box = ({
-  min = "0",
-  max = "200",
-  step = "0.1",
-  label = "defaultLabel",
-  setF={function(){}},
-  unit="AU",
+  min = '0',
+  max = '200',
+  step = '0.1',
+  label = 'defaultLabel',
+  setF = { function() {} },
+  unit = 'AU',
   value,
-  hideCanvas=false,
-  isResult=false,
-  rgb={r: 255, g: 255, b: 255},
-  canvasplot=<canvas style={{backgroundColor: `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`, height: "200px", width: "200px", backgroundImage: 'url("/maniac.jpeg")',backgroundSize: "cover",
-backgroundBlendMode: "luminosity"}}></canvas>
+  hideCanvas = false,
+  isResult = false,
+  rgb = { r: 255, g: 255, b: 255 },
+  canvasplot = (
+    <canvas
+      style={{
+        backgroundColor: `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`,
+        height: '200px',
+        width: '200px',
+        backgroundImage: 'url("/maniac.jpeg")',
+        backgroundSize: 'cover',
+        backgroundBlendMode: 'luminosity',
+      }}
+    ></canvas>
+  ),
 }) => {
-  
-  let size = "500px";
+  let size = '500px'
   //TODO Box with Canvas for same layout
   const stylingBox = {
-    background: "#222",
-    display: "inline-flex",
-    flexDirection: "column",
-    margin: "2.5px 2.5px",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+    background: '#222',
+    display: 'inline-flex',
+    flexDirection: 'column',
+    margin: '2.5px 2.5px',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
     width: size,
-    minWidth: "300px",
-    alignItems: "center"
+    minWidth: '300px',
+    alignItems: 'center',
     //height: "400px"
-  };
+  }
 
-  useEffect(() => {console.log("BLINKKK")},[value])
+  useEffect(() => {
+    console.log('BLINKKK')
+  }, [value])
   return (
     <div className="box" style={stylingBox}>
-      <label style={{ color: "white", textAlign: "center", width: "100%"}}>
-        <h1 style={{ marginRight: "1rem" }}>{label}</h1>
+      <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
+        <h1 style={{ marginRight: '1rem' }}>{label}</h1>
         <span>
-       {isResult ? <input type="number" disabled value={value} />  : <input
-          id="bla"
-          type="number"
+          {isResult ? (
+            <input type="number" disabled value={value} />
+          ) : (
+            <input
+              id="bla"
+              type="number"
+              min={min}
+              max={max}
+              step={step}
+              onChange={setF}
+              value={value}
+            />
+          )}
+
+          {unit}
+        </span>
+      </label>
+      {!hideCanvas && canvasplot}
+      {!isResult && (
+        <input
+          type="range"
+          value={value}
+          step={step}
           min={min}
           max={max}
-          step={step}
           onChange={setF}
-          value={value}
-        />}
-
-       {unit}</span>
-       
-      </label>
-    {!hideCanvas && canvasplot}
-      {!isResult&& <input
-        type="range"
-        value={value}
-        step={step}
-        min={min}
-        max={max}
-        onChange={setF}
-      />  }    
-
+        />
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default Box;
+export default Box
 
 /**
 <label>
@@ -97,7 +112,7 @@ label>
           </label>
           */
 
-          /*
+/*
           <label>
             <a href="https://en.wikipedia.org/wiki/Wavelength">Wavelength</a>
             {showformulas && <MathJax>{`\\(\\lambda\\)`}</MathJax>}
@@ -113,7 +128,7 @@ label>
             {showvisualizations && <Wavelength wavelength={wavelength} />}
           </label>
           */
-         /*
+/*
           <label>
             <a href="https://en.wikipedia.org/wiki/Reflectance#Reflectivity">
               Reflectivity
@@ -142,7 +157,7 @@ label>
             />
           </label>
           */
-         /*
+/*
          <label>
             <a href="https://en.wikipedia.org/wiki/Wavenumber">
               Angular Wave Number
@@ -157,7 +172,7 @@ label>
             <input type="text" value={wavenumber} disabled />
           </label>*/
 
-          /*
+/*
 
           <hr />
 

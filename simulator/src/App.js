@@ -1,11 +1,11 @@
 import './App.css'
+import * as math from 'mathjs'
+import Box from './Box.js'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-import * as math from 'mathjs'
-import Box from './Box.js'
-import {wavelength2rgb} from './Visualizations.js'
+import { wavelength2rgb } from './Visualizations.js'
 
 function App() {
   // configurable variables:
@@ -36,14 +36,16 @@ function App() {
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
-  },[wavelength])
+  }, [wavelength])
 
   useEffect(() => {
     const locked = rad2deg(phaseshift) % 180 === 0 && cavitylength > 0
     setIsLocked(locked)
     setIsMaximallyOutOfPhase(!locked && rad2deg(phaseshift) % 90 === 0)
-    setWavelengthColor(x => { console.log(x); return x;})
-
+    setWavelengthColor((x) => {
+      console.log(x)
+      return x
+    })
   }, [phaseshift, cavitylength])
 
   useEffect(() => {
@@ -120,45 +122,178 @@ function App() {
     epow2ikl,
   ])
 
-  const btnStyle= {
-    background: "black",
-    padding: "1rem",
-    color: "white",
-    width: "50%",
-   }
+  const btnStyle = {
+    background: 'black',
+    padding: '1rem',
+    color: 'white',
+    width: '50%',
+  }
 
   return (
     <MathJaxContext>
       <div className="App">
-
-    <div style={{height: "100vh", display: 'flex', flexFlow: 'row wrap', overflowX: 'auto', background: `linear-gradient(90deg, black 30%, rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b},0.4) 50%, black 70%)`, justifyContent: 'center'}} className='variable-wrapper'>
-
-    <Box label='laser power' rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="100" step="1" unit="nm" value={laserpower} canvasplot={<Power power={laserpower}/>} setF={e => setLaserpower(e.target.value)}/>
-    <Box label="cavity length" rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="1000" step="1" unit="nm" value={cavitylength} setF={e => setCavitylength(e.target.value)} />
-    <Box label="wave length" rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="1000" step="1" unit="nm" value={wavelength} canvasplot={<Wavelength wavelength={wavelength}/>} setF={e => setWavelength(e.target.value)} />
-    <Box label="reflectivity mirror 1" rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="1" step="0.01" unit="" value={m1reflectivity}  setF={e => setM1reflectivity(e.target.value)} />
-    <Box label="reflectivity mirror 2" rgb={wavelengthColor} hideCanvas={!showvisualizations} min="0" max="1" step="0.01" unit="" value={m2reflectivity}  setF={e => setM2reflectivity(e.target.value)} />
-    <Box label="angular wavenumber" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" value={wavenumber} />
-    <Box label="phase shift (rad)" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="rad" value={phaseshift} />
-    <Box label="phase shift (deg)" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="deg" value={rad2deg(phaseshift)} />
-    <Box label="transmittance mirror 1" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" value={m1transmittance} />
-    <Box label="transmittance mirror 2" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" value={m2transmittance} />
-    <Box label="optical gain at ressonance" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult canvasplot={<Gain power={laserpower} gain={opticalgainRessonance}/>} unit="" value={opticalgainRessonance} />
-    <Box label="current optical gain" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={opticalgain}/>} value={opticalgain} />
-    <Box label="reflected gain" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={reflectedgain}/>} value={reflectedgain} />
-    <Box label="transmitted gain" rgb={wavelengthColor} hideCanvas={!showvisualizations} isResult unit="" canvasplot={<Gain power={laserpower} gain={transmittedgain}/>} value={transmittedgain} />
-
-    </div>
-        <div style={{display: 'flex', flexFlow: "row wrap" }} className="controls">
-          <button style={btnStyle} onClick={() => setShowvisualizations((v) => !v)}>
+        <div
+          style={{
+            height: '100vh',
+            display: 'flex',
+            flexFlow: 'row wrap',
+            overflowX: 'auto',
+            background: `linear-gradient(90deg, black 30%, rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b},0.4) 50%, black 70%)`,
+            justifyContent: 'center',
+          }}
+          className="variable-wrapper"
+        >
+          <Box
+            label="laser power"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            min="0"
+            max="100"
+            step="1"
+            unit="nm"
+            value={laserpower}
+            canvasplot={<Power power={laserpower} />}
+            setF={(e) => setLaserpower(e.target.value)}
+          />
+          <Box
+            label="cavity length"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            min="0"
+            max="1000"
+            step="1"
+            unit="nm"
+            value={cavitylength}
+            setF={(e) => setCavitylength(e.target.value)}
+          />
+          <Box
+            label="wave length"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            min="0"
+            max="1000"
+            step="1"
+            unit="nm"
+            value={wavelength}
+            canvasplot={<Wavelength wavelength={wavelength} />}
+            setF={(e) => setWavelength(e.target.value)}
+          />
+          <Box
+            label="reflectivity mirror 1"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            min="0"
+            max="1"
+            step="0.01"
+            unit=""
+            value={m1reflectivity}
+            setF={(e) => setM1reflectivity(e.target.value)}
+          />
+          <Box
+            label="reflectivity mirror 2"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            min="0"
+            max="1"
+            step="0.01"
+            unit=""
+            value={m2reflectivity}
+            setF={(e) => setM2reflectivity(e.target.value)}
+          />
+          <Box
+            label="angular wavenumber"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            value={wavenumber}
+          />
+          <Box
+            label="phase shift (rad)"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit="rad"
+            value={phaseshift}
+          />
+          <Box
+            label="phase shift (deg)"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit="deg"
+            value={rad2deg(phaseshift)}
+          />
+          <Box
+            label="transmittance mirror 1"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            value={m1transmittance}
+          />
+          <Box
+            label="transmittance mirror 2"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            value={m2transmittance}
+          />
+          <Box
+            label="optical gain at ressonance"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            canvasplot={
+              <Gain power={laserpower} gain={opticalgainRessonance} />
+            }
+            unit=""
+            value={opticalgainRessonance}
+          />
+          <Box
+            label="current optical gain"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            canvasplot={<Gain power={laserpower} gain={opticalgain} />}
+            value={opticalgain}
+          />
+          <Box
+            label="reflected gain"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
+            value={reflectedgain}
+          />
+          <Box
+            label="transmitted gain"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            canvasplot={<Gain power={laserpower} gain={transmittedgain} />}
+            value={transmittedgain}
+          />
+        </div>
+        <div
+          style={{ display: 'flex', flexFlow: 'row wrap' }}
+          className="controls"
+        >
+          <button
+            style={btnStyle}
+            onClick={() => setShowvisualizations((v) => !v)}
+          >
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
           </button>
           <button style={btnStyle} onClick={() => setShowformulas((v) => !v)}>
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
-        
-        
+
         <div className={`cavitystatus ${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
