@@ -1,27 +1,15 @@
 .App {
   height: 100vh;
   background: black;
-}
-
-.controls,
-.results {
+  max-height: 100%;
+  overflow-y: hidden;
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
 }
 
-.controls input,
-.results input {
-  padding: 0.2em;
-  margin: 0.2em;
-}
 
-.App hr {
-  margin: 1em 0.3em 1em 0.3em;
-  width: 30%;
-}
-
-.cavitystatus {
-  padding: 1rem 0;
+label{
+  color: black!important;
 }
 
 .locked {

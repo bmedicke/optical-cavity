@@ -133,6 +133,23 @@ function App() {
     m2reflectivity,
     epow2ikl,
   ])
+/*
+rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
+*/
+  const containerStyle = {
+    height: "65vh",
+    display: 'flex',
+    flexFlow: 'row wrap',
+    overflowX: 'auto',
+    background: `linear-gradient(90deg, black 30%, ${rgb2string(
+      wavelengthColor,
+      0.4
+    )} 50%, black 70%)`,
+    justifyContent: 'center',
+    overflowScrolling: 'touch',
+    WebkitOverflowScrolling: "touch",
+    padding: "0.3rem"
+  }
 
   const btnStyle = {
     background: 'black',
@@ -145,17 +162,7 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div
-          style={{
-            height: '100vh',
-            display: 'flex',
-            flexFlow: 'row wrap',
-            overflowX: 'auto',
-            background: `linear-gradient(90deg, black 30%, ${rgb2string(
-              wavelengthColor,
-              0.4
-            )} 50%, black 70%)`,
-            justifyContent: 'center',
-          }}
+          style={containerStyle}
           className="variable-wrapper"
         >
           <Box
