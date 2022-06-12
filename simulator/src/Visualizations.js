@@ -85,8 +85,7 @@ const Wavelength = (props) => {
     context.clearRect(0, 0, canvas.width, canvas.height)
 
     context.lineWidth = 2
-    var c = wavelength2rgb(props.wavelength)
-    context.strokeStyle = `rgb(${c.r},${c.g},${c.b})`
+    context.strokeStyle = rgb2string(wavelength2rgb(props.wavelength))
 
     var frequency = (1 / props.wavelength) * scaleWavelength
     context.beginPath()
