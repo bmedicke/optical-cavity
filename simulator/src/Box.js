@@ -1,5 +1,4 @@
 import { rgb2string } from './Visualizations'
-import { useEffect } from 'react'
 
 const Box = ({
   min = '0',

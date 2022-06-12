@@ -133,11 +133,11 @@ function App() {
     m2reflectivity,
     epow2ikl,
   ])
-/*
+  /*
 rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
 */
   const containerStyle = {
-    height: "65vh",
+    height: '65vh',
     display: 'flex',
     flexFlow: 'row wrap',
     overflowX: 'auto',
@@ -147,40 +147,38 @@ rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
     )} 50%, black 70%)`,
     justifyContent: 'center',
     overflowScrolling: 'touch',
-    WebkitOverflowScrolling: "touch",
-    padding: "0.3rem"
+    WebkitOverflowScrolling: 'touch',
+    padding: '0.3rem',
   }
 
   const btnStyle = {
     background: 'black',
     padding: '1rem',
     color: 'white',
-    width: `${100/3}%`,
+    width: `${100 / 3}%`,
   }
-   const statusStyle = {
-    padding: "1rem 0",
-    border: `1px solid rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b})`,
-    textAlign: "center",
-    color: isLocked ? `1px solid rgb(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b})` : "white"
+  const statusStyle = {
+    padding: '1rem 0',
+    border: `1px solid ${rgb2string(wavelengthColor)}`,
+    textAlign: 'center',
+    color: isLocked ? `1px solid ${rgb2string(wavelengthColor)}` : 'white',
   }
-   const bottomStyle={
-    height: "40%",
-    background: "url(/galaxy.gif)",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundBlendMode: isLocked ? "luminosity" : "multiply",
-    backgroundColor: `rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}, ${isLocked ? "100%":"90%"}`,
-    backgroundPosition: "center",
-   }
+  const bottomStyle = {
+    height: '40%',
+    background: 'url(/galaxy.gif)',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
+    backgroundColor: `rgba(${wavelengthColor.r},${wavelengthColor.g},${
+      wavelengthColor.b
+    }, ${isLocked ? '100%' : '90%'}`,
+    backgroundPosition: 'center',
+  }
 
   return (
     <MathJaxContext>
       <div className="App">
-
-        <div
-          style={containerStyle}
-          className="variable-wrapper"
-        >
+        <div style={containerStyle} className="variable-wrapper">
           <Box
             label="laser power"
             rgb={wavelengthColor}
@@ -335,25 +333,28 @@ rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
             style={btnStyle}
             onClick={() => setShowvisualizations((v) => !v)}
           >
-
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
           </button>
-          <button style={btnStyle} onClick={() => {setCavitylength(200); setWavelength(400)}}>
+          <button
+            style={btnStyle}
+            onClick={() => {
+              setCavitylength(200)
+              setWavelength(400)
+            }}
+          >
             LOCK CAVITY
           </button>
           <button style={btnStyle} onClick={() => setShowformulas((v) => !v)}>
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
-        
+
         <div style={statusStyle} className={`${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
         </div>
-        
-        <div style={bottomStyle}>
-        
-        </div>
+
+        <div style={bottomStyle}></div>
       </div>
     </MathJaxContext>
   )
