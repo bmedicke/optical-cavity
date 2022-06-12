@@ -215,6 +215,7 @@ function App() {
             isResult
             unit="rad"
             value={phaseshift}
+            canvasplot={<Phaseshift phaseshift={phaseshift} />}
           />
           <Box
             label="phase shift (deg)"
@@ -223,6 +224,7 @@ function App() {
             isResult
             unit="deg"
             value={rad2deg(phaseshift)}
+            canvasplot={<Phaseshift phaseshift={phaseshift} />}
           />
           <Box
             label="transmittance mirror 1"
