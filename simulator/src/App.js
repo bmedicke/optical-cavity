@@ -42,10 +42,6 @@ function App() {
     const locked = rad2deg(phaseshift) % 180 === 0 && cavitylength > 0
     setIsLocked(locked)
     setIsMaximallyOutOfPhase(!locked && rad2deg(phaseshift) % 90 === 0)
-    setWavelengthColor((x) => {
-      console.log(x)
-      return x
-    })
   }, [phaseshift, cavitylength])
 
   useEffect(() => {

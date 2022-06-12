@@ -38,8 +38,9 @@ const Box = ({
   }
 
   useEffect(() => {
-    console.log('BLINKKK')
+    console.log('box component changed')
   }, [value])
+
   return (
     <div className="box" style={stylingBox}>
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
