@@ -35,8 +35,6 @@ const Box = ({
     alignItems: 'center',
     width: size,
     minWidth: '300px',
-    alignItems: 'center',
-    //height: "400px"
   }
 
   useEffect(() => {
