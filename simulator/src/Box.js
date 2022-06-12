@@ -13,6 +13,7 @@ const Box = ({
   rgb = { r: 255, g: 255, b: 255 },
   canvasplot = (
     <canvas
+      // TODO use style from Visualization.css
       style={{
         backgroundColor: `rgba(${rgb.r},${rgb.g},${rgb.b},0.3)`,
         height: '200px',
@@ -24,7 +25,6 @@ const Box = ({
     ></canvas>
   ),
 }) => {
-  let size = '500px'
   //TODO Box with Canvas for same layout
   const stylingBox = {
     background: '#222',
@@ -33,7 +33,7 @@ const Box = ({
     margin: '2.5px 2.5px',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: size,
+    width: '400px',
     minWidth: '300px',
   }
 
