@@ -133,9 +133,7 @@ function App() {
     m2reflectivity,
     epow2ikl,
   ])
-  /*
-rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
-*/
+
   const containerStyle = {
     height: '65vh',
     display: 'flex',
@@ -169,9 +167,7 @@ rgba(${wavelengthColor.r},${wavelengthColor.g},${wavelengthColor.b}
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
-    backgroundColor: `rgba(${wavelengthColor.r},${wavelengthColor.g},${
-      wavelengthColor.b
-    }, ${isLocked ? '100%' : '90%'}`,
+    backgroundColor: `${rgb2string(wavelengthColor)}`,
     backgroundPosition: 'center',
   }
 
