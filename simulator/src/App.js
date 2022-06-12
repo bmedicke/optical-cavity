@@ -25,6 +25,7 @@ function App() {
   const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
   const [reflectedgain, setReflectedgain] = useState(0)
   const [transmittedgain, setTransmittedgain] = useState(0)
+  const [finesse, setFinesse] = useState(0)
 
   const [isLocked, setIsLocked] = useState(false)
   const [isMaximallyOutOfPhase, setIsMaximallyOutOfPhase] = useState(false)
@@ -64,10 +65,25 @@ function App() {
       setM1transmittance(Math.sqrt(1.0 - Math.pow(x, 2)))
       return x
     })
+
     setM2reflectivity((x) => {
       setM2transmittance(Math.sqrt(1.0 - Math.pow(x, 2)))
       return x
     })
+
+    // calculate the cavity finesse:
+    const reflectivityproduct = math.multiply(m1reflectivity, m2reflectivity)
+    const numerator = math.subtract(1, reflectivityproduct)
+    const denominator = math.multiply(2, math.sqrt(reflectivityproduct))
+
+    const outerNumerator = math.pi
+    const outerDenominator = math.multiply(
+      2,
+      math.asin(math.divide(numerator, denominator))
+    )
+
+    const result = math.divide(outerNumerator, outerDenominator)
+    setFinesse(result)
   }, [m1reflectivity, m2reflectivity])
 
   useEffect(() => {
@@ -278,6 +294,14 @@ function App() {
             unit=""
             canvasplot={<Gain power={laserpower} gain={transmittedgain} />}
             value={transmittedgain}
+          />
+          <Box
+            label="cavity finesse"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            value={finesse}
           />
         </div>
         <div
