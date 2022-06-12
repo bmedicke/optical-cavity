@@ -198,7 +198,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             min="0"
-            max="1"
+            max="0.99"
             step="0.01"
             unit=""
             value={m1reflectivity}
@@ -209,7 +209,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             min="0"
-            max="1"
+            max="0.99"
             step="0.01"
             unit=""
             value={m2reflectivity}
