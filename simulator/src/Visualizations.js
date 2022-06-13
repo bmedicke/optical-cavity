@@ -68,7 +68,6 @@ const Power = (props) => {
     <div>
       <canvas
         ref={ref}
-        id="power"
         className={styles.small_visualization}
       ></canvas>
     </div>
@@ -110,7 +109,6 @@ const Wavelength = (props) => {
     <div>
       <canvas
         ref={ref}
-        id="wavelength"
         className={styles.small_visualization}
       ></canvas>
     </div>
@@ -136,7 +134,6 @@ const Gain = (props) => {
     <div>
       <canvas
         ref={ref}
-        id="gain"
         className={styles.small_visualization}
       ></canvas>
     </div>
@@ -164,7 +161,6 @@ const Phaseshift = (props) => {
     <div>
       <canvas
         ref={ref}
-        id="phaseshift"
         className={styles.small_visualization}
       ></canvas>
     </div>
