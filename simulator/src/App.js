@@ -162,12 +162,17 @@ function App() {
     color: isLocked ? `1px solid ${rgb2string(wavelengthColor)}` : 'white',
   }
   const bottomStyle = {
+    // background: 'url(/galaxy.gif)',
+    // backgroundColor: `${rgb2string(wavelengthColor)}`,
+    background: `linear-gradient(
+      0deg,
+      black 25%,
+      ${rgb2string(wavelengthColor)} 50%,
+      black 75%)`,
     height: '40%',
-    background: 'url(/galaxy.gif)',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
-    backgroundColor: `${rgb2string(wavelengthColor)}`,
     backgroundPosition: 'center',
   }
 
