@@ -86,7 +86,12 @@ const Reflectivity = (props) => {
   }, [props.reflectivity])
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
@@ -127,7 +132,12 @@ const Transmittance = (props) => {
 
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
@@ -157,7 +167,12 @@ const CavityLength = (props) => {
 
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
@@ -177,7 +192,12 @@ const Power = (props) => {
 
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
@@ -215,7 +235,12 @@ const Wavelength = (props) => {
 
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
@@ -237,7 +262,12 @@ const Gain = (props) => {
   }, [props.gain, props.power])
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
@@ -261,7 +291,12 @@ const Phaseshift = (props) => {
 
   return (
     <div>
-      <canvas ref={ref} className={styles.small_visualization}></canvas>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
     </div>
   )
 }
