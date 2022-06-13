@@ -51,6 +51,24 @@ function draw_sine(canvas, context, scale, phaseshift = 0) {
   context.stroke()
 }
 
+const Reflectivity = (props) => {
+  const ref = useRef(null)
+  return (
+    <div>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
+    </div>
+  )
+}
+
+const Transmittance = (props) => {
+  const ref = useRef(null)
+  return (
+    <div>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
+    </div>
+  )
+}
+
 const Power = (props) => {
   const ref = useRef(null)
 
