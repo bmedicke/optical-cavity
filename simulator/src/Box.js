@@ -13,6 +13,7 @@ const Box = ({
   hideCanvas = false,
   formula = null,
   isResult = false,
+  showFormula = false,
   rgb = { r: 255, g: 255, b: 255 },
   canvasplot = (
     <canvas
@@ -47,7 +48,7 @@ const Box = ({
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
         <span className="formula" >
-        {formula && <MathJax>{formula}</MathJax>}
+        {formula && showFormula && <MathJax>{formula}</MathJax>}
         </span>
         <span>
           {isResult ? (
