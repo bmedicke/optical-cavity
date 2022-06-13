@@ -210,6 +210,22 @@ const Wavelength = (props) => {
     const scaleWavelength = 632
     context.clearRect(0, 0, canvas.width, canvas.height)
 
+    context.fillStyle = 'white'
+    context.font = `${Math.round(canvas.width / 13)}px Lato`
+    var text = ''
+
+    if (props.wavelength < 2) {
+      text = 'x-ray'
+    } else if (props.wavelength < 380) {
+      text = 'ultraviolet'
+    } else if (props.wavelength < 750) {
+      text = 'visible'
+    } else {
+      text = 'infrared'
+    }
+
+    context.fillText(text, (canvas.width / 5) * 3, (canvas.height / 13) * 12)
+
     context.lineWidth = 2
     context.strokeStyle = rgb2string(wavelength2rgb(props.wavelength))
 
