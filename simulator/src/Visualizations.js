@@ -64,26 +64,25 @@ const Reflectivity = (props) => {
     context.beginPath()
     context.lineWidth = 10
     context.strokeStyle = 'green'
-    context.moveTo(w/10, h/3)
-    context.lineTo(w/2, h/2)
+    context.moveTo(w / 10, h / 3)
+    context.lineTo(w / 2, h / 2)
     context.stroke()
 
     // outbound ray:
     context.beginPath()
     context.lineWidth = 10 * props.reflectivity
     context.strokeStyle = 'red'
-    context.moveTo(w/2, h/2)
-    context.lineTo(w/9, h/3*2)
+    context.moveTo(w / 2, h / 2)
+    context.lineTo(w / 9, (h / 3) * 2)
     context.stroke()
 
     // surface:
     context.beginPath()
     context.lineWidth = 5
     context.strokeStyle = 'white'
-    context.moveTo(w/2, h/10)
-    context.lineTo(w/2, h/10*9)
+    context.moveTo(w / 2, h / 10)
+    context.lineTo(w / 2, (h / 10) * 9)
     context.stroke()
-
   }, [props.reflectivity])
   return (
     <div>
@@ -105,26 +104,25 @@ const Transmittance = (props) => {
     context.beginPath()
     context.lineWidth = 10
     context.strokeStyle = 'green'
-    context.moveTo(w/10, h/3)
-    context.lineTo(w/2, h/2)
+    context.moveTo(w / 10, h / 3)
+    context.lineTo(w / 2, h / 2)
     context.stroke()
 
     // outbound ray:
     context.beginPath()
     context.lineWidth = 10 * props.transmittance
     context.strokeStyle = 'red'
-    context.moveTo(w/2, h/2)
-    context.lineTo(w/10*9, h/3*2)
+    context.moveTo(w / 2, h / 2)
+    context.lineTo((w / 10) * 9, (h / 3) * 2)
     context.stroke()
 
     // surface:
     context.beginPath()
     context.lineWidth = 5
     context.strokeStyle = 'white'
-    context.moveTo(w/2, h/10)
-    context.lineTo(w/2, h/10*9)
+    context.moveTo(w / 2, h / 10)
+    context.lineTo(w / 2, (h / 10) * 9)
     context.stroke()
-
   }, [props.transmittance])
 
   return (
