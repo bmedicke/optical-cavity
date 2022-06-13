@@ -77,7 +77,7 @@ const Reflectivity = (props) => {
 
     // surface:
     context.beginPath()
-    context.lineWidth = 5
+    context.lineWidth = 4
     context.strokeStyle = 'white'
     context.moveTo(w / 2, h / 10)
     context.lineTo(w / 2, (h / 10) * 9)
@@ -122,7 +122,7 @@ const Transmittance = (props) => {
 
     // surface:
     context.beginPath()
-    context.lineWidth = 5
+    context.lineWidth = 4
     context.strokeStyle = 'white'
     context.moveTo(w / 2, h / 10)
     context.lineTo(w / 2, (h / 10) * 9)
@@ -152,7 +152,7 @@ const CavityLength = (props) => {
 
     // left mirror surface:
     context.beginPath()
-    context.lineWidth = 3
+    context.lineWidth = 4
     context.strokeStyle = 'white'
     context.moveTo(w / 10, h / 10)
     context.lineTo(w / 10, (h / 10) * 9)
