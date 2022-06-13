@@ -2,7 +2,14 @@ import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
+import {
+  Power,
+  Phaseshift,
+  Gain,
+  Wavelength,
+  Reflectivity,
+  Transmittance,
+} from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
@@ -218,23 +225,43 @@ function App() {
             label="reflectivity mirror 1"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
-            min="0"
+            min="0.01"
             max="0.99"
             step="0.01"
             unit=""
             value={m1reflectivity}
+            canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
             setF={(e) => setM1reflectivity(e.target.value)}
+          />
+          <Box
+            label="transmittance mirror 1"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            canvasplot={<Transmittance transmittance={m1transmittance} />}
+            value={m1transmittance}
           />
           <Box
             label="reflectivity mirror 2"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
-            min="0"
+            min="0.01"
             max="0.99"
             step="0.01"
             unit=""
             value={m2reflectivity}
+            canvasplot={<Reflectivity reflectivity={m2reflectivity} />}
             setF={(e) => setM2reflectivity(e.target.value)}
+          />
+          <Box
+            label="transmittance mirror 2"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            unit=""
+            canvasplot={<Transmittance transmittance={m2transmittance} />}
+            value={m2transmittance}
           />
           <Box
             label="angular wavenumber"
@@ -261,22 +288,6 @@ function App() {
             unit="deg"
             value={rad2deg(phaseshift)}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
-          />
-          <Box
-            label="transmittance mirror 1"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            unit=""
-            value={m1transmittance}
-          />
-          <Box
-            label="transmittance mirror 2"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            unit=""
-            value={m2transmittance}
           />
           <Box
             label="optical gain at ressonance"

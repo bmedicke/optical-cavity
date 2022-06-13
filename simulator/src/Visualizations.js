@@ -51,6 +51,87 @@ function draw_sine(canvas, context, scale, phaseshift = 0) {
   context.stroke()
 }
 
+const Reflectivity = (props) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    const canvas = ref.current
+    const context = canvas.getContext('2d')
+    const [w, h] = [canvas.width, canvas.height]
+
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    // inbound ray:
+    context.beginPath()
+    context.lineWidth = 10
+    context.strokeStyle = 'green'
+    context.moveTo(w / 10, h / 3)
+    context.lineTo(w / 2, h / 2)
+    context.stroke()
+
+    // outbound ray:
+    context.beginPath()
+    context.lineWidth = 10 * props.reflectivity
+    context.strokeStyle = 'red'
+    context.moveTo(w / 2, h / 2)
+    context.lineTo(w / 9, (h / 3) * 2)
+    context.stroke()
+
+    // surface:
+    context.beginPath()
+    context.lineWidth = 5
+    context.strokeStyle = 'white'
+    context.moveTo(w / 2, h / 10)
+    context.lineTo(w / 2, (h / 10) * 9)
+    context.stroke()
+  }, [props.reflectivity])
+  return (
+    <div>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
+    </div>
+  )
+}
+
+const Transmittance = (props) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    const canvas = ref.current
+    const context = canvas.getContext('2d')
+    const [w, h] = [canvas.width, canvas.height]
+
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    // inbound ray:
+    context.beginPath()
+    context.lineWidth = 10
+    context.strokeStyle = 'green'
+    context.moveTo(w / 10, h / 3)
+    context.lineTo(w / 2, h / 2)
+    context.stroke()
+
+    // outbound ray:
+    context.beginPath()
+    context.lineWidth = 10 * props.transmittance
+    context.strokeStyle = 'red'
+    context.moveTo(w / 2, h / 2)
+    context.lineTo((w / 10) * 9, (h / 3) * 2)
+    context.stroke()
+
+    // surface:
+    context.beginPath()
+    context.lineWidth = 5
+    context.strokeStyle = 'white'
+    context.moveTo(w / 2, h / 10)
+    context.lineTo(w / 2, (h / 10) * 9)
+    context.stroke()
+  }, [props.transmittance])
+
+  return (
+    <div>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
+    </div>
+  )
+}
+
 const Power = (props) => {
   const ref = useRef(null)
 
@@ -66,10 +147,7 @@ const Power = (props) => {
 
   return (
     <div>
-      <canvas
-        ref={ref}
-        className={styles.small_visualization}
-      ></canvas>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
     </div>
   )
 }
@@ -107,10 +185,7 @@ const Wavelength = (props) => {
 
   return (
     <div>
-      <canvas
-        ref={ref}
-        className={styles.small_visualization}
-      ></canvas>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
     </div>
   )
 }
@@ -132,10 +207,7 @@ const Gain = (props) => {
   }, [props.gain, props.power])
   return (
     <div>
-      <canvas
-        ref={ref}
-        className={styles.small_visualization}
-      ></canvas>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
     </div>
   )
 }
@@ -159,11 +231,17 @@ const Phaseshift = (props) => {
 
   return (
     <div>
-      <canvas
-        ref={ref}
-        className={styles.small_visualization}
-      ></canvas>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
     </div>
   )
 }
-export { Power, Phaseshift, Gain, Wavelength, wavelength2rgb, rgb2string }
+export {
+  Power,
+  Phaseshift,
+  Gain,
+  Wavelength,
+  Reflectivity,
+  Transmittance,
+  wavelength2rgb,
+  rgb2string,
+}
