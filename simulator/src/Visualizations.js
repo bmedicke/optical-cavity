@@ -132,6 +132,36 @@ const Transmittance = (props) => {
   )
 }
 
+const CavityLength = (props) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    const canvas = ref.current
+    const context = canvas.getContext('2d')
+    const [w, h] = [canvas.width, canvas.height]
+
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    // left mirror surface:
+    context.beginPath()
+    context.lineWidth = 3
+    context.strokeStyle = 'white'
+    context.moveTo(w / 10, h / 10)
+    context.lineTo(w / 10, (h / 10) * 9)
+
+    // right mirror surface:
+    const offset = (props.cavitylength / 1000) * ((w / 10) * 8)
+    context.moveTo(w / 10 + offset, h / 10)
+    context.lineTo(w / 10 + offset, (h / 10) * 9)
+    context.stroke()
+  }, [props.cavitylength])
+
+  return (
+    <div>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
+    </div>
+  )
+}
+
 const Power = (props) => {
   const ref = useRef(null)
 
@@ -235,13 +265,15 @@ const Phaseshift = (props) => {
     </div>
   )
 }
+
 export {
-  Power,
-  Phaseshift,
+  CavityLength,
   Gain,
-  Wavelength,
+  Phaseshift,
+  Power,
   Reflectivity,
   Transmittance,
-  wavelength2rgb,
+  Wavelength,
   rgb2string,
+  wavelength2rgb,
 }
