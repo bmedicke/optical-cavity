@@ -9,6 +9,7 @@ import {
   Wavelength,
   Reflectivity,
   Transmittance,
+  CavityLength,
 } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
@@ -202,11 +203,12 @@ function App() {
             label="cavity length"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
-            min="0"
+            min="1"
             max="1000"
             step="1"
             unit="nm"
             value={cavitylength}
+            canvasplot={<CavityLength cavitylength={cavitylength} />}
             setF={(e) => setCavitylength(e.target.value)}
           />
           <Box
