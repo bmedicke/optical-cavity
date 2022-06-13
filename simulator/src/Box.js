@@ -1,3 +1,5 @@
+import { MathJax } from 'better-react-mathjax'
+import { useEffect } from 'react'
 import { rgb2string } from './Visualizations'
 
 const Box = ({
@@ -9,6 +11,7 @@ const Box = ({
   unit = 'AU',
   value,
   hideCanvas = false,
+  formula = null,
   isResult = false,
   rgb = { r: 255, g: 255, b: 255 },
   canvasplot = (
@@ -27,6 +30,7 @@ const Box = ({
 }) => {
   //TODO Box with Canvas for same layout
 
+
   const stylingBox = {
     background: '#fff',
     display: 'inline-flex',
@@ -42,6 +46,9 @@ const Box = ({
     <div className="box" style={stylingBox}>
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
+        <span className="formula" >
+        {formula && <MathJax>{formula}</MathJax>}
+        </span>
         <span>
           {isResult ? (
             <input type="number" disabled value={value} />

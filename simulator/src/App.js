@@ -191,6 +191,7 @@ function App() {
             label="laser power"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
+            formula={`\\(P\\)`}
             min="0"
             max="100"
             step="1"
@@ -205,6 +206,7 @@ function App() {
             hideCanvas={!showvisualizations}
             min="1"
             max="1000"
+            formula={`\\(L\\)`}
             step="1"
             unit="nm"
             value={cavitylength}
@@ -216,6 +218,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             min="1"
+            formula={`\\(\\lambda\\)`}
             max="1000"
             step="1"
             unit="nm"
@@ -227,10 +230,12 @@ function App() {
             label="reflectivity mirror 1"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
+            formula={`\\(r_n\\)`}
             min="0.01"
             max="0.99"
             step="0.01"
             unit=""
+
             value={m1reflectivity}
             canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
             setF={(e) => setM1reflectivity(e.target.value)}
@@ -240,6 +245,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
+            formula={`\\(t_n = \\sqrt{1 - r_n^2}\\)`}
             unit=""
             canvasplot={<Transmittance transmittance={m1transmittance} />}
             value={m1transmittance}
@@ -251,6 +257,7 @@ function App() {
             min="0.01"
             max="0.99"
             step="0.01"
+            formula={`\\(r_n\\)`}
             unit=""
             value={m2reflectivity}
             canvasplot={<Reflectivity reflectivity={m2reflectivity} />}
@@ -261,6 +268,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
+            formula={`\\(t_n = \\sqrt{1 - r_n^2}\\)`}
             unit=""
             canvasplot={<Transmittance transmittance={m2transmittance} />}
             value={m2transmittance}
@@ -270,6 +278,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
+            formula= {`\\(k = \\frac{2\\pi}{\\lambda}\\)`}
             unit=""
             value={wavenumber}
           />
@@ -278,6 +287,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
+            formula={`\\(\\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi\\)`}
             unit="rad"
             value={phaseshift}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
@@ -287,6 +297,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
+            formula={`\\(\\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi\\)`}
             unit="deg"
             value={rad2deg(phaseshift)}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
@@ -295,6 +306,7 @@ function App() {
             label="optical gain at ressonance"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
+            formula={`\\(\\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|\\)`}
             isResult
             canvasplot={
               <Gain power={laserpower} gain={opticalgainRessonance} />
@@ -308,6 +320,9 @@ function App() {
             hideCanvas={!showvisualizations}
             isResult
             unit=""
+            formula={`\\(
+              \\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\)`}
             canvasplot={<Gain power={laserpower} gain={opticalgain} />}
             value={opticalgain}
           />
@@ -317,12 +332,18 @@ function App() {
             hideCanvas={!showvisualizations}
             isResult
             unit=""
+            formula= {`\\(
+              \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{2ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\)`}
             canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
             value={reflectedgain}
           />
           <Box
             label="transmitted gain"
             rgb={wavelengthColor}
+            formula={`\\(
+              \\left|\\dfrac{E_\\mathrm{transmitted}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1 t_2 e^{ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\)`}
             hideCanvas={!showvisualizations}
             isResult
             unit=""
