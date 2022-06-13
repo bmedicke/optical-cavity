@@ -218,7 +218,7 @@ function App() {
             label="reflectivity mirror 1"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
-            min="0"
+            min="0.01"
             max="0.99"
             step="0.01"
             unit=""
@@ -230,7 +230,7 @@ function App() {
             label="reflectivity mirror 2"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
-            min="0"
+            min="0.01"
             max="0.99"
             step="0.01"
             unit=""
