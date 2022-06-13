@@ -177,11 +177,17 @@ const Phaseshift = (props) => {
 
   return (
     <div>
-      <canvas
-        ref={ref}
-        className={styles.small_visualization}
-      ></canvas>
+      <canvas ref={ref} className={styles.small_visualization}></canvas>
     </div>
   )
 }
-export { Power, Phaseshift, Gain, Wavelength, wavelength2rgb, rgb2string }
+export {
+  Power,
+  Phaseshift,
+  Gain,
+  Wavelength,
+  Reflectivity,
+  Transmittance,
+  wavelength2rgb,
+  rgb2string,
+}

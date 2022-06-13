@@ -2,7 +2,7 @@ import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import { Power, Phaseshift, Gain, Wavelength } from './Visualizations'
+import { Power, Phaseshift, Gain, Wavelength, Reflectivity, Transmittance } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
@@ -223,6 +223,7 @@ function App() {
             step="0.01"
             unit=""
             value={m1reflectivity}
+            canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
             setF={(e) => setM1reflectivity(e.target.value)}
           />
           <Box
@@ -234,6 +235,7 @@ function App() {
             step="0.01"
             unit=""
             value={m2reflectivity}
+            canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
             setF={(e) => setM2reflectivity(e.target.value)}
           />
           <Box
@@ -268,6 +270,7 @@ function App() {
             hideCanvas={!showvisualizations}
             isResult
             unit=""
+            canvasplot={<Transmittance transmittance={m1transmittance} />}
             value={m1transmittance}
           />
           <Box
@@ -276,6 +279,7 @@ function App() {
             hideCanvas={!showvisualizations}
             isResult
             unit=""
+            canvasplot={<Transmittance transmittance={m1transmittance} />}
             value={m2transmittance}
           />
           <Box
