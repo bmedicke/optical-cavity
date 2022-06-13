@@ -43,7 +43,6 @@ function draw_sine(canvas, context, scale, phaseshift = 0) {
         (100 + context.lineWidth * 4)) *
         scale +
       canvas.height / 2
-    context.moveTo(x, y)
     x = i
     context.lineTo(x, y)
   }
