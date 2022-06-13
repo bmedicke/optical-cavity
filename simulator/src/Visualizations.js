@@ -225,7 +225,6 @@ const Wavelength = (props) => {
           (100 + context.lineWidth * 4)) *
           50 +
         canvas.height / 2
-      context.moveTo(x, y)
       x = i
       context.lineTo(x, y)
     }
