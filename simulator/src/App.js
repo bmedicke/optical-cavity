@@ -164,11 +164,10 @@ function App() {
   const bottomStyle = {
     // background: 'url(/galaxy.gif)',
     // backgroundColor: `${rgb2string(wavelengthColor)}`,
-    background: `linear-gradient(
-      0deg,
-      black 25%,
-      ${rgb2string(wavelengthColor)} 50%,
-      black 75%)`,
+    background: `linear-gradient( 0deg, black 25%, ${rgb2string(
+      wavelengthColor,
+      (laserpower / 100) * (opticalgain / opticalgainRessonance)
+    )} 50%, black 75%)`,
     height: '40%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
