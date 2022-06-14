@@ -1,7 +1,7 @@
 import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
-import { MathJax, MathJaxContext } from 'better-react-mathjax'
+import { MathJaxContext } from 'better-react-mathjax'
 import {
   Power,
   Phaseshift,
