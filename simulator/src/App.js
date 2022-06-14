@@ -16,14 +16,17 @@ import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
 
 function App() {
+  const c = 299792458 // speed of light in vacuum, m/s.
+
   // configurable variables:
-  const [cavitylength, setCavitylength] = useState(150)
+  const [cavitylength, setCavitylength] = useState(150) // in nm.
   const [laserpower, setLaserpower] = useState(40) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
-  const [wavelength, setWavelength] = useState(200)
+  const [wavelength, setWavelength] = useState(200) // in nm.
 
   // calculated variables:
+  const [frequency, setFrequency] = useState(0)
   const [wavenumber, setWavenumber] = useState(0)
   const [phaseshift, setPhaseshift] = useState(0)
   const [m1transmittance, setM1transmittance] = useState(0)
@@ -55,6 +58,7 @@ function App() {
 
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
+    setFrequency(Math.round((c / wavelength) * 1e9))
   }, [wavelength])
 
   useEffect(() => {
@@ -227,6 +231,17 @@ function App() {
             value={wavelength}
             canvasplot={<Wavelength wavelength={wavelength} />}
             setF={(e) => setWavelength(e.target.value)}
+            showFormula={showformulas}
+          />
+          <Box
+            label="frequency"
+            rgb={wavelengthColor}
+            hideCanvas={!showvisualizations}
+            isResult
+            formula={`\\(f = \\dfrac{c}{\\lambda}\\)`}
+            unit="THz"
+            value={Math.round((frequency / 1e12) * 100) / 100}
+            canvasplot={<Wavelength wavelength={wavelength} />}
             showFormula={showformulas}
           />
           <Box
