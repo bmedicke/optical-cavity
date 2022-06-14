@@ -14,6 +14,7 @@ import {
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
+import { withSweep } from './withSweep.js'
 
 function App() {
   const c = 299792458 // speed of light in vacuum, m/s.
@@ -45,6 +46,13 @@ function App() {
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
+
+  // cavity controls
+  const [isPowerSweeping, setIsPowerSweeping] = useState(false)
+  const PowerSweep = withSweep(Box)
+
+  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
+  const LengthSweep = withSweep(Box)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
@@ -191,6 +199,8 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div style={containerStyle} className="variable-wrapper">
+          <PowerSweep unit="s" label="powersweep" value={0.5} isActive={isPowerSweeping} setIsActive={setIsPowerSweeping} setter={setLaserpower} />
+          <LengthSweep unit="s" label="length sweep" value={0.5} isActive={isLengthSweeping} setIsActive={setIsLengthSweeping} setter={setCavitylength} />
           <Box
             label="laser power"
             rgb={wavelengthColor}
@@ -414,7 +424,7 @@ function App() {
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
-
+        
         <div style={statusStyle} className={`${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
