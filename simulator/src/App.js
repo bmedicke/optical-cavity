@@ -322,6 +322,7 @@ function App() {
             }
             unit=""
             value={opticalgainRessonance}
+            showFormula={showformulas}
           />
           <Box
             label="current optical gain"
