@@ -195,7 +195,7 @@ function App() {
             min="0"
             max="100"
             step="1"
-            unit="nm"
+            unit="W"
             value={laserpower}
             canvasplot={<Power power={laserpower} />}
             setF={(e) => setLaserpower(e.target.value)}
