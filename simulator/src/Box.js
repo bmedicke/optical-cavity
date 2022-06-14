@@ -41,11 +41,15 @@ const Box = ({
     minWidth: '220px',
   }
 
+  const formulaStyle = {
+    fontSize: '85%',
+  }
+
   return (
     <div className="box" style={stylingBox}>
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
-        <span className="formula">
+        <span className="formula" style={formulaStyle}>
           {formula && showFormula && <MathJax>{formula}</MathJax>}
         </span>
         <span>

@@ -17,7 +17,7 @@ import { wavelength2rgb, rgb2string } from './Visualizations.js'
 
 function App() {
   // configurable variables:
-  const [cavitylength, setCavitylength] = useState(200)
+  const [cavitylength, setCavitylength] = useState(150)
   const [laserpower, setLaserpower] = useState(40) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
@@ -143,7 +143,7 @@ function App() {
   ])
 
   const containerStyle = {
-    height: '65vh',
+    height: '70vh',
     display: 'flex',
     flexFlow: 'row wrap',
     overflowX: 'auto',
@@ -176,7 +176,7 @@ function App() {
       wavelengthColor,
       (laserpower / 100) * (opticalgain / opticalgainRessonance)
     )} 50%, black 75%)`,
-    height: '40%',
+    height: '20%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
@@ -214,7 +214,6 @@ function App() {
             canvasplot={<CavityLength cavitylength={cavitylength} />}
             setF={(e) => setCavitylength(e.target.value)}
             showFormula={showformulas}
-
           />
           <Box
             label="wave length"
@@ -254,7 +253,6 @@ function App() {
             canvasplot={<Transmittance transmittance={m1transmittance} />}
             value={m1transmittance}
             showFormula={showformulas}
-
           />
           <Box
             label="reflectivity mirror 2"
@@ -269,7 +267,6 @@ function App() {
             canvasplot={<Reflectivity reflectivity={m2reflectivity} />}
             setF={(e) => setM2reflectivity(e.target.value)}
             showFormula={showformulas}
-
           />
           <Box
             label="transmittance mirror 2"
@@ -281,18 +278,16 @@ function App() {
             canvasplot={<Transmittance transmittance={m2transmittance} />}
             value={m2transmittance}
             showFormula={showformulas}
-
           />
           <Box
             label="angular wavenumber"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
-            formula= {`\\(k = \\frac{2\\pi}{\\lambda}\\)`}
+            formula={`\\(k = \\frac{2\\pi}{\\lambda}\\)`}
             unit=""
             value={wavenumber}
             showFormula={showformulas}
-
           />
           <Box
             label="phase shift (rad)"
@@ -304,7 +299,6 @@ function App() {
             value={phaseshift}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
             showFormula={showformulas}
-
           />
           <Box
             label="phase shift (deg)"
@@ -316,7 +310,6 @@ function App() {
             value={rad2deg(phaseshift)}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
             showFormula={showformulas}
-
           />
           <Box
             label="optical gain at ressonance"
@@ -342,7 +335,6 @@ function App() {
             canvasplot={<Gain power={laserpower} gain={opticalgain} />}
             value={opticalgain}
             showFormula={showformulas}
-
           />
           <Box
             label="reflected gain"
@@ -350,13 +342,12 @@ function App() {
             hideCanvas={!showvisualizations}
             isResult
             unit=""
-            formula= {`\\(
+            formula={`\\(
               \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{2ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
             canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
             value={reflectedgain}
             showFormula={showformulas}
-
           />
           <Box
             label="transmitted gain"
@@ -370,7 +361,6 @@ function App() {
             canvasplot={<Gain power={laserpower} gain={transmittedgain} />}
             value={transmittedgain}
             showFormula={showformulas}
-
           />
           {/**TODO: implement formula**/}
           <Box
@@ -381,7 +371,6 @@ function App() {
             unit=""
             value={finesse}
             showFormula={showformulas}
-
           />
         </div>
         <div
@@ -398,7 +387,7 @@ function App() {
             style={btnStyle}
             onClick={() => {
               setCavitylength(200)
-              setWavelength(400)
+              setWavelength(200)
             }}
           >
             LOCK CAVITY
