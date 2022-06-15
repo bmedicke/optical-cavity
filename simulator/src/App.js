@@ -14,6 +14,7 @@ import {
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
+import { withJitter } from './withJitter.js'
 import { withSweep } from './withSweep.js'
 
 function App() {
@@ -53,6 +54,9 @@ function App() {
 
   const [isLengthSweeping, setIsLengthSweeping] = useState(false)
   const LengthSweep = withSweep(Box)
+
+  const [isLengthJittering, setIsLengthJittering] = useState(false)
+  const LengthJitter = withJitter(Box)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
@@ -199,15 +203,14 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div style={containerStyle} className="variable-wrapper">
-          <PowerSweep
+          <LengthJitter
             unit="s"
-            label="powersweep"
+            label="length jitter"
             value={0.5}
-            isActive={isPowerSweeping}
-            setIsActive={setIsPowerSweeping}
-            setter={setLaserpower}
+            isActive={isLengthJittering}
+            setIsActive={setIsLengthJittering}
+            setter={setCavitylength}
             hideCanvas={!showvisualizations}
-
           />
           <LengthSweep
             unit="s"
@@ -216,6 +219,15 @@ function App() {
             isActive={isLengthSweeping}
             setIsActive={setIsLengthSweeping}
             setter={setCavitylength}
+            hideCanvas={!showvisualizations}
+          />
+          <PowerSweep
+            unit="s"
+            label="power sweep"
+            value={0.5}
+            isActive={isPowerSweeping}
+            setIsActive={setIsPowerSweeping}
+            setter={setLaserpower}
             hideCanvas={!showvisualizations}
           />
           <Box
