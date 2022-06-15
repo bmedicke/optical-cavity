@@ -184,7 +184,7 @@ function App() {
   const bottomStyle = {
     // background: 'url(/galaxy.gif)',
     // backgroundColor: `${rgb2string(wavelengthColor)}`,
-    background: `linear-gradient( 0deg, black 25%, ${rgb2string(
+    backgroundImage: `linear-gradient( 0deg, black 25%, ${rgb2string(
       wavelengthColor,
       (laserpower / 100) * (opticalgain / opticalgainRessonance)
     )} 50%, black 75%)`,
@@ -199,8 +199,22 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div style={containerStyle} className="variable-wrapper">
-          <PowerSweep unit="s" label="powersweep" value={0.5} isActive={isPowerSweeping} setIsActive={setIsPowerSweeping} setter={setLaserpower} />
-          <LengthSweep unit="s" label="length sweep" value={0.5} isActive={isLengthSweeping} setIsActive={setIsLengthSweeping} setter={setCavitylength} />
+          <PowerSweep
+            unit="s"
+            label="powersweep"
+            value={0.5}
+            isActive={isPowerSweeping}
+            setIsActive={setIsPowerSweeping}
+            setter={setLaserpower}
+          />
+          <LengthSweep
+            unit="s"
+            label="length sweep"
+            value={0.5}
+            isActive={isLengthSweeping}
+            setIsActive={setIsLengthSweeping}
+            setter={setCavitylength}
+          />
           <Box
             label="laser power"
             rgb={wavelengthColor}
@@ -424,7 +438,7 @@ function App() {
             {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
-        
+
         <div style={statusStyle} className={`${isLocked && 'locked'}`}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
