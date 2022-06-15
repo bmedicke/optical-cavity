@@ -19,11 +19,9 @@ export const withSweep = (BaseComponent) => (props) => {
 
   return (
     <BaseComponent {...props} isResult isIncreasing={isIncreasing}>
-      {props.hideCanvas && (
         <button onMouseUp={() => props.setIsActive((x) => !x)}>
           {props.isActive ? 'Stop Sweep' : 'Start Sweep'}
         </button>
-      )}
     </BaseComponent>
   )
 }
