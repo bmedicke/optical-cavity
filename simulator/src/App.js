@@ -125,7 +125,7 @@ function App() {
     )
     const denomerator = math.subtract(1, foo)
 
-    setReflectedgain(Math.abs(math.divide(numerator, denomerator).re))
+    setReflectedgain(Math.abs(math.divide(numerator, denomerator).re || ''))
   }, [m1transmittance, m1reflectivity, m2reflectivity, epow2ikl])
 
   useEffect(() => {
