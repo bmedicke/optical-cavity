@@ -206,6 +206,8 @@ function App() {
             isActive={isPowerSweeping}
             setIsActive={setIsPowerSweeping}
             setter={setLaserpower}
+            hideCanvas={!showvisualizations}
+
           />
           <LengthSweep
             unit="s"
@@ -214,6 +216,7 @@ function App() {
             isActive={isLengthSweeping}
             setIsActive={setIsLengthSweeping}
             setter={setCavitylength}
+            hideCanvas={!showvisualizations}
           />
           <Box
             label="laser power"
