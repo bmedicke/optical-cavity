@@ -1,7 +1,5 @@
-import { min } from 'mathjs'
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-//props: minimum, maximum, setter, delay, step}
 export const withSweep = (BaseComponent) => (props) => {
   const [isIncreasing, setIsIncreasing] = useState(true)
 
