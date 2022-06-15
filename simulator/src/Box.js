@@ -8,7 +8,7 @@ const Box = ({
   label = 'defaultLabel',
   setF = { function() {} },
   unit = 'AU',
-  value,
+  value = '0',
   hideCanvas = false,
   formula = null,
   isResult = false,
