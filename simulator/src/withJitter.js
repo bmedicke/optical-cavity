@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-export const withJitter = (BaseComponent) => (props) => {
+const withJitter = (BaseComponent) => (props) => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (props.isActive) {
@@ -21,3 +21,5 @@ export const withJitter = (BaseComponent) => (props) => {
     </BaseComponent>
   )
 }
+
+export { withJitter }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export const withSweep = (BaseComponent) => (props) => {
+const withSweep = (BaseComponent) => (props) => {
   const [isIncreasing, setIsIncreasing] = useState(true)
 
   useEffect(() => {
@@ -17,9 +17,11 @@ export const withSweep = (BaseComponent) => (props) => {
 
   return (
     <BaseComponent {...props} isResult isIncreasing={isIncreasing}>
-        <button onMouseUp={() => props.setIsActive((x) => !x)}>
-          {props.isActive ? 'Stop Sweep' : 'Start Sweep'}
-        </button>
+      <button onMouseUp={() => props.setIsActive((x) => !x)}>
+        {props.isActive ? 'Stop Sweep' : 'Start Sweep'}
+      </button>
     </BaseComponent>
   )
 }
+
+export { withSweep }
