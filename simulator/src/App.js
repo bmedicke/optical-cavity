@@ -16,6 +16,29 @@ import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
 import { withJitter } from './withJitter.js'
 import { withSweep } from './withSweep.js'
+import { draw_sine } from './Visualizations.js'
+
+function changeFavicon(wavelength) {
+  const canvas = document.createElement('canvas')
+  canvas.height = 64
+  canvas.width = 64
+  const context = canvas.getContext('2d')
+
+  context.lineWidth = 2
+  context.strokeStyle = rgb2string(wavelength2rgb(wavelength))
+  draw_sine(canvas, context, 90, 0)
+
+  // remove old favicon:
+  const icons = document.querySelectorAll('link[rel="shortcut icon"]')
+  icons.forEach((e) => e.parentNode.removeChild(e))
+
+  const link = document.createElement('link')
+  link.id = 'dynamic-favicon'
+  link.rel = 'shortcut icon'
+  link.href = canvas.toDataURL()
+
+  document.head.appendChild(link)
+}
 
 function App() {
   const c = 299792458 // speed of light in vacuum, m/s.
@@ -60,6 +83,7 @@ function App() {
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
+    changeFavicon(wavelength)
   }, [wavelength])
 
   useEffect(() => {

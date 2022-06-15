@@ -323,6 +323,7 @@ export {
   Reflectivity,
   Transmittance,
   Wavelength,
+  draw_sine,
   rgb2string,
   wavelength2rgb,
 }
