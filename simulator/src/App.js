@@ -102,7 +102,7 @@ function App() {
 
     const exponent = math.multiply(
       math.multiply(math.multiply(2, math.complex(0, 1)), wavenumber),
-      cavitylength
+      cavitylength ? cavitylength : 1.0
     )
     const exponentiation = math.pow(math.e, exponent)
     setEpow2ikl(exponentiation)
@@ -149,7 +149,7 @@ function App() {
 
     const numerator = math.add(
       -m1reflectivity,
-      math.multiply(m2reflectivity, epow2ikl)
+      math.multiply(m2reflectivity ? m2reflectivity : 0.0, epow2ikl)
     )
     const denomerator = math.subtract(1, foo)
 
