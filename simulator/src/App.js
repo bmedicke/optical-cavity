@@ -217,11 +217,14 @@ function App() {
       wavelengthColor,
       (laserpower / 100) * (opticalgain / opticalgainRessonance)
     )} 50%, black 75%)`,
-    height: '20%',
+    height: isBottomCollapsed ? '0%' : '80%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
     backgroundPosition: 'center',
+    position: 'relative',
+  }
+
   const collapsBtnStyle = {
     position: 'absolute',
     top: isBottomCollapsed ? '-52px' : 0,
