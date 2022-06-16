@@ -222,6 +222,15 @@ function App() {
     backgroundSize: 'cover',
     backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
     backgroundPosition: 'center',
+  const collapsBtnStyle = {
+    position: 'absolute',
+    top: isBottomCollapsed ? '-52px' : 0,
+    right: 0,
+    padding: '1rem',
+    border: '1px solid white',
+    borderRadius: '12%',
+    background: isBottomCollapsed ? 'white' : 'transparent',
+    color: isBottomCollapsed ? 'black' : 'white',
   }
 
   return (
