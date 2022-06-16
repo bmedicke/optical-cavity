@@ -1,4 +1,5 @@
 import { MathJax } from 'better-react-mathjax'
+import Formula from './Formula.js'
 import { rgb2string } from './Visualizations'
 
 const Box = ({
@@ -51,7 +52,7 @@ const Box = ({
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
         <span className="formula" style={formulaStyle}>
-          {formula && showFormula && <MathJax>{formula}</MathJax>}
+          {formula && showFormula && <Formula formula={formula}/>}
         </span>
         <span>
           {isResult ? (
