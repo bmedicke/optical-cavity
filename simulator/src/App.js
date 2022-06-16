@@ -17,6 +17,7 @@ import { wavelength2rgb, rgb2string } from './Visualizations.js'
 import { withJitter } from './withJitter.js'
 import { withSweep } from './withSweep.js'
 import { draw_sine } from './Visualizations.js'
+import JitterBox from './JitterBox.js'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
@@ -227,16 +228,14 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div style={containerStyle} className="variable-wrapper">
-          <LengthJitter
-            unit="s"
+          <JitterBox
             label="length jitter"
-            value={0.5}
             isActive={isLengthJittering}
             setIsActive={setIsLengthJittering}
             setter={setCavitylength}
             hideCanvas={!showvisualizations}
           />
-          <LengthSweep
+          {/* <LengthSweep
             unit="s"
             label="length sweep"
             value={0.5}
@@ -253,7 +252,7 @@ function App() {
             setIsActive={setIsPowerSweeping}
             setter={setLaserpower}
             hideCanvas={!showvisualizations}
-          />
+          /> */}
           <Box
             label="laser power"
             rgb={wavelengthColor}
