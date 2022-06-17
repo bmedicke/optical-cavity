@@ -180,8 +180,9 @@ function App() {
 
   const containerStyle = {
     height: '100vh',
-    display: 'flex',
-    flexFlow: 'row wrap',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, 220px)',
+    gap: '16px',
     overflowX: 'hidden',
     justifyContent: 'center',
     padding: '0.3rem',
@@ -190,6 +191,8 @@ function App() {
       wavelengthColor,
       0.4
     )} 50%, black 70%)`,
+    alignContent: 'start',
+    alignItmes: 'start',
   }
 
   const btnStyle = {
