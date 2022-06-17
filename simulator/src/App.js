@@ -17,6 +17,8 @@ import { wavelength2rgb, rgb2string } from './Visualizations.js'
 import { withSweep } from './withSweep.js'
 import { draw_sine } from './Visualizations.js'
 import JitterBox from './JitterBox.js'
+import { DndProvider } from 'react-dnd'
+import { TouchBackend } from 'react-dnd-touch-backend'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
@@ -240,10 +242,11 @@ function App() {
   }
 
   return (
-    <MathJaxContext>
-      <div className="App">
-        <div style={containerStyle} className="variable-wrapper">
-          {/* <LengthSweep
+    <DndProvider backend={TouchBackend}>
+      <MathJaxContext>
+        <div className="App">
+          <div style={containerStyle} className="variable-wrapper">
+            {/* <LengthSweep
             unit="s"
             label="length sweep"
             value={0.5}
@@ -261,252 +264,253 @@ function App() {
             setter={setLaserpower}
             hideCanvas={!showvisualizations}
           /> */}
-          <Box
-            label="laser power"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            formula={`\\(P\\)`}
-            min="0"
-            max="100"
-            step="1"
-            unit="W"
-            value={laserpower}
-            canvasplot={<Power power={laserpower} />}
-            setF={(e) => setLaserpower(e.target.value)}
-            showFormula={showformulas}
-          />
-          <JitterBox
-            label="length jitter"
-            isActive={isLengthJittering}
-            setIsActive={setIsLengthJittering}
-            setter={setCavitylength}
-            hideCanvas={!showvisualizations}
-          />
-          <Box
-            label="cavity length"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            min="1"
-            max="1000"
-            formula={`\\(L\\)`}
-            step="1"
-            unit="nm"
-            value={cavitylength}
-            canvasplot={<CavityLength cavitylength={cavitylength} />}
-            setF={(e) => setCavitylength(e.target.value)}
-            showFormula={showformulas}
-          />
-          <Box
-            label="wave length"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            min="1"
-            formula={`\\(\\lambda\\)`}
-            max="1000"
-            step="1"
-            unit="nm"
-            value={wavelength}
-            canvasplot={<Wavelength wavelength={wavelength} />}
-            setF={(e) => setWavelength(e.target.value)}
-            showFormula={showformulas}
-          />
-          <Box
-            label="frequency"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            formula={`\\(f = \\dfrac{c}{\\lambda}\\)`}
-            unit="THz"
-            value={Math.round((frequency / 1e12) * 100) / 100}
-            canvasplot={<Wavelength wavelength={wavelength} />}
-            showFormula={showformulas}
-          />
-          <Box
-            label="reflectivity mirror 1"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            formula={`\\(r_n\\)`}
-            min="0.01"
-            max="0.99"
-            step="0.01"
-            unit=""
-            showFormula={showformulas}
-            value={m1reflectivity}
-            canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
-            setF={(e) => setM1reflectivity(e.target.value)}
-          />
-          <Box
-            label="transmittance mirror 1"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            formula={`\\(t_n = \\sqrt{1 - r_n^2}\\)`}
-            unit=""
-            canvasplot={<Transmittance transmittance={m1transmittance} />}
-            value={m1transmittance}
-            showFormula={showformulas}
-          />
-          <Box
-            label="reflectivity mirror 2"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            min="0.01"
-            max="0.99"
-            step="0.01"
-            formula={`\\(r_n\\)`}
-            unit=""
-            value={m2reflectivity}
-            canvasplot={<Reflectivity reflectivity={m2reflectivity} />}
-            setF={(e) => setM2reflectivity(e.target.value)}
-            showFormula={showformulas}
-          />
-          <Box
-            label="transmittance mirror 2"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            formula={`\\(t_n = \\sqrt{1 - r_n^2}\\)`}
-            unit=""
-            canvasplot={<Transmittance transmittance={m2transmittance} />}
-            value={m2transmittance}
-            showFormula={showformulas}
-          />
-          <Box
-            label="angular wavenumber"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            formula={`\\(k = \\frac{2\\pi}{\\lambda}\\)`}
-            unit=""
-            value={wavenumber}
-            showFormula={showformulas}
-          />
-          <Box
-            label="phase shift (rad)"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            formula={`\\(\\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi\\)`}
-            unit="rad"
-            value={phaseshift}
-            canvasplot={<Phaseshift phaseshift={phaseshift} />}
-            showFormula={showformulas}
-          />
-          <Box
-            label="phase shift (deg)"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            formula={`\\(\\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi\\)`}
-            unit="deg"
-            value={rad2deg(phaseshift)}
-            canvasplot={<Phaseshift phaseshift={phaseshift} />}
-            showFormula={showformulas}
-          />
-          <Box
-            label="optical gain at ressonance"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            formula={`\\(\\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|\\)`}
-            isResult
-            canvasplot={
-              <Gain power={laserpower} gain={opticalgainRessonance} />
-            }
-            unit=""
-            value={opticalgainRessonance}
-            showFormula={showformulas}
-          />
-          <Box
-            label="current optical gain"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            unit=""
-            formula={`\\(
+            <Box
+              label="laser power"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              formula={`\\(P\\)`}
+              min="0"
+              max="100"
+              step="1"
+              unit="W"
+              value={laserpower}
+              canvasplot={<Power power={laserpower} />}
+              setF={(e) => setLaserpower(e.target.value)}
+              showFormula={showformulas}
+            />
+            <JitterBox
+              label="length jitter"
+              isActive={isLengthJittering}
+              setIsActive={setIsLengthJittering}
+              setter={setCavitylength}
+              hideCanvas={!showvisualizations}
+            />
+            <Box
+              label="cavity length"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              min="1"
+              max="1000"
+              formula={`\\(L\\)`}
+              step="1"
+              unit="nm"
+              value={cavitylength}
+              canvasplot={<CavityLength cavitylength={cavitylength} />}
+              setF={(e) => setCavitylength(e.target.value)}
+              showFormula={showformulas}
+            />
+            <Box
+              label="wave length"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              min="1"
+              formula={`\\(\\lambda\\)`}
+              max="1000"
+              step="1"
+              unit="nm"
+              value={wavelength}
+              canvasplot={<Wavelength wavelength={wavelength} />}
+              setF={(e) => setWavelength(e.target.value)}
+              showFormula={showformulas}
+            />
+            <Box
+              label="frequency"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              formula={`\\(f = \\dfrac{c}{\\lambda}\\)`}
+              unit="THz"
+              value={Math.round((frequency / 1e12) * 100) / 100}
+              canvasplot={<Wavelength wavelength={wavelength} />}
+              showFormula={showformulas}
+            />
+            <Box
+              label="reflectivity mirror 1"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              formula={`\\(r_n\\)`}
+              min="0.01"
+              max="0.99"
+              step="0.01"
+              unit=""
+              showFormula={showformulas}
+              value={m1reflectivity}
+              canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
+              setF={(e) => setM1reflectivity(e.target.value)}
+            />
+            <Box
+              label="transmittance mirror 1"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              formula={`\\(t_n = \\sqrt{1 - r_n^2}\\)`}
+              unit=""
+              canvasplot={<Transmittance transmittance={m1transmittance} />}
+              value={m1transmittance}
+              showFormula={showformulas}
+            />
+            <Box
+              label="reflectivity mirror 2"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              min="0.01"
+              max="0.99"
+              step="0.01"
+              formula={`\\(r_n\\)`}
+              unit=""
+              value={m2reflectivity}
+              canvasplot={<Reflectivity reflectivity={m2reflectivity} />}
+              setF={(e) => setM2reflectivity(e.target.value)}
+              showFormula={showformulas}
+            />
+            <Box
+              label="transmittance mirror 2"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              formula={`\\(t_n = \\sqrt{1 - r_n^2}\\)`}
+              unit=""
+              canvasplot={<Transmittance transmittance={m2transmittance} />}
+              value={m2transmittance}
+              showFormula={showformulas}
+            />
+            <Box
+              label="angular wavenumber"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              formula={`\\(k = \\frac{2\\pi}{\\lambda}\\)`}
+              unit=""
+              value={wavenumber}
+              showFormula={showformulas}
+            />
+            <Box
+              label="phase shift (rad)"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              formula={`\\(\\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi\\)`}
+              unit="rad"
+              value={phaseshift}
+              canvasplot={<Phaseshift phaseshift={phaseshift} />}
+              showFormula={showformulas}
+            />
+            <Box
+              label="phase shift (deg)"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              formula={`\\(\\phi = k L \\,\\, \\mathrm{mod}\\,\\, 2\\pi\\)`}
+              unit="deg"
+              value={rad2deg(phaseshift)}
+              canvasplot={<Phaseshift phaseshift={phaseshift} />}
+              showFormula={showformulas}
+            />
+            <Box
+              label="optical gain at ressonance"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              formula={`\\(\\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|\\)`}
+              isResult
+              canvasplot={
+                <Gain power={laserpower} gain={opticalgainRessonance} />
+              }
+              unit=""
+              value={opticalgainRessonance}
+              showFormula={showformulas}
+            />
+            <Box
+              label="current optical gain"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              unit=""
+              formula={`\\(
               \\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
-            canvasplot={<Gain power={laserpower} gain={opticalgain} />}
-            value={opticalgain}
-            showFormula={showformulas}
-          />
-          <Box
-            label="reflected gain"
-            rgb={wavelengthColor}
-            hideCanvas={!showvisualizations}
-            isResult
-            unit=""
-            formula={`\\(
+              canvasplot={<Gain power={laserpower} gain={opticalgain} />}
+              value={opticalgain}
+              showFormula={showformulas}
+            />
+            <Box
+              label="reflected gain"
+              rgb={wavelengthColor}
+              hideCanvas={!showvisualizations}
+              isResult
+              unit=""
+              formula={`\\(
               \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{2ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
-            canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
-            value={reflectedgain}
-            showFormula={showformulas}
-          />
-          <Box
-            label="transmitted gain"
-            rgb={wavelengthColor}
-            formula={`\\(
+              canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
+              value={reflectedgain}
+              showFormula={showformulas}
+            />
+            <Box
+              label="transmitted gain"
+              rgb={wavelengthColor}
+              formula={`\\(
               \\left|\\dfrac{E_\\mathrm{transmitted}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1 t_2 e^{ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
               \\)`}
-            hideCanvas={!showvisualizations}
-            isResult
-            unit=""
-            canvasplot={<Gain power={laserpower} gain={transmittedgain} />}
-            value={transmittedgain}
-            showFormula={showformulas}
-          />
-          <Box
-            label="cavity finesse"
-            rgb={wavelengthColor}
-            formula={`\\(
+              hideCanvas={!showvisualizations}
+              isResult
+              unit=""
+              canvasplot={<Gain power={laserpower} gain={transmittedgain} />}
+              value={transmittedgain}
+              showFormula={showformulas}
+            />
+            <Box
+              label="cavity finesse"
+              rgb={wavelengthColor}
+              formula={`\\(
               \\mathcal{F} = \\dfrac{\\pi}{2 \\arcsin{\\left( \\dfrac{1 - r_1 r_2}{2 \\sqrt{r_1 r_2}}\\right)}}
               \\)`}
-            hideCanvas={!showvisualizations}
-            isResult
-            unit=""
-            value={finesse}
-            showFormula={showformulas}
-          />
-        </div>
-        <div
-          style={{ display: 'flex', flexFlow: 'row wrap' }}
-          className="controls"
-        >
-          <button
-            style={btnStyle}
-            onClick={() => setShowvisualizations((v) => !v)}
+              hideCanvas={!showvisualizations}
+              isResult
+              unit=""
+              value={finesse}
+              showFormula={showformulas}
+            />
+          </div>
+          <div
+            style={{ display: 'flex', flexFlow: 'row wrap' }}
+            className="controls"
           >
-            {showvisualizations ? 'Hide' : 'Show'} Visualizations
-          </button>
-          <button
-            style={btnStyle}
-            onClick={() => {
-              setCavitylength(200)
-              setWavelength(200)
-            }}
-          >
-            LOCK CAVITY
-          </button>
-          <button style={btnStyle} onClick={() => setShowformulas((v) => !v)}>
-            {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
-          </button>
-        </div>
+            <button
+              style={btnStyle}
+              onClick={() => setShowvisualizations((v) => !v)}
+            >
+              {showvisualizations ? 'Hide' : 'Show'} Visualizations
+            </button>
+            <button
+              style={btnStyle}
+              onClick={() => {
+                setCavitylength(200)
+                setWavelength(200)
+              }}
+            >
+              LOCK CAVITY
+            </button>
+            <button style={btnStyle} onClick={() => setShowformulas((v) => !v)}>
+              {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
+            </button>
+          </div>
 
-        <div style={statusStyle} className={`${isLocked && 'locked'}`}>
-          Cavity {isLocked ? 'is locked' : 'is out of phase'}
-          {isMaximallyOutOfPhase && ' (maximally)'}
+          <div style={statusStyle} className={`${isLocked && 'locked'}`}>
+            Cavity {isLocked ? 'is locked' : 'is out of phase'}
+            {isMaximallyOutOfPhase && ' (maximally)'}
+          </div>
+          <div style={bottomStyle}>
+            <button
+              style={collapsBtnStyle}
+              onClick={() => setIsBottomCollapsed((x) => !x)}
+              className="collapse-button"
+            >
+              {isBottomCollapsed ? 'Show' : 'Hide'}
+            </button>
+          </div>
         </div>
-        <div style={bottomStyle}>
-          <button
-            style={collapsBtnStyle}
-            onClick={() => setIsBottomCollapsed((x) => !x)}
-            className="collapse-button"
-          >
-            {isBottomCollapsed ? 'Show' : 'Hide'}
-          </button>
-        </div>
-      </div>
-    </MathJaxContext>
+      </MathJaxContext>
+    </DndProvider>
   )
 }
 

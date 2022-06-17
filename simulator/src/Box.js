@@ -1,4 +1,5 @@
 import { MathJax } from 'better-react-mathjax'
+import { useDrag, useDrop } from 'react-dnd' //https://vijayt.com/post/drag-and-drop-using-react-dnd/
 import Formula from './Formula.js'
 import { rgb2string } from './Visualizations'
 
@@ -49,8 +50,17 @@ const Box = ({
     fontSize: '85%',
   }
 
+  //DRAG
+  const [{ isDragging }, dragRef] = useDrag(() => ({
+    type: 'box',
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }))
+
   return (
-    <div className="box" style={stylingBox}>
+    // added ref for DND - https://vijayt.com/post/drag-and-drop-using-react-dnd/
+    <div className="box" ref={dragRef} style={stylingBox}>
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
         <span className="formula" style={formulaStyle}>
