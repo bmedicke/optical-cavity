@@ -41,6 +41,8 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
     alignItems: 'center',
     width: '220px',
     minWidth: '220px',
+    maxHeight: '390px',
+    padding: '2rem 0',
   }
 
   return (
@@ -48,7 +50,9 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
       </label>
-      {!hideCanvas && <Jitter jitter={graphData} datapoints={datapoints} totaldelta={delta} />}
+      {!hideCanvas && (
+        <Jitter jitter={graphData} datapoints={datapoints} totaldelta={delta} />
+      )}
       <button onClick={() => setIsActive((x) => !x)}>
         {isActive ? 'turn off' : 'turn on'}
       </button>

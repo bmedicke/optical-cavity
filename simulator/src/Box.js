@@ -41,6 +41,8 @@ const Box = ({
     alignItems: 'center',
     width: '220px',
     minWidth: '220px',
+    maxHeight: '390px',
+    height: '100%',
   }
 
   const formulaStyle = {
@@ -52,7 +54,7 @@ const Box = ({
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
         <span className="formula" style={formulaStyle}>
-          {formula && showFormula && <Formula formula={formula}/>}
+          {formula && showFormula && <Formula formula={formula} />}
         </span>
         <span>
           {isResult ? (
