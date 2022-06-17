@@ -71,6 +71,8 @@ function App() {
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
 
+  const [boxList, setBoxList] = useState([{}])
+
   // cavity controls
   const [isPowerSweeping, setIsPowerSweeping] = useState(false)
   const PowerSweep = withSweep(Box)
@@ -82,6 +84,31 @@ function App() {
 
   // BOTTOM
   const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
+
+  const list = [
+    {
+      label: 'laser power',
+      rgb: wavelengthColor,
+      hideCanvas: !showvisualizations,
+      formula: '\\(P\\)',
+      min: '0',
+      max: '100',
+      step: '1',
+      unit: 'W',
+      value: laserpower,
+      canvasplot: <Power power={laserpower} />,
+      setF: (e) => setLaserpower(e.target.value),
+      showFormula: showformulas,
+    },
+    {
+      label: 'length jitter',
+      isActive: isLengthJittering,
+      setIsActive: setIsLengthJittering,
+      setter: setCavitylength,
+      hideCanvas: !showvisualizations,
+      type: 'jitter',
+    },
+  ]
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
@@ -240,6 +267,20 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div style={containerStyle} className="variable-wrapper">
+          {list.map((e) => {
+            let toReturn = null
+
+            switch (e.type) {
+              case 'jitter':
+                toReturn = <JitterBox {...e} />
+                break
+
+              default:
+                toReturn = <Box {...e} />
+            }
+
+            return toReturn
+          })}
           {/* <LengthSweep
             unit="s"
             label="length sweep"
@@ -258,6 +299,7 @@ function App() {
             setter={setLaserpower}
             hideCanvas={!showvisualizations}
           /> */}
+          {/*           
           <Box
             label="laser power"
             rgb={wavelengthColor}
@@ -463,7 +505,7 @@ function App() {
             unit=""
             value={finesse}
             showFormula={showformulas}
-          />
+          /> */}
         </div>
         <div
           style={{ display: 'flex', flexFlow: 'row wrap' }}
