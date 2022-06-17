@@ -242,13 +242,6 @@ function App() {
     <MathJaxContext>
       <div className="App">
         <div style={containerStyle} className="variable-wrapper">
-          <JitterBox
-            label="length jitter"
-            isActive={isLengthJittering}
-            setIsActive={setIsLengthJittering}
-            setter={setCavitylength}
-            hideCanvas={!showvisualizations}
-          />
           {/* <LengthSweep
             unit="s"
             label="length sweep"
@@ -280,6 +273,13 @@ function App() {
             canvasplot={<Power power={laserpower} />}
             setF={(e) => setLaserpower(e.target.value)}
             showFormula={showformulas}
+          />
+          <JitterBox
+            label="length jitter"
+            isActive={isLengthJittering}
+            setIsActive={setIsLengthJittering}
+            setter={setCavitylength}
+            hideCanvas={!showvisualizations}
           />
           <Box
             label="cavity length"
