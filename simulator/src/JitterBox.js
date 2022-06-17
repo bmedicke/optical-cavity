@@ -1,47 +1,32 @@
+import { Jitter } from './Visualizations'
 import { useEffect, useState } from 'react'
-import { rgb2string } from './Visualizations'
 
-const JitterBox = ({
-  label = 'defaultLabel',
-  setter = null,
-  hideCanvas = false,
-  rgb = { r: 255, g: 255, b: 255 },
-//   isActive,
-//   setIsActive,
-  canvasplot = (
-    <canvas
-      // TODO use style from Visualization.css
-      style={{
-        backgroundColor: rgb2string(rgb, 0.1),
-        height: '200px',
-        width: '200px',
-        backgroundImage: 'url("/maniac.jpeg")',
-        backgroundSize: 'cover',
-        backgroundBlendMode: 'luminosity',
-      }}
-    ></canvas>
-  )
-}) => {
+const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
+  const [isActive, setIsActive] = useState(false)
+  const datapoints = 25
+  const [graphData, setGraphData] = useState([])
 
-    const [isActive, setIsActive] = useState(false)
-
-// Sets an interval every 0.5s
+  // Sets an interval every 0.5s
   useEffect(() => {
-    
-        const interval = setInterval(() => {
-        setIsActive(x => {console.log(x); return x;})
-        
-        setIsActive(x => {
-            if(x){
-                setter && setter((y) => parseInt(y) + Math.floor(Math.random() * 3) - 1)
+    const interval = setInterval(() => {
+      setIsActive((active) => {
+        if (active) {
+          setGraphData((graphdata) => {
+            graphdata.push(Math.floor(Math.random() * 3) - 1)
+            if (graphdata.length > datapoints) {
+              graphdata.shift()
             }
-            return x
-        })
-        
-          },500)
+            return graphdata
+          })
+          if (setter) {
+            setter((value) => parseInt(value) + graphData[graphData.length - 1])
+          }
+        }
+        return active
+      })
+    }, 500)
     return () => {
       clearInterval(interval)
-      console.log("clearing intervale in " + label)
     }
   }, [])
 
@@ -61,9 +46,11 @@ const JitterBox = ({
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
       </label>
-      {!hideCanvas && canvasplot}
-      <button onClick={() => setIsActive(x => !x)}>Jitter</button>
-          </div>
+      {!hideCanvas && <Jitter jitter={graphData} datapoints={datapoints} />}
+      <button onClick={() => setIsActive((x) => !x)}>
+        {isActive ? 'turn off' : 'turn on'}
+      </button>
+    </div>
   )
 }
 
