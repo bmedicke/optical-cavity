@@ -77,7 +77,7 @@ const Jitter = (props) => {
     context.fillText('+1', w / 2, h / 4)
     context.fillText('-1', w / 2, (h / 4) * 3 + textheight)
     context.fillText(
-      `Δ ${props.totaldelta} nm`,
+      `ΣΔ ${props.totaldelta} nm`,
       w / 10,
       (h / 10) * 9 + textheight / 2
     )
