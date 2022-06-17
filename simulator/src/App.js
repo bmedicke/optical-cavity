@@ -188,7 +188,7 @@ function App() {
     height: '100vh',
     display: 'flex',
     flexFlow: 'row wrap',
-    overflowX: 'auto',
+    overflowX: 'hidden',
     justifyContent: 'center',
     padding: '0.3rem',
     position: 'relative',
