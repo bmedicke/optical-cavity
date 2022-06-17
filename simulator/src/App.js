@@ -83,7 +83,7 @@ function App() {
   const LengthJitter = withJitter(Box)
 
   // BOTTOM
-  const [isBottomCollapsed, setIsBottomCollapsed] = useState(false)
+  const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
