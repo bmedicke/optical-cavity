@@ -58,6 +58,7 @@ const Jitter = (props) => {
     const [w, h] = [canvas.width, canvas.height]
     const heightscale = canvas.height / 5
     const widthscale = props.datapoints - 1
+    const textheight = Math.round(canvas.width / 13)
 
     context.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -66,16 +67,21 @@ const Jitter = (props) => {
     context.strokeStyle = 'green'
     context.moveTo(0, h / 2)
     props.jitter.forEach((jitter, i) => {
-      context.lineTo((w / widthscale) * i, h / 2 + jitter * heightscale)
+      context.lineTo((w / widthscale) * i, h / 2 - jitter * heightscale)
     })
     context.stroke()
 
     context.fillStyle = 'white'
-    context.font = `${Math.round(canvas.width / 13)}px Lato`
-    context.fillText(' 0', w / 2, h / 2 + 5)
+    context.font = `${textheight}px Lato`
+    context.fillText(' 0', w / 2, h / 2 + textheight / 3)
     context.fillText('+1', w / 2, h / 4)
-    context.fillText('-1', w / 2, (h / 4) * 3 + 10)
-  }, [JSON.stringify(props.jitter)])
+    context.fillText('-1', w / 2, (h / 4) * 3 + textheight)
+    context.fillText(
+      `Δ ${props.totaldelta} nm`,
+      w / 10,
+      (h / 10) * 9 + textheight / 2
+    )
+  }, [JSON.stringify(props.jitter), props.totaldelta])
   // TODO write custom deep compare function?
 
   return (

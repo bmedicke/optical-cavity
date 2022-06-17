@@ -5,6 +5,7 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
   const [isActive, setIsActive] = useState(false)
   const datapoints = 25
   const [graphData, setGraphData] = useState([])
+  const [delta, setDelta] = useState(0)
 
   // Sets an interval every 0.5s
   useEffect(() => {
@@ -13,6 +14,7 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
         if (active) {
           setGraphData((graphdata) => {
             graphdata.push(Math.floor(Math.random() * 3) - 1)
+            setDelta((x) => x + graphdata[graphdata.length - 1])
             if (graphdata.length > datapoints) {
               graphdata.shift()
             }
@@ -46,7 +48,7 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
       </label>
-      {!hideCanvas && <Jitter jitter={graphData} datapoints={datapoints} />}
+      {!hideCanvas && <Jitter jitter={graphData} datapoints={datapoints} totaldelta={delta} />}
       <button onClick={() => setIsActive((x) => !x)}>
         {isActive ? 'turn off' : 'turn on'}
       </button>
