@@ -66,7 +66,7 @@ const Jitter = (props) => {
     context.strokeStyle = 'green'
     context.moveTo(0, h / 2)
     props.jitter.forEach((jitter, i) => {
-      context.lineTo((w / widthscale) * i, h / 2 + jitter * heightscale)
+      context.lineTo((w / widthscale) * i, h / 2 - jitter * heightscale)
     })
     context.stroke()
 
