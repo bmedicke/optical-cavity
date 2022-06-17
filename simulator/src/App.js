@@ -14,7 +14,6 @@ import {
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import { wavelength2rgb, rgb2string } from './Visualizations.js'
-import { withJitter } from './withJitter.js'
 import { withSweep } from './withSweep.js'
 import { draw_sine } from './Visualizations.js'
 import JitterBox from './JitterBox.js'
@@ -80,7 +79,6 @@ function App() {
   const LengthSweep = withSweep(Box)
 
   const [isLengthJittering, setIsLengthJittering] = useState(false)
-  const LengthJitter = withJitter(Box)
 
   // BOTTOM
   const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
