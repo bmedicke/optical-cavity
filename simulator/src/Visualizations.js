@@ -50,6 +50,46 @@ function draw_sine(canvas, context, scale, phaseshift = 0) {
   context.stroke()
 }
 
+const Jitter = (props) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    const canvas = ref.current
+    const context = canvas.getContext('2d')
+    const [w, h] = [canvas.width, canvas.height]
+    const heightscale = canvas.height / 5
+    const widthscale = props.datapoints - 1
+
+    context.clearRect(0, 0, canvas.width, canvas.height)
+
+    context.beginPath()
+    context.lineWidth = 2
+    context.strokeStyle = 'green'
+    context.moveTo(0, h / 2)
+    props.jitter.forEach((jitter, i) => {
+      context.lineTo((w / widthscale) * i, h / 2 + jitter * heightscale)
+    })
+    context.stroke()
+
+    context.fillStyle = 'white'
+    context.font = `${Math.round(canvas.width / 13)}px Lato`
+    context.fillText(' 0', w / 2, h / 2 + 5)
+    context.fillText('+1', w / 2, h / 4)
+    context.fillText('-1', w / 2, (h / 4) * 3 + 10)
+  }, [JSON.stringify(props.jitter)])
+  // TODO write custom deep compare function?
+
+  return (
+    <div>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
+    </div>
+  )
+}
+
 const Reflectivity = (props) => {
   const ref = useRef(null)
   useEffect(() => {
@@ -318,6 +358,7 @@ const Phaseshift = (props) => {
 export {
   CavityLength,
   Gain,
+  Jitter,
   Phaseshift,
   Power,
   Reflectivity,
