@@ -82,6 +82,9 @@ function App() {
   const [isLengthJittering, setIsLengthJittering] = useState(false)
   const LengthJitter = withJitter(Box)
 
+  // BOTTOM
+  const [isBottomCollapsed, setIsBottomCollapsed] = useState(false)
+
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
     changeFavicon(wavelength)
@@ -184,18 +187,17 @@ function App() {
   ])
 
   const containerStyle = {
-    height: '70vh',
+    height: '100vh',
     display: 'flex',
     flexFlow: 'row wrap',
     overflowX: 'auto',
+    justifyContent: 'center',
+    padding: '0.3rem',
+    position: 'relative',
     background: `linear-gradient(90deg, black 30%, ${rgb2string(
       wavelengthColor,
       0.4
     )} 50%, black 70%)`,
-    justifyContent: 'center',
-    overflowScrolling: 'touch',
-    WebkitOverflowScrolling: 'touch',
-    padding: '0.3rem',
   }
 
   const btnStyle = {
@@ -217,11 +219,23 @@ function App() {
       wavelengthColor,
       (laserpower / 100) * (opticalgain / opticalgainRessonance)
     )} 50%, black 75%)`,
-    height: '20%',
+    height: isBottomCollapsed ? '0%' : '80%',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundBlendMode: isLocked ? 'luminosity' : 'multiply',
     backgroundPosition: 'center',
+    position: 'relative',
+  }
+
+  const collapsBtnStyle = {
+    position: 'absolute',
+    top: isBottomCollapsed ? '-52px' : 0,
+    right: 0,
+    padding: '1rem',
+    border: '1px solid white',
+    borderRadius: '12%',
+    background: isBottomCollapsed ? 'white' : 'transparent',
+    color: isBottomCollapsed ? 'black' : 'white',
   }
 
   return (
@@ -481,8 +495,15 @@ function App() {
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
         </div>
-
-        <div style={bottomStyle}></div>
+        <div style={bottomStyle}>
+          <button
+            style={collapsBtnStyle}
+            onClick={() => setIsBottomCollapsed((x) => !x)}
+            className="collapse-button"
+          >
+            {isBottomCollapsed ? 'Show' : 'Hide'}
+          </button>
+        </div>
       </div>
     </MathJaxContext>
   )

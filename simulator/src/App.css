@@ -5,11 +5,11 @@
   overflow-y: hidden;
   display: flex;
   flex-flow: column nowrap;
+  justify-content: flex-end;
 }
 
-
-label{
-  color: black!important;
+label {
+  color: black !important;
 }
 
 .locked {
