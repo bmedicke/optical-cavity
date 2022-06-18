@@ -40,9 +40,18 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
       {!hideCanvas && (
         <Jitter jitter={graphData} datapoints={datapoints} totaldelta={delta} />
       )}
-      <button onClick={() => setIsActive((x) => !x)}>
-        {isActive ? 'turn off' : 'turn on'}
-      </button>
+      <div className={'button-container'}>
+        <button onClick={() => setIsActive((x) => !x)}>
+          {isActive ? 'turn off' : 'turn on'}
+        </button>
+        <button
+          onClick={() => {
+            setDelta(0)
+          }}
+        >
+          reset delta
+        </button>
+      </div>
     </div>
   )
 }
