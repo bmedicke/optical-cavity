@@ -271,6 +271,8 @@ function App() {
             setIsActive={setIsLengthJittering}
             setter={setCavitylength}
             hideCanvas={!showvisualizations}
+            showDetails={showdetails}
+            infoClick={infoClickHandler}
           />
           <Box
             label="cavity length"

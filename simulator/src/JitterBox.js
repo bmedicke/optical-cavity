@@ -2,7 +2,13 @@ import styles from './Box.module.scss'
 import { Jitter } from './Visualizations'
 import { useEffect, useState } from 'react'
 
-const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
+const JitterBox = ({
+  label = 'Jitter',
+  setter = null,
+  hideCanvas = false,
+  showDetails = false,
+  infoClick = () => {},
+}) => {
   const [isActive, setIsActive] = useState(false)
   const datapoints = 25
   const [graphData, setGraphData] = useState([])
@@ -52,6 +58,11 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
           reset delta
         </button>
       </div>
+      {showDetails && (
+        <button onClick={() => infoClick(label)} className={styles.infoBtn}>
+          i
+        </button>
+      )}
     </div>
   )
 }
