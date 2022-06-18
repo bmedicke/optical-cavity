@@ -1,5 +1,5 @@
 import { MathJax } from 'better-react-mathjax'
-import React, { useState, memo} from 'react'
+import React, { memo} from 'react'
 
 const Formula = ({formula}) => {
 
