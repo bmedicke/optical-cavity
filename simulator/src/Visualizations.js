@@ -82,7 +82,6 @@ const Jitter = (props) => {
       (h / 10) * 9 + textheight / 2
     )
   }, [JSON.stringify(props.jitter), props.totaldelta])
-  // TODO write custom deep compare function?
 
   return (
     <div>
