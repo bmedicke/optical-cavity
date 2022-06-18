@@ -238,6 +238,10 @@ function App() {
       text: `variation in distance between
       the mirrors based on incoherent noise`,
     },
+    'cavity length': {
+      label: 'cavity length',
+      text: `distance between the mirrors`,
+    },
   }
 
   const infoClickHandler = (label) => {
@@ -273,15 +277,6 @@ function App() {
             setF={(e) => setLaserpower(e.target.value)}
             showDetails={showdetails}
           />
-          <JitterBox
-            label="length jitter"
-            isActive={isLengthJittering}
-            setIsActive={setIsLengthJittering}
-            setter={setCavitylength}
-            hideCanvas={!showvisualizations}
-            showDetails={showdetails}
-            infoClick={infoClickHandler}
-          />
           <Box
             label="cavity length"
             rgb={wavelengthColor}
@@ -295,6 +290,16 @@ function App() {
             canvasplot={<CavityLength cavitylength={cavitylength} />}
             setF={(e) => setCavitylength(e.target.value)}
             showDetails={showdetails}
+            infoClick={infoClickHandler}
+          />
+          <JitterBox
+            label="length jitter"
+            isActive={isLengthJittering}
+            setIsActive={setIsLengthJittering}
+            setter={setCavitylength}
+            hideCanvas={!showvisualizations}
+            showDetails={showdetails}
+            infoClick={infoClickHandler}
           />
           <Box
             label="wave length"
