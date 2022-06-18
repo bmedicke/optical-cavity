@@ -6,8 +6,8 @@ const InfoOverlay = ({
   children,
   info = '',
   label = 'info overlay',
+  hideOverlay,
   rgb = { r: 255, g: 255, b: 255 },
-  closeHandler = () => {},
 }) => {
   const stylingInfoOverlay = { border: `1px solid ${rgb2string(rgb, 0.5)}` }
   const closeButton = { border: `1px solid ${rgb2string(rgb, 0.2)}` }
@@ -17,7 +17,7 @@ const InfoOverlay = ({
       <button
         className={style.closeButton}
         style={closeButton}
-        onClick={closeHandler}
+        onClick={hideOverlay}
       >
         x
       </button>

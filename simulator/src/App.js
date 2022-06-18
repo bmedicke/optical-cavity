@@ -72,6 +72,7 @@ function App() {
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
+  const [isOverlayHidden, setIsOverlayHidden] = useState(false)
 
   // cavity controls
   const [isPowerSweeping, setIsPowerSweeping] = useState(false)
@@ -241,14 +242,17 @@ function App() {
   return (
     <MathJaxContext>
       <div className="App">
-        {
+        {!isOverlayHidden && (
           <InfoOverlay
             rgb={wavelengthColor}
+            hideOverlay={() => {
+              setIsOverlayHidden(true)
+            }}
             info={`\\(a_1^{b}=x\\) Lorem ipsum dolor sit amet,
             rebum. Stet clita kasd gubergren, no sea takimata sanctus
             est Lorem ipsum dolor sit amet.`}
           />
-        }
+        )}
         <div style={containerStyle} className="variable-wrapper">
           {/* <LengthSweep
             unit="s"
