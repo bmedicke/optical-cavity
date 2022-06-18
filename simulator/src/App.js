@@ -69,7 +69,7 @@ function App() {
   // ui controls:
   const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
   const [isOverlayHidden, setIsOverlayHidden] = useState(true)
-  const [infoText, setInfoText] = useState('welcome!')
+  const [infoObject, setInfoObject] = useState({})
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
@@ -228,12 +228,12 @@ function App() {
     color: isBottomCollapsed ? 'black' : 'white',
   }
 
-  const infoTexts = {
-    'laser power': 'unit sign: \\(P\\)',
+  const infoObjects = {
+    'laser power': { label: 'laser power', text: 'unit sign: \\(P\\)' },
   }
 
   const infoClickHandler = (label) => {
-    setInfoText(infoTexts[label])
+    setInfoObject(infoObjects[label])
     setIsOverlayHidden(false)
   }
 
@@ -246,7 +246,7 @@ function App() {
             hideOverlay={() => {
               setIsOverlayHidden(true)
             }}
-            info={infoText}
+            info={infoObject}
           />
         )}
         <div style={containerStyle} className="variable-wrapper">

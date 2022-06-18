@@ -4,8 +4,7 @@ import { rgb2string } from './Visualizations.js'
 
 const InfoOverlay = ({
   children,
-  info = '',
-  label = 'info overlay',
+  info = { text: '', label: '' },
   hideOverlay,
   rgb = { r: 255, g: 255, b: 255 },
 }) => {
@@ -21,9 +20,9 @@ const InfoOverlay = ({
       >
         x
       </button>
-      <h1>{label}</h1>
+      <h1>{info.label}</h1>
       <span className="details">
-        <Formula formula={info} />
+        <Formula formula={info.text} />
       </span>
       {children}
     </div>
