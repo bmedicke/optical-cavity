@@ -1,3 +1,4 @@
+import styles from './Box.module.scss'
 import { Jitter } from './Visualizations'
 import { useEffect, useState } from 'react'
 
@@ -31,19 +32,8 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
     }
   }, [])
 
-  const stylingBox = {
-    background: '#fff',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    margin: '2.5px 2.5px',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    width: '220px',
-    minWidth: '220px',
-  }
-
   return (
-    <div className="box" style={stylingBox}>
+    <div className={styles.box}>
       <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
         <h1 style={{ marginRight: '1rem' }}>{label}</h1>
       </label>
