@@ -26,7 +26,7 @@ const JitterBox = ({ label = 'Jitter', setter = null, hideCanvas = false }) => {
         }
         return active
       })
-    }, 500)
+    }, 10)
     return () => {
       clearInterval(interval)
     }
