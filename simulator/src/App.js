@@ -68,7 +68,8 @@ function App() {
 
   // ui controls:
   const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
-  const [isOverlayHidden, setIsOverlayHidden] = useState(false)
+  const [isOverlayHidden, setIsOverlayHidden] = useState(true)
+  const [infoText, setInfoText] = useState('welcome!')
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
@@ -227,6 +228,15 @@ function App() {
     color: isBottomCollapsed ? 'black' : 'white',
   }
 
+  const infoTexts = {
+    'laser power': 'unit sign: \\(P\\)',
+  }
+
+  const infoClickHandler = (label) => {
+    setInfoText(infoTexts[label])
+    setIsOverlayHidden(false)
+  }
+
   return (
     <MathJaxContext>
       <div className="App">
@@ -236,9 +246,7 @@ function App() {
             hideOverlay={() => {
               setIsOverlayHidden(true)
             }}
-            info={`\\(a_1^{b}=x\\) Lorem ipsum dolor sit amet,
-            rebum. Stet clita kasd gubergren, no sea takimata sanctus
-            est Lorem ipsum dolor sit amet.`}
+            info={infoText}
           />
         )}
         <div style={containerStyle} className="variable-wrapper">
@@ -251,7 +259,7 @@ function App() {
             max="100"
             step="1"
             unit="W"
-            infoClick={() => setIsOverlayHidden(false)}
+            infoClick={infoClickHandler}
             value={laserpower}
             canvasplot={<Power power={laserpower} />}
             setF={(e) => setLaserpower(e.target.value)}
