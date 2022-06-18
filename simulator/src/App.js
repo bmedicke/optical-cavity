@@ -1,9 +1,8 @@
 import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
+import InfoOverlay from './InfoOverlay.js'
 import JitterBox from './JitterBox.js'
-import { InfoOverlay } from './InfoOverlay.js'
-import { MathJaxContext } from 'better-react-mathjax'
 import {
   CavityLength,
   Gain,
@@ -16,6 +15,7 @@ import {
   rgb2string,
   wavelength2rgb,
 } from './Visualizations'
+import { MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
 import { withSweep } from './withSweep.js'
@@ -241,6 +241,11 @@ function App() {
   return (
     <MathJaxContext>
       <div className="App">
+        {
+          <InfoOverlay
+            info={` Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. `}
+          />
+        }
         <div style={containerStyle} className="variable-wrapper">
           {/* <LengthSweep
             unit="s"
