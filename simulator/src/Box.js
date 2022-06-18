@@ -13,7 +13,7 @@ const Box = ({
   hideCanvas = false,
   formula = null,
   isResult = false,
-  showFormula = false,
+  showDetails = false,
   rgb = { r: 255, g: 255, b: 255 },
   infoClick = () => console.log('no info text provided'),
   canvasplot = (
@@ -29,7 +29,7 @@ const Box = ({
         <h1 style={{ textAlign: 'center' }}>{label}</h1>
       </label>
       <span className={styles.formula}>
-        {formula && showFormula && <Formula formula={formula} />}
+        {formula && showDetails && <Formula formula={formula} />}
       </span>
       <span>
         {isResult ? (
@@ -58,9 +58,11 @@ const Box = ({
           onChange={setF}
         />
       )}
-      <button onClick={() => infoClick(label)} className={styles.infoBtn}>
-        i
-      </button>
+      {showDetails && (
+        <button onClick={() => infoClick(label)} className={styles.infoBtn}>
+          i
+        </button>
+      )}
     </div>
   )
 }
