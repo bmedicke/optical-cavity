@@ -1,22 +1,23 @@
 import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
-import { MathJaxContext } from 'better-react-mathjax'
+import InfoOverlay from './InfoOverlay.js'
+import JitterBox from './JitterBox.js'
 import {
-  Power,
-  Phaseshift,
+  CavityLength,
   Gain,
-  Wavelength,
+  Phaseshift,
+  Power,
   Reflectivity,
   Transmittance,
-  CavityLength,
+  Wavelength,
+  draw_sine,
+  rgb2string,
+  wavelength2rgb,
 } from './Visualizations'
+import { MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-import { wavelength2rgb, rgb2string } from './Visualizations.js'
-import { withSweep } from './withSweep.js'
-import { draw_sine } from './Visualizations.js'
-import JitterBox from './JitterBox.js'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
@@ -51,37 +52,30 @@ function App() {
   const [wavelength, setWavelength] = useState(200) // in nm.
 
   // calculated variables:
-  const [frequency, setFrequency] = useState(0)
-  const [wavenumber, setWavenumber] = useState(0)
-  const [phaseshift, setPhaseshift] = useState(0)
-  const [m1transmittance, setM1transmittance] = useState(0)
-  const [m2transmittance, setM2transmittance] = useState(0)
   const [epow2ikl, setEpow2ikl] = useState(0) // e^(i*k*l).
-  const [opticalgain, setOpticalgain] = useState(0)
-  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
-  const [reflectedgain, setReflectedgain] = useState(0)
-  const [transmittedgain, setTransmittedgain] = useState(0)
   const [finesse, setFinesse] = useState(0)
-
+  const [frequency, setFrequency] = useState(0)
   const [isLocked, setIsLocked] = useState(false)
   const [isMaximallyOutOfPhase, setIsMaximallyOutOfPhase] = useState(false)
+  const [m1transmittance, setM1transmittance] = useState(0)
+  const [m2transmittance, setM2transmittance] = useState(0)
+  const [opticalgain, setOpticalgain] = useState(0)
+  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
+  const [phaseshift, setPhaseshift] = useState(0)
+  const [reflectedgain, setReflectedgain] = useState(0)
+  const [transmittedgain, setTransmittedgain] = useState(0)
+  const [wavenumber, setWavenumber] = useState(0)
 
   // ui controls:
-  const [showformulas, setShowformulas] = useState(false)
+  const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
+  const [isOverlayHidden, setIsOverlayHidden] = useState(true)
+  const [infoObject, setInfoObject] = useState({})
+  const [showdetails, setShowdetails] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
 
-  // cavity controls
-  const [isPowerSweeping, setIsPowerSweeping] = useState(false)
-  const PowerSweep = withSweep(Box)
-
-  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
-  const LengthSweep = withSweep(Box)
-
+  // logic controls:
   const [isLengthJittering, setIsLengthJittering] = useState(false)
-
-  // BOTTOM
-  const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
@@ -211,8 +205,6 @@ function App() {
     color: isLocked ? `1px solid ${rgb2string(wavelengthColor)}` : 'white',
   }
   const bottomStyle = {
-    // background: 'url(/galaxy.gif)',
-    // backgroundColor: `${rgb2string(wavelengthColor)}`,
     backgroundImage: `linear-gradient( 0deg, black 25%, ${rgb2string(
       wavelengthColor,
       (laserpower / 100) * (opticalgain / opticalgainRessonance)
@@ -236,28 +228,28 @@ function App() {
     color: isBottomCollapsed ? 'black' : 'white',
   }
 
+  const infoObjects = {
+    'laser power': { label: 'laser power', text: 'unit sign: \\(P\\)' },
+  }
+
+  const infoClickHandler = (label) => {
+    setInfoObject(infoObjects[label])
+    setIsOverlayHidden(false)
+  }
+
   return (
     <MathJaxContext>
       <div className="App">
-        <div style={containerStyle} className="variable-wrapper">
-          {/* <LengthSweep
-            unit="s"
-            label="length sweep"
-            value={0.5}
-            isActive={isLengthSweeping}
-            setIsActive={setIsLengthSweeping}
-            setter={setCavitylength}
-            hideCanvas={!showvisualizations}
+        {!isOverlayHidden && (
+          <InfoOverlay
+            rgb={wavelengthColor}
+            hideOverlay={() => {
+              setIsOverlayHidden(true)
+            }}
+            info={infoObject}
           />
-          <PowerSweep
-            unit="s"
-            label="power sweep"
-            value={0.5}
-            isActive={isPowerSweeping}
-            setIsActive={setIsPowerSweeping}
-            setter={setLaserpower}
-            hideCanvas={!showvisualizations}
-          /> */}
+        )}
+        <div style={containerStyle} className="variable-wrapper">
           <Box
             label="laser power"
             rgb={wavelengthColor}
@@ -267,10 +259,11 @@ function App() {
             max="100"
             step="1"
             unit="W"
+            infoClick={infoClickHandler}
             value={laserpower}
             canvasplot={<Power power={laserpower} />}
             setF={(e) => setLaserpower(e.target.value)}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <JitterBox
             label="length jitter"
@@ -291,7 +284,7 @@ function App() {
             value={cavitylength}
             canvasplot={<CavityLength cavitylength={cavitylength} />}
             setF={(e) => setCavitylength(e.target.value)}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="wave length"
@@ -305,7 +298,7 @@ function App() {
             value={wavelength}
             canvasplot={<Wavelength wavelength={wavelength} />}
             setF={(e) => setWavelength(e.target.value)}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="frequency"
@@ -316,7 +309,7 @@ function App() {
             unit="THz"
             value={Math.round((frequency / 1e12) * 100) / 100}
             canvasplot={<Wavelength wavelength={wavelength} />}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="reflectivity mirror 1"
@@ -327,7 +320,7 @@ function App() {
             max="0.99"
             step="0.01"
             unit=""
-            showFormula={showformulas}
+            showDetails={showdetails}
             value={m1reflectivity}
             canvasplot={<Reflectivity reflectivity={m1reflectivity} />}
             setF={(e) => setM1reflectivity(e.target.value)}
@@ -341,7 +334,7 @@ function App() {
             unit=""
             canvasplot={<Transmittance transmittance={m1transmittance} />}
             value={m1transmittance}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="reflectivity mirror 2"
@@ -355,7 +348,7 @@ function App() {
             value={m2reflectivity}
             canvasplot={<Reflectivity reflectivity={m2reflectivity} />}
             setF={(e) => setM2reflectivity(e.target.value)}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="transmittance mirror 2"
@@ -366,7 +359,7 @@ function App() {
             unit=""
             canvasplot={<Transmittance transmittance={m2transmittance} />}
             value={m2transmittance}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="angular wavenumber"
@@ -376,7 +369,7 @@ function App() {
             formula={`\\(k = \\frac{2\\pi}{\\lambda}\\)`}
             unit=""
             value={wavenumber}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="phase shift (rad)"
@@ -387,7 +380,7 @@ function App() {
             unit="rad"
             value={phaseshift}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="phase shift (deg)"
@@ -398,7 +391,7 @@ function App() {
             unit="deg"
             value={rad2deg(phaseshift)}
             canvasplot={<Phaseshift phaseshift={phaseshift} />}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="optical gain at ressonance"
@@ -411,7 +404,7 @@ function App() {
             }
             unit=""
             value={opticalgainRessonance}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="current optical gain"
@@ -424,7 +417,7 @@ function App() {
               \\)`}
             canvasplot={<Gain power={laserpower} gain={opticalgain} />}
             value={opticalgain}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="reflected gain"
@@ -437,7 +430,7 @@ function App() {
               \\)`}
             canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
             value={reflectedgain}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="transmitted gain"
@@ -450,7 +443,7 @@ function App() {
             unit=""
             canvasplot={<Gain power={laserpower} gain={transmittedgain} />}
             value={transmittedgain}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
           <Box
             label="cavity finesse"
@@ -462,7 +455,7 @@ function App() {
             isResult
             unit=""
             value={finesse}
-            showFormula={showformulas}
+            showDetails={showdetails}
           />
         </div>
         <div
@@ -484,8 +477,8 @@ function App() {
           >
             LOCK CAVITY
           </button>
-          <button style={btnStyle} onClick={() => setShowformulas((v) => !v)}>
-            {showformulas ? 'Hide' : 'Show'} Formulae & Unit Signs
+          <button style={btnStyle} onClick={() => setShowdetails((v) => !v)}>
+            {showdetails ? 'Hide' : 'Show'} Formulae & Unit Signs
           </button>
         </div>
 
