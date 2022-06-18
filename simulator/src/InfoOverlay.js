@@ -1,27 +1,29 @@
-import { MathJax } from 'better-react-mathjax'
+import Formula from './Formula.js'
+import style from './InfoOverlay.module.scss'
+import { rgb2string } from './Visualizations.js'
 
 const InfoOverlay = ({
   children,
-  info = 'lorem',
+  info = '',
   label = 'info overlay',
   rgb = { r: 255, g: 255, b: 255 },
+  closeHandler = () => {},
 }) => {
-  const stylingInfoOverlay = {
-    background: 'red',
-    justifyContent: 'space-evenly',
-    position: 'absolute',
-    zIndex: '1',
-    left: '10%',
-    top: '10%',
-    width: '80%',
-    height: '80%',
-  }
+  const stylingInfoOverlay = { border: `1px solid ${rgb2string(rgb, 0.5)}` }
+  const closeButton = { border: `1px solid ${rgb2string(rgb, 0.2)}` }
 
   return (
-    <div className="infoOverlay" style={stylingInfoOverlay}>
-      <h1 style={{ marginRight: '1rem' }}>{label}</h1>
+    <div className={style.infoOverlay} style={stylingInfoOverlay}>
+      <button
+        className={style.closeButton}
+        style={closeButton}
+        onClick={closeHandler}
+      >
+        x
+      </button>
+      <h1>{label}</h1>
       <span className="details">
-        <MathJax>{info}</MathJax>
+        <Formula formula={info} />
       </span>
       {children}
     </div>

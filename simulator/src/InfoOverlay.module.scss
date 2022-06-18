@@ -1,0 +1,23 @@
+.infoOverlay {
+    background: black;
+    opacity: 0.9;
+    color: white;
+    padding: 1rem;
+    position: absolute;
+    z-index: 1;
+    left: 10%;
+    top: 10%;
+    width: 80%;
+    height: 80%;
+}
+
+.closeButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-top: none!important;
+    border-right: none!important;
+    padding: 0.7rem 1rem;
+    background: transparent;
+    color: white;
+}
