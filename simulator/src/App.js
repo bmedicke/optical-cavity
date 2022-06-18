@@ -204,8 +204,6 @@ function App() {
     color: isLocked ? `1px solid ${rgb2string(wavelengthColor)}` : 'white',
   }
   const bottomStyle = {
-    // background: 'url(/galaxy.gif)',
-    // backgroundColor: `${rgb2string(wavelengthColor)}`,
     backgroundImage: `linear-gradient( 0deg, black 25%, ${rgb2string(
       wavelengthColor,
       (laserpower / 100) * (opticalgain / opticalgainRessonance)
@@ -244,24 +242,6 @@ function App() {
           />
         )}
         <div style={containerStyle} className="variable-wrapper">
-          {/* <LengthSweep
-            unit="s"
-            label="length sweep"
-            value={0.5}
-            isActive={isLengthSweeping}
-            setIsActive={setIsLengthSweeping}
-            setter={setCavitylength}
-            hideCanvas={!showvisualizations}
-          />
-          <PowerSweep
-            unit="s"
-            label="power sweep"
-            value={0.5}
-            isActive={isPowerSweeping}
-            setIsActive={setIsPowerSweeping}
-            setter={setLaserpower}
-            hideCanvas={!showvisualizations}
-          /> */}
           <Box
             label="laser power"
             rgb={wavelengthColor}
