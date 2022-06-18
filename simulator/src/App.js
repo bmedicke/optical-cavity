@@ -1,22 +1,24 @@
 import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
+import JitterBox from './JitterBox.js'
+import { InfoOverlay } from './InfoOverlay.js'
 import { MathJaxContext } from 'better-react-mathjax'
 import {
-  Power,
-  Phaseshift,
+  CavityLength,
   Gain,
-  Wavelength,
+  Phaseshift,
+  Power,
   Reflectivity,
   Transmittance,
-  CavityLength,
+  Wavelength,
+  draw_sine,
+  rgb2string,
+  wavelength2rgb,
 } from './Visualizations'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-import { wavelength2rgb, rgb2string } from './Visualizations.js'
 import { withSweep } from './withSweep.js'
-import { draw_sine } from './Visualizations.js'
-import JitterBox from './JitterBox.js'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
