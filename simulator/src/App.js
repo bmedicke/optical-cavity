@@ -229,7 +229,15 @@ function App() {
   }
 
   const infoObjects = {
-    'laser power': { label: 'laser power', text: 'unit sign: \\(P\\)' },
+    'laser power': {
+      label: 'laser power',
+      text: `amplitude of the laser beam`,
+    },
+    'length jitter': {
+      label: 'length jitter',
+      text: `variation in distance between
+      the mirrors based on incoherent noise`,
+    },
   }
 
   const infoClickHandler = (label) => {
@@ -472,7 +480,9 @@ function App() {
           </button>
           <button
             style={btnStyle}
-            onClick={() => { setCavitylength(wavelength) }}
+            onClick={() => {
+              setCavitylength(wavelength)
+            }}
           >
             LOCK CAVITY
           </button>
