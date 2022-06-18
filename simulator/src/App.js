@@ -470,10 +470,7 @@ function App() {
           </button>
           <button
             style={btnStyle}
-            onClick={() => {
-              setCavitylength(200)
-              setWavelength(200)
-            }}
+            onClick={() => { setCavitylength(wavelength) }}
           >
             LOCK CAVITY
           </button>
