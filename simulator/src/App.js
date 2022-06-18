@@ -231,7 +231,7 @@ function App() {
   const infoObjects = {
     'laser power': {
       label: 'laser power',
-      text: `amplitude of the laser beam`,
+      text: `amplitude of the laser beam wave`,
     },
     'length jitter': {
       label: 'length jitter',
