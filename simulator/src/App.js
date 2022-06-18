@@ -52,30 +52,29 @@ function App() {
   const [wavelength, setWavelength] = useState(200) // in nm.
 
   // calculated variables:
-  const [frequency, setFrequency] = useState(0)
-  const [wavenumber, setWavenumber] = useState(0)
-  const [phaseshift, setPhaseshift] = useState(0)
-  const [m1transmittance, setM1transmittance] = useState(0)
-  const [m2transmittance, setM2transmittance] = useState(0)
   const [epow2ikl, setEpow2ikl] = useState(0) // e^(i*k*l).
-  const [opticalgain, setOpticalgain] = useState(0)
-  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
-  const [reflectedgain, setReflectedgain] = useState(0)
-  const [transmittedgain, setTransmittedgain] = useState(0)
   const [finesse, setFinesse] = useState(0)
-
+  const [frequency, setFrequency] = useState(0)
   const [isLocked, setIsLocked] = useState(false)
   const [isMaximallyOutOfPhase, setIsMaximallyOutOfPhase] = useState(false)
+  const [m1transmittance, setM1transmittance] = useState(0)
+  const [m2transmittance, setM2transmittance] = useState(0)
+  const [opticalgain, setOpticalgain] = useState(0)
+  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
+  const [phaseshift, setPhaseshift] = useState(0)
+  const [reflectedgain, setReflectedgain] = useState(0)
+  const [transmittedgain, setTransmittedgain] = useState(0)
+  const [wavenumber, setWavenumber] = useState(0)
 
   // ui controls:
+  const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
+  const [isOverlayHidden, setIsOverlayHidden] = useState(false)
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
 
+  // logic controls:
   const [isLengthJittering, setIsLengthJittering] = useState(false)
-
-  // BOTTOM
-  const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))

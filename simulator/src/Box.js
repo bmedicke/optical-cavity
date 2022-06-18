@@ -1,6 +1,6 @@
-import { MathJax } from 'better-react-mathjax'
 import Formula from './Formula.js'
-import { rgb2string } from './Visualizations'
+import styles from './Box.module.scss'
+import { rgb2string } from './Visualizations.js'
 
 const Box = ({
   min = '0',
