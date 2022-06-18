@@ -478,7 +478,7 @@ function App() {
             LOCK CAVITY
           </button>
           <button style={btnStyle} onClick={() => setShowdetails((v) => !v)}>
-            {showdetails ? 'Hide' : 'Show'} Formulae & Unit Signs
+            {showdetails ? 'Hide' : 'Show'} Formulae, Unit Signs & Infos
           </button>
         </div>
 
