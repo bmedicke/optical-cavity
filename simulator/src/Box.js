@@ -16,43 +16,23 @@ const Box = ({
   showFormula = false,
   rgb = { r: 255, g: 255, b: 255 },
   children,
+  infoClick,
   canvasplot = (
     <canvas
-      // TODO use style from Visualization.css
-      style={{
-        backgroundColor: rgb2string(rgb, 0.1),
-        height: '200px',
-        width: '200px',
-        backgroundImage: 'url("/maniac.jpeg")',
-        backgroundSize: 'cover',
-        backgroundBlendMode: 'luminosity',
-      }}
+      className={styles.visualization}
+      style={{ backgroundColor: `${rgb2string(rgb, 0.2)}` }}
     ></canvas>
   ),
 }) => {
-  //TODO Box with Canvas for same layout
-
-  const stylingBox = {
-    background: '#fff',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    margin: '2.5px 2.5px',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
-    width: '220px',
-    minWidth: '220px',
-  }
-
-  const formulaStyle = {
-    fontSize: '85%',
-  }
-
   return (
-    <div className="box" style={stylingBox}>
-      <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
-        <h1 style={{ marginRight: '1rem' }}>{label}</h1>
-        <span className="formula" style={formulaStyle}>
-          {formula && showFormula && <Formula formula={formula}/>}
+    <div className={styles.box}>
+      <label style={{ textAlign: 'center' }}>
+        <h1 style={{ textAlign: 'center' }}>{label}</h1>
+        <button onClick={infoClick} className={styles.infoBtn}>
+          i
+        </button>
+        <span className={styles.formula}>
+          {formula && showFormula && <Formula formula={formula} />}
         </span>
         <span>
           {isResult ? (

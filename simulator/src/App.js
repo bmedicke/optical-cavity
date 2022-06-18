@@ -251,6 +251,7 @@ function App() {
             max="100"
             step="1"
             unit="W"
+            infoClick={() => setIsOverlayHidden(false)}
             value={laserpower}
             canvasplot={<Power power={laserpower} />}
             setF={(e) => setLaserpower(e.target.value)}
