@@ -18,7 +18,6 @@ import {
 import { MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
 import { useEffect, useState } from 'react'
-import { withSweep } from './withSweep.js'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
@@ -72,14 +71,6 @@ function App() {
   const [showformulas, setShowformulas] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
   const [wavelengthColor, setWavelengthColor] = useState({})
-  const [isOverlayHidden, setIsOverlayHidden] = useState(false)
-
-  // cavity controls
-  const [isPowerSweeping, setIsPowerSweeping] = useState(false)
-  const PowerSweep = withSweep(Box)
-
-  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
-  const LengthSweep = withSweep(Box)
 
   const [isLengthJittering, setIsLengthJittering] = useState(false)
 
