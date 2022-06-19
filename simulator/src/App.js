@@ -2,6 +2,7 @@ import * as math from 'mathjs'
 import Box from './Box.js'
 import InfoOverlay from './InfoOverlay.js'
 import JitterBox from './JitterBox.js'
+import SweepBox from './SweepBox.js'
 import styles from './App.module.scss'
 import {
   CavityLength,
@@ -76,6 +77,7 @@ function App() {
 
   // logic controls:
   const [isLengthJittering, setIsLengthJittering] = useState(false)
+  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
@@ -286,6 +288,15 @@ function App() {
             label="length jitter"
             isActive={isLengthJittering}
             setIsActive={setIsLengthJittering}
+            setter={setCavitylength}
+            hideCanvas={!showvisualizations}
+            showDetails={showdetails}
+            infoClick={infoClickHandler}
+          />
+          <SweepBox
+            label="length sweep"
+            isActive={isLengthSweeping}
+            setIsActive={setIsLengthSweeping}
             setter={setCavitylength}
             hideCanvas={!showvisualizations}
             showDetails={showdetails}
