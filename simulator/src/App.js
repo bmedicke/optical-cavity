@@ -399,7 +399,7 @@ function App() {
             showDetails={showdetails}
           />
           <Box
-            label="optical gain at ressonance"
+            label="maximum optical gain"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             formula={`\\(\\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|\\)`}

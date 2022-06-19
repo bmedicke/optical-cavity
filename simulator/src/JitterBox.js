@@ -39,7 +39,10 @@ const JitterBox = ({
   }, [])
 
   return (
-    <div className={styles.box}>
+    <div
+      className={styles.box}
+      style={hideCanvas ? { minHeight: '100px' } : { minHeight: '300px' }}
+    >
       <label>
         <h1>{label}</h1>
       </label>
