@@ -1,6 +1,7 @@
 import styles from './Box.module.scss'
 import { Jitter } from './Visualizations'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useInterval } from './utilities'
 
 const JitterBox = ({
   label = 'Jitter',
