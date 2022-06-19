@@ -56,11 +56,11 @@ const Jitter = (props) => {
     const canvas = ref.current
     const context = canvas.getContext('2d')
     const [w, h] = [canvas.width, canvas.height]
-    const heightscale = canvas.height / 5
+    const heightscale = h / 5
     const widthscale = props.datapoints - 1
-    const textheight = Math.round(canvas.width / 13)
+    const textheight = Math.round(w / 13)
 
-    context.clearRect(0, 0, canvas.width, canvas.height)
+    context.clearRect(0, 0, w, h)
 
     context.beginPath()
     context.lineWidth = 2
