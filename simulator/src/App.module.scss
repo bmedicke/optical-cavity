@@ -1,0 +1,30 @@
+.App {
+  height: 100vh;
+  background: black;
+  max-height: 100%;
+  overflow-y: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  gap: 16px;
+  overflow-x: hidden;
+  justify-content: center;
+  padding: 0.3rem;
+  position: relative;
+  align-content: start;
+  align-items: start;
+}
+
+.btn {
+  background: black;
+  padding: 1rem;
+  color: white;
+  width: calc(100% / 3);
+}

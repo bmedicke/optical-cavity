@@ -1,8 +1,8 @@
-import './App.css'
 import * as math from 'mathjs'
 import Box from './Box.js'
 import InfoOverlay from './InfoOverlay.js'
 import JitterBox from './JitterBox.js'
+import styles from './App.module.scss'
 import {
   CavityLength,
   Gain,
@@ -179,28 +179,12 @@ function App() {
   ])
 
   const containerStyle = {
-    height: '100vh',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, 220px)',
-    gap: '16px',
-    overflowX: 'hidden',
-    justifyContent: 'center',
-    padding: '0.3rem',
-    position: 'relative',
     background: `linear-gradient(90deg, black 30%, ${rgb2string(
       wavelengthColor,
       0.4
     )} 50%, black 70%)`,
-    alignContent: 'start',
-    alignItmes: 'start',
   }
 
-  const btnStyle = {
-    background: 'black',
-    padding: '1rem',
-    color: 'white',
-    width: `${100 / 3}%`,
-  }
   const statusStyle = {
     padding: '1rem 0',
     border: `1px solid ${rgb2string(wavelengthColor)}`,
@@ -254,7 +238,7 @@ function App() {
 
   return (
     <MathJaxContext>
-      <div className="App">
+      <div className={`${styles.App}`}>
         {!isOverlayHidden && (
           <InfoOverlay
             rgb={wavelengthColor}
@@ -264,7 +248,10 @@ function App() {
             info={infoObject}
           />
         )}
-        <div style={containerStyle} className="variable-wrapper">
+        <div
+          style={containerStyle}
+          className={`variable-wrapper ${styles.container}`}
+        >
           <Box
             label="laser power"
             rgb={wavelengthColor}
@@ -481,25 +468,28 @@ function App() {
           className="controls"
         >
           <button
-            style={btnStyle}
+            className={styles.btn}
             onClick={() => setShowvisualizations((v) => !v)}
           >
             {showvisualizations ? 'Hide' : 'Show'} Visualizations
           </button>
           <button
-            style={btnStyle}
+            className={styles.btn}
             onClick={() => {
               setCavitylength(wavelength)
             }}
           >
             LOCK CAVITY
           </button>
-          <button style={btnStyle} onClick={() => setShowdetails((v) => !v)}>
+          <button
+            className={styles.btn}
+            onClick={() => setShowdetails((v) => !v)}
+          >
             {showdetails ? 'Hide' : 'Show'} Formulae, Unit Signs & Infos
           </button>
         </div>
 
-        <div style={statusStyle} className={`${isLocked && 'locked'}`}>
+        <div style={statusStyle}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
         </div>
