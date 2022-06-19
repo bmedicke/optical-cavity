@@ -76,6 +76,7 @@ function App() {
 
   // logic controls:
   const [isLengthJittering, setIsLengthJittering] = useState(false)
+  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
