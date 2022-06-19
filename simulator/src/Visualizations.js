@@ -50,6 +50,46 @@ function draw_sine(canvas, context, scale, phaseshift = 0) {
   context.stroke()
 }
 
+const Sweep = (props) => {
+  const ref = useRef(null)
+  useEffect(() => {
+    const canvas = ref.current
+    const context = canvas.getContext('2d')
+    const [w, h] = [canvas.width, canvas.height]
+
+    context.clearRect(0, 0, w, h)
+
+    if (props.isActive) {
+      context.strokeStyle = 'white'
+    } else {
+      context.strokeStyle = 'grey'
+    }
+    context.beginPath()
+    context.lineWidth = 3
+
+    if (props.isMovingLeft) {
+      context.moveTo((w / 4) * 3, h / 4)
+      context.lineTo(w / 4, h / 2)
+      context.lineTo((w / 4) * 3, (h / 4) * 3)
+    } else {
+      context.moveTo(w / 4, h / 4)
+      context.lineTo((w / 4) * 3, h / 2)
+      context.lineTo(w / 4, (h / 4) * 3)
+    }
+    context.stroke()
+  }, [props.isMovingLeft, props.isActive])
+
+  return (
+    <div>
+      <canvas
+        width={200}
+        height={200}
+        ref={ref}
+        className={styles.small_visualization}
+      ></canvas>
+    </div>
+  )
+}
 const Jitter = (props) => {
   const ref = useRef(null)
   useEffect(() => {
@@ -367,6 +407,7 @@ export {
   Phaseshift,
   Power,
   Reflectivity,
+  Sweep,
   Transmittance,
   Wavelength,
   draw_sine,
