@@ -40,8 +40,8 @@ const JitterBox = ({
 
   return (
     <div className={styles.box}>
-      <label style={{ color: 'white', textAlign: 'center', width: '100%' }}>
-        <h1 style={{ marginRight: '1rem' }}>{label}</h1>
+      <label>
+        <h1>{label}</h1>
       </label>
       {!hideCanvas && (
         <Jitter jitter={graphData} datapoints={datapoints} totaldelta={delta} />

@@ -25,8 +25,8 @@ const Box = ({
 }) => {
   return (
     <div className={styles.box}>
-      <label style={{ textAlign: 'center' }} htmlFor={'infoTODO'}>
-        <h1 style={{ textAlign: 'center' }}>{label}</h1>
+      <label htmlFor={'infoTODO'}>
+        <h1>{label}</h1>
       </label>
       <span className={styles.formula}>
         {formula && showDetails && <Formula formula={formula} />}
