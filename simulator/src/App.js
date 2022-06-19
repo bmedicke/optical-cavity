@@ -2,6 +2,7 @@ import * as math from 'mathjs'
 import Box from './Box.js'
 import InfoOverlay from './InfoOverlay.js'
 import JitterBox from './JitterBox.js'
+import SweepBox from './SweepBox.js'
 import styles from './App.module.scss'
 import {
   CavityLength,
