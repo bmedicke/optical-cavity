@@ -293,6 +293,15 @@ function App() {
             showDetails={showdetails}
             infoClick={infoClickHandler}
           />
+          <SweepBox
+            label="length sweep"
+            isActive={isLengthSweeping}
+            setIsActive={setIsLengthSweeping}
+            setter={setCavitylength}
+            hideCanvas={!showvisualizations}
+            showDetails={showdetails}
+            infoClick={infoClickHandler}
+          />
           <Box
             label="wave length"
             rgb={wavelengthColor}
