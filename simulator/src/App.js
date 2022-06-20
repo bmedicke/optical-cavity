@@ -208,13 +208,18 @@ function App() {
 
   const collapsBtnStyle = {
     position: 'absolute',
-    top: isBottomCollapsed ? '-52px' : 0,
+    top: 0,
     right: 0,
-    padding: '1rem',
-    border: '1px solid white',
-    borderRadius: '12%',
+    padding: '0 1rem',
+    borderTop: 'transparent',
+    borderBottom: 'transparent',
+    borderRight: '0.6px solid transparent',
+    borderLeft: '0.6px solid white',
+    borderRadius: '2%',
     background: isBottomCollapsed ? 'white' : 'transparent',
     color: isBottomCollapsed ? 'black' : 'white',
+    height: '100%',
+    fontSize: '1.2rem',
   }
 
   const infoObjects = {
@@ -520,7 +525,7 @@ function App() {
             onClick={() => setIsBottomCollapsed((x) => !x)}
             className="collapse-button"
           >
-            {isBottomCollapsed ? 'Show' : 'Hide'}
+            {isBottomCollapsed ? '↑' : '↓'}
           </button>
         </div>
       </div>
