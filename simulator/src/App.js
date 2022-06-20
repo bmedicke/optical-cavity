@@ -192,6 +192,7 @@ function App() {
     border: `1px solid ${rgb2string(wavelengthColor)}`,
     textAlign: 'center',
     color: isLocked ? `1px solid ${rgb2string(wavelengthColor)}` : 'white',
+    position: 'relative',
   }
   const bottomStyle = {
     backgroundImage: `linear-gradient( 0deg, black 25%, ${rgb2string(
@@ -518,8 +519,6 @@ function App() {
         <div style={statusStyle}>
           Cavity {isLocked ? 'is locked' : 'is out of phase'}
           {isMaximallyOutOfPhase && ' (maximally)'}
-        </div>
-        <div style={bottomStyle}>
           <button
             style={collapsBtnStyle}
             onClick={() => setIsBottomCollapsed((x) => !x)}
@@ -528,6 +527,7 @@ function App() {
             {isBottomCollapsed ? '↑' : '↓'}
           </button>
         </div>
+        <div style={bottomStyle}></div>
       </div>
     </MathJaxContext>
   )
