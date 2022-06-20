@@ -1,6 +1,7 @@
 import styles from './Box.module.scss'
 import { Jitter } from './Visualizations'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useInterval } from './utilities'
 
 const JitterBox = ({
   label = 'Jitter',
@@ -13,30 +14,26 @@ const JitterBox = ({
   const datapoints = 25
   const [graphData, setGraphData] = useState([])
   const [delta, setDelta] = useState(0)
+  const [delay, setDelay] = useState(30)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsActive((active) => {
-        if (active) {
-          setGraphData((graphdata) => {
-            graphdata.push(Math.floor(Math.random() * 3) - 1)
-            setDelta((x) => x + graphdata[graphdata.length - 1])
-            if (graphdata.length > datapoints) {
-              graphdata.shift()
-            }
-            return graphdata
-          })
-          if (setter) {
-            setter((value) => parseInt(value) + graphData[graphData.length - 1])
+  useInterval(() => {
+    setIsActive((active) => {
+      if (active) {
+        setGraphData((graphdata) => {
+          graphdata.push(Math.floor(Math.random() * 3) - 1)
+          setDelta((x) => x + graphdata[graphdata.length - 1])
+          if (graphdata.length > datapoints) {
+            graphdata.shift()
           }
+          return graphdata
+        })
+        if (setter) {
+          setter((value) => parseInt(value) + graphData[graphData.length - 1])
         }
-        return active
-      })
-    }, 10)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [])
+      }
+      return active
+    })
+  }, delay)
 
   return (
     <div
@@ -61,6 +58,14 @@ const JitterBox = ({
           reset delta
         </button>
       </div>
+      <input
+        type="range"
+        value={delay}
+        min={1}
+        max={100}
+        step={1}
+        onChange={(e) => setDelay(e.target.value)}
+      />
       {showDetails && (
         <button onClick={() => infoClick(label)} className={styles.infoBtn}>
           i

@@ -12,7 +12,7 @@ const SweepBox = ({
 }) => {
   const [isActive, setIsActive] = useState(false)
   const [isMovingLeft, setIsMovingLeft] = useState(false)
-  const [delay, setDelay] = useState(100)
+  const [delay, setDelay] = useState(30)
 
   useInterval(() => {
     if (isActive) {
@@ -53,7 +53,7 @@ const SweepBox = ({
         type="range"
         value={delay}
         min={1}
-        max={1000}
+        max={100}
         step={1}
         onChange={(e) => setDelay(e.target.value)}
       />
