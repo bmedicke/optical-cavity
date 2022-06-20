@@ -241,6 +241,16 @@ function App() {
   return (
     <MathJaxContext>
       <div className={`${styles.App}`}>
+        <a
+          className={`${styles['github-fork-ribbon']}
+                      github-fork-ribbon
+                      right-top`}
+          href="https://github.com/bmedicke/optical-cavity"
+          data-ribbon="Fork me on GitHub"
+          title="Fork me on GitHub"
+        >
+          Fork me on GitHub
+        </a>
         {!isOverlayHidden && (
           <InfoOverlay
             rgb={wavelengthColor}
