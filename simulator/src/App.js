@@ -85,7 +85,7 @@ function App() {
   // strict mode renders App twice (dev mode only):
   // https://reactjs.org/docs/strict-mode.html
   useEffect(() => {
-    const URL = 'mqtt://test.mosquitto.org:8081'
+    const URL = 'mqtt://test.mosquitto.org:8080'
     const client = mqtt.connect(URL)
     const topic = 'optical-cavity-simulator'
 
