@@ -3,6 +3,7 @@ import Box from './Box.js'
 import InfoOverlay from './InfoOverlay.js'
 import JitterBox from './JitterBox.js'
 import SweepBox from './SweepBox.js'
+import mqtt from 'precompiled-mqtt'
 import styles from './App.module.scss'
 import {
   CavityLength,
@@ -78,6 +79,34 @@ function App() {
   // logic controls:
   const [isLengthJittering, setIsLengthJittering] = useState(false)
   const [isLengthSweeping, setIsLengthSweeping] = useState(false)
+
+  // MQTT:
+  // mosquitto_sub -h test.mosquitto.org -t 'optical-cavity-simulator' | ts | tee app.log
+  // strict mode renders App twice (dev mode only):
+  // https://reactjs.org/docs/strict-mode.html
+  useEffect(() => {
+    const URL = 'mqtt://test.mosquitto.org:8080'
+    const client = mqtt.connect(URL)
+    const topic = 'optical-cavity-simulator'
+
+    client.on('connect', () => {
+      console.log(`connected to '${URL}', listening to '${topic}'`)
+      client.subscribe(topic, (err) => {
+        if (!err) {
+          client.publish(topic, `App() loaded`)
+        }
+      })
+    })
+
+    client.on('disconnect', () => {
+      console.log('disconnected')
+    })
+
+    client.on('message', (topic, message) => {
+      console.log(message.toString())
+      client.end()
+    })
+  }, [])
 
   useEffect(() => {
     setWavelengthColor(wavelength2rgb(wavelength))
