@@ -20,6 +20,27 @@ const CavityScene = () => {
       <pointLight position={[0, 50, 10]} intensity={1.5} />
       <Mirror position={[POS_ITM, 0, 0]} />
       <Mirror position={[POS_ETM, 0, 0]} />
+      <Ray
+        rayThickness={rayThickness}
+        length={10}
+        color={'#ff6c65'}
+        position={[-10 / 2, 0, 0]} //fixed
+        rotation={[0, 0, convertDegToRad(90)]}
+      />
+      <Ray
+        rayThickness={rayThickness}
+        length={caviLength / 10}
+        color={isResonant ? 'red' : '#ff6c65'}
+        position={[caviLength / 10 / 2, 0, 0]}
+        rotation={[0, 0, convertDegToRad(90)]}
+      />
+      <Ray
+        rayThickness={rayThickness}
+        length={10 - caviLength / 10}
+        color={'#ff6c65'}
+        position={[caviLength / 10 + (10 - caviLength / 10) / 2, 0, 0]}
+        rotation={[0, 0, convertDegToRad(90)]}
+      />
     </>
   )
 }
