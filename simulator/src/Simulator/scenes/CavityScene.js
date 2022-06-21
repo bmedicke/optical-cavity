@@ -12,7 +12,7 @@ const CavityScene = () => {
   const { caviLength } = useContext(CavityContext) // test out countext state
 
   let POS_ITM = 0
-  let POS_ETM = caviLength / 20
+  let POS_ETM = caviLength / 100
   const rayThickness = 0.05
   return (
     <>
