@@ -34,6 +34,10 @@ export const CavityProvider = (props) => {
   const [showdetails, setShowdetails] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
 
+  // logic controls:
+  const [isLengthJittering, setIsLengthJittering] = useState(false)
+  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
+
   const value = useMemo(
     () => ({
       caviLength,
@@ -86,6 +90,10 @@ export const CavityProvider = (props) => {
       setShowdetails,
       showvisualizations,
       setShowvisualizations,
+      isLengthJittering,
+      setIsLengthJittering,
+      isLengthSweeping,
+      setIsLengthSweeping,
     }),
     [
       caviLength,
@@ -113,6 +121,8 @@ export const CavityProvider = (props) => {
       infoObject,
       showdetails,
       showvisualizations,
+      isLengthJittering,
+      isLengthSweeping,
     ]
   )
   return <CavityContext.Provider value={value} {...props} />
