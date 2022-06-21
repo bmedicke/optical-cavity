@@ -10,6 +10,9 @@ const CavityScene = () => {
   const [isResonant, setIsResonant] = useState(true) //to be done
   const { caviLength } = useContext(CavityContext) // test out countext state
   return (
+    <>
+      <CameraController />
+    </>
   )
 }
 export default CavityScene
