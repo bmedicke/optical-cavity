@@ -9,6 +9,10 @@ import { convertDegToRad } from '../helpers'
 const CavityScene = () => {
   const [isResonant, setIsResonant] = useState(true) //to be done
   const { caviLength } = useContext(CavityContext) // test out countext state
+
+  let POS_ITM = 0
+  let POS_ETM = caviLength / 20
+  const rayThickness = 0.05
   return (
     <>
       <CameraController />
