@@ -86,6 +86,23 @@ function App() {
   const { isLengthJittering, setIsLengthJittering } = useContext(CavityContext)
   const { isLengthSweeping, setIsLengthSweeping } = useContext(CavityContext)
 
+  // handle presentation remote:
+  const keyHandler = (e) => {
+    switch (e.key) {
+      case 'PageDown':
+        e.preventDefault()
+        console.log('PageDown')
+        setIsLengthSweeping((x) => !x)
+        break
+      case 'PageUp':
+        e.preventDefault()
+        setIsLengthJittering((x) => !x)
+        break
+      default:
+    }
+  }
+  document.onkeydown = keyHandler
+
   // MQTT:
   // mosquitto_sub -h test.mosquitto.org -t 'optical-cavity-simulator' | ts | tee app.log
   // strict mode renders App twice (dev mode only):
