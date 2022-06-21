@@ -22,6 +22,7 @@ import { rad2deg } from './utilities'
 // TESTING OUT CONTEXT API
 import { useContext, useEffect, useState } from 'react'
 import { CavityContext } from './Simulator/ctx/CavityContext.js'
+import Simulator from './Simulator/Simulator.js'
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
   canvas.height = 64
@@ -118,10 +119,10 @@ function App() {
   }, [wavelength])
 
   useEffect(() => {
-    const locked = rad2deg(phaseshift) % 180 === 0 && cavitylength > 0
+    const locked = rad2deg(phaseshift) % 180 === 0 && caviLength > 0
     setIsLocked(locked)
     setIsMaximallyOutOfPhase(!locked && rad2deg(phaseshift) % 90 === 0)
-  }, [phaseshift, cavitylength])
+  }, [phaseshift, caviLength])
 
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
@@ -129,15 +130,15 @@ function App() {
   }, [wavelength])
 
   useEffect(() => {
-    setPhaseshift(((wavenumber * 10 * cavitylength) / 10) % (2 * Math.PI))
+    setPhaseshift(((wavenumber * 10 * caviLength) / 10) % (2 * Math.PI))
 
     const exponent = math.multiply(
       math.multiply(math.multiply(2, math.complex(0, 1)), wavenumber),
-      cavitylength ? cavitylength : 1.0
+      caviLength ? caviLength : 1.0
     )
     const exponentiation = math.pow(math.e, exponent)
     setEpow2ikl(exponentiation)
-  }, [wavenumber, cavitylength])
+  }, [wavenumber, caviLength])
 
   useEffect(() => {
     setM1reflectivity((x) => {
@@ -189,7 +190,7 @@ function App() {
 
   useEffect(() => {
     const exponent = math.multiply(
-      math.multiply(wavenumber, cavitylength),
+      math.multiply(wavenumber, caviLength),
       math.i
     )
     const exponentiation = math.pow(math.e, exponent)
@@ -206,7 +207,7 @@ function App() {
   }, [
     m1transmittance,
     m2transmittance,
-    cavitylength,
+    caviLength,
     wavenumber,
     m1reflectivity,
     m2reflectivity,
@@ -327,9 +328,9 @@ function App() {
             formula={`\\(L\\)`}
             step="1"
             unit="nm"
-            value={cavitylength}
-            canvasplot={<CavityLength cavitylength={cavitylength} />}
-            setF={(e) => setCavitylength(e.target.value)}
+            value={caviLength}
+            canvasplot={<CavityLength cavitylength={caviLength} />}
+            setF={(e) => setCaviLength(e.target.value)}
             showDetails={showdetails}
             infoClick={infoClickHandler}
           />
@@ -337,7 +338,7 @@ function App() {
             label="length jitter"
             isActive={isLengthJittering}
             setIsActive={setIsLengthJittering}
-            setter={setCavitylength}
+            setter={setCaviLength}
             hideCanvas={!showvisualizations}
             showDetails={showdetails}
             infoClick={infoClickHandler}
@@ -346,7 +347,7 @@ function App() {
             label="length sweep"
             isActive={isLengthSweeping}
             setIsActive={setIsLengthSweeping}
-            setter={setCavitylength}
+            setter={setCaviLength}
             hideCanvas={!showvisualizations}
             showDetails={showdetails}
             infoClick={infoClickHandler}
@@ -536,7 +537,7 @@ function App() {
           <button
             className={styles.btn}
             onClick={() => {
-              setCavitylength(wavelength)
+              setCaviLength(wavelength)
             }}
           >
             LOCK CAVITY
@@ -560,7 +561,10 @@ function App() {
             {isBottomCollapsed ? '↑' : '↓'}
           </button>
         </div>
-        <div style={bottomStyle}></div>
+        <div style={bottomStyle}>
+          <Simulator />
+          {}
+        </div>
       </div>
     </MathJaxContext>
   )
