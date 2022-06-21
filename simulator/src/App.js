@@ -2,9 +2,11 @@ import * as math from 'mathjs'
 import Box from './Box.js'
 import InfoOverlay from './InfoOverlay.js'
 import JitterBox from './JitterBox.js'
+import Simulator from './Simulator/Simulator.js'
 import SweepBox from './SweepBox.js'
 import mqtt from 'precompiled-mqtt'
 import styles from './App.module.scss'
+import { CavityContext } from './Simulator/ctx/CavityContext.js'
 import {
   CavityLength,
   Gain,
@@ -19,7 +21,7 @@ import {
 } from './Visualizations'
 import { MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
@@ -47,38 +49,42 @@ function App() {
   const c = 299792458 // speed of light in vacuum, m/s.
 
   // configurable variables:
-  const [cavitylength, setCavitylength] = useState(150) // in nm.
-  const [laserpower, setLaserpower] = useState(40) // in W.
-  const [m1reflectivity, setM1reflectivity] = useState(0.9)
-  const [m2reflectivity, setM2reflectivity] = useState(0.9)
-  const [wavelength, setWavelength] = useState(200) // in nm.
+  const { caviLength, setCaviLength } = useContext(CavityContext) // in nm.
+  const { laserpower, setLaserpower } = useContext(CavityContext) // in W.
+  const { m1reflectivity, setM1reflectivity } = useContext(CavityContext)
+  const { m2reflectivity, setM2reflectivity } = useContext(CavityContext)
+  const { wavelength, setWavelength } = useContext(CavityContext) // in nm.
 
   // calculated variables:
-  const [epow2ikl, setEpow2ikl] = useState(0) // e^(i*k*l).
-  const [finesse, setFinesse] = useState(0)
-  const [frequency, setFrequency] = useState(0)
-  const [isLocked, setIsLocked] = useState(false)
-  const [isMaximallyOutOfPhase, setIsMaximallyOutOfPhase] = useState(false)
-  const [m1transmittance, setM1transmittance] = useState(0)
-  const [m2transmittance, setM2transmittance] = useState(0)
-  const [opticalgain, setOpticalgain] = useState(0)
-  const [opticalgainRessonance, setOpticalgainRessonance] = useState(0)
-  const [phaseshift, setPhaseshift] = useState(0)
-  const [reflectedgain, setReflectedgain] = useState(0)
-  const [transmittedgain, setTransmittedgain] = useState(0)
-  const [wavenumber, setWavenumber] = useState(0)
+  const { epow2ikl, setEpow2ikl } = useContext(CavityContext) // e^(i*k*l).
+  const { finesse, setFinesse } = useContext(CavityContext)
+  const { frequency, setFrequency } = useContext(CavityContext)
+  const { isLocked, setIsLocked } = useContext(CavityContext)
+  const { isMaximallyOutOfPhase, setIsMaximallyOutOfPhase } =
+    useContext(CavityContext)
+  const { m1transmittance, setM1transmittance } = useContext(CavityContext)
+  const { m2transmittance, setM2transmittance } = useContext(CavityContext)
+  const { opticalgain, setOpticalgain } = useContext(CavityContext)
+  const { opticalgainRessonance, setOpticalgainRessonance } =
+    useContext(CavityContext)
+  const { phaseshift, setPhaseshift } = useContext(CavityContext)
+  const { reflectedgain, setReflectedgain } = useContext(CavityContext)
+  const { transmittedgain, setTransmittedgain } = useContext(CavityContext)
+  const { wavenumber, setWavenumber } = useContext(CavityContext)
 
   // ui controls:
-  const [isBottomCollapsed, setIsBottomCollapsed] = useState(true)
-  const [isOverlayHidden, setIsOverlayHidden] = useState(true)
-  const [infoObject, setInfoObject] = useState({})
-  const [showdetails, setShowdetails] = useState(false)
-  const [showvisualizations, setShowvisualizations] = useState(true)
-  const [wavelengthColor, setWavelengthColor] = useState({})
+  const { isBottomCollapsed, setIsBottomCollapsed } = useContext(CavityContext)
+  const { isOverlayHidden, setIsOverlayHidden } = useContext(CavityContext)
+  const { infoObject, setInfoObject } = useContext(CavityContext)
+  const { showdetails, setShowdetails } = useContext(CavityContext)
+  const { showvisualizations, setShowvisualizations } =
+    useContext(CavityContext)
+  const { wavelengthColor, setWavelengthColor } = useContext(CavityContext)
+  const { is3D, setIs3D } = useContext(CavityContext)
 
   // logic controls:
-  const [isLengthJittering, setIsLengthJittering] = useState(false)
-  const [isLengthSweeping, setIsLengthSweeping] = useState(false)
+  const { isLengthJittering, setIsLengthJittering } = useContext(CavityContext)
+  const { isLengthSweeping, setIsLengthSweeping } = useContext(CavityContext)
 
   // MQTT:
   // mosquitto_sub -h test.mosquitto.org -t 'optical-cavity-simulator' | ts | tee app.log
@@ -114,10 +120,10 @@ function App() {
   }, [wavelength])
 
   useEffect(() => {
-    const locked = rad2deg(phaseshift) % 180 === 0 && cavitylength > 0
+    const locked = rad2deg(phaseshift) % 180 === 0 && caviLength > 0
     setIsLocked(locked)
     setIsMaximallyOutOfPhase(!locked && rad2deg(phaseshift) % 90 === 0)
-  }, [phaseshift, cavitylength])
+  }, [phaseshift, caviLength])
 
   useEffect(() => {
     setWavenumber((2 * Math.PI) / wavelength)
@@ -125,15 +131,15 @@ function App() {
   }, [wavelength])
 
   useEffect(() => {
-    setPhaseshift(((wavenumber * 10 * cavitylength) / 10) % (2 * Math.PI))
+    setPhaseshift(((wavenumber * 10 * caviLength) / 10) % (2 * Math.PI))
 
     const exponent = math.multiply(
       math.multiply(math.multiply(2, math.complex(0, 1)), wavenumber),
-      cavitylength ? cavitylength : 1.0
+      caviLength ? caviLength : 1.0
     )
     const exponentiation = math.pow(math.e, exponent)
     setEpow2ikl(exponentiation)
-  }, [wavenumber, cavitylength])
+  }, [wavenumber, caviLength])
 
   useEffect(() => {
     setM1reflectivity((x) => {
@@ -185,7 +191,7 @@ function App() {
 
   useEffect(() => {
     const exponent = math.multiply(
-      math.multiply(wavenumber, cavitylength),
+      math.multiply(wavenumber, caviLength),
       math.i
     )
     const exponentiation = math.pow(math.e, exponent)
@@ -202,7 +208,7 @@ function App() {
   }, [
     m1transmittance,
     m2transmittance,
-    cavitylength,
+    caviLength,
     wavenumber,
     m1reflectivity,
     m2reflectivity,
@@ -250,6 +256,16 @@ function App() {
     color: isBottomCollapsed ? 'black' : 'white',
     height: '100%',
     fontSize: '1.2rem',
+  }
+
+  const threeDBtnStyle = {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
+    background: 'black',
+    color: 'white',
+    padding: '0.2rem 1rem',
   }
 
   const infoObjects = {
@@ -323,9 +339,9 @@ function App() {
             formula={`\\(L\\)`}
             step="1"
             unit="nm"
-            value={cavitylength}
-            canvasplot={<CavityLength cavitylength={cavitylength} />}
-            setF={(e) => setCavitylength(e.target.value)}
+            value={caviLength}
+            canvasplot={<CavityLength cavitylength={caviLength} />}
+            setF={(e) => setCaviLength(e.target.value)}
             showDetails={showdetails}
             infoClick={infoClickHandler}
           />
@@ -333,7 +349,7 @@ function App() {
             label="length jitter"
             isActive={isLengthJittering}
             setIsActive={setIsLengthJittering}
-            setter={setCavitylength}
+            setter={setCaviLength}
             hideCanvas={!showvisualizations}
             showDetails={showdetails}
             infoClick={infoClickHandler}
@@ -342,7 +358,7 @@ function App() {
             label="length sweep"
             isActive={isLengthSweeping}
             setIsActive={setIsLengthSweeping}
-            setter={setCavitylength}
+            setter={setCaviLength}
             hideCanvas={!showvisualizations}
             showDetails={showdetails}
             infoClick={infoClickHandler}
@@ -532,7 +548,7 @@ function App() {
           <button
             className={styles.btn}
             onClick={() => {
-              setCavitylength(wavelength)
+              setCaviLength(wavelength)
             }}
           >
             LOCK CAVITY
@@ -556,7 +572,16 @@ function App() {
             {isBottomCollapsed ? '↑' : '↓'}
           </button>
         </div>
-        <div style={bottomStyle}></div>
+        <div style={bottomStyle}>
+          <button
+            style={threeDBtnStyle}
+            onClick={() => setIs3D((x) => !x)}
+            className="threed-button"
+          >
+            {is3D ? '3D View' : '2D View'}
+          </button>
+          {is3D && <Simulator />}
+        </div>
       </div>
     </MathJaxContext>
   )
