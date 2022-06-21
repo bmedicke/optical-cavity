@@ -4,7 +4,7 @@ export const CavityContext = createContext({})
 
 export const CavityProvider = (props) => {
   const [caviLength, setCaviLength] = useState(150.0)
-  const [is3D, setIs3D] = useState(false)
+  const [is3D, setIs3D] = useState(true)
 
   const value = useMemo(
     () => ({
@@ -13,7 +13,7 @@ export const CavityProvider = (props) => {
       is3D,
       setIs3D,
     }),
-    [caviLength]
+    [caviLength, is3D]
   )
   return <CavityContext.Provider value={value} {...props} />
 }
