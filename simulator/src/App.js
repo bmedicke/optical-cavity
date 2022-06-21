@@ -561,10 +561,7 @@ function App() {
             {isBottomCollapsed ? '↑' : '↓'}
           </button>
         </div>
-        <div style={bottomStyle}>
-          <Simulator />
-          {}
-        </div>
+        <div style={bottomStyle}>{is3D && <Simulator />}</div>
       </div>
     </MathJaxContext>
   )
