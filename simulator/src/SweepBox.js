@@ -9,8 +9,9 @@ const SweepBox = ({
   hideCanvas = false,
   showDetails = false,
   infoClick = () => {},
+  setIsActive,
+  isActive,
 }) => {
-  const [isActive, setIsActive] = useState(false)
   const [isMovingLeft, setIsMovingLeft] = useState(false)
   const [delay, setDelay] = useState(30)
 

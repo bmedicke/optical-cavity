@@ -9,8 +9,9 @@ const JitterBox = ({
   hideCanvas = false,
   showDetails = false,
   infoClick = () => {},
+  setIsActive,
+  isActive,
 }) => {
-  const [isActive, setIsActive] = useState(false)
   const datapoints = 25
   const [graphData, setGraphData] = useState([])
   const [delta, setDelta] = useState(0)
