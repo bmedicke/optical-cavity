@@ -19,8 +19,9 @@ import {
 } from './Visualizations'
 import { MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
-import { useEffect, useState } from 'react'
-
+// TESTING OUT CONTEXT API
+import { useContext, useEffect, useState } from 'react'
+import { CavityContext } from './Simulator/ctx/CavityContext.js'
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')
   canvas.height = 64
