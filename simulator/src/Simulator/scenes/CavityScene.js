@@ -30,16 +30,16 @@ const CavityScene = () => {
       />
       <Ray
         rayThickness={rayThickness}
-        length={caviLength / 10}
+        length={caviLength / 100}
         color={isResonant ? 'red' : '#ff6c65'}
-        position={[caviLength / 10 / 2, 0, 0]}
+        position={[caviLength / 100 / 2, 0, 0]}
         rotation={[0, 0, convertDegToRad(90)]}
       />
       <Ray
         rayThickness={rayThickness}
-        length={10 - caviLength / 10}
+        length={100 - caviLength / 100}
         color={'#ff6c65'}
-        position={[caviLength / 10 + (10 - caviLength / 10) / 2, 0, 0]}
+        position={[caviLength / 100 + (100 - caviLength / 100) / 2, 0, 0]}
         rotation={[0, 0, convertDegToRad(90)]}
       />
     </>
