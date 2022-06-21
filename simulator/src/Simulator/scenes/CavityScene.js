@@ -16,6 +16,8 @@ const CavityScene = () => {
   return (
     <>
       <CameraController />
+      <ambientLight />
+      <pointLight position={[0, 50, 10]} intensity={1.5} />
     </>
   )
 }
