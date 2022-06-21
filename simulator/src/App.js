@@ -79,7 +79,8 @@ function App() {
   const [infoObject, setInfoObject] = useState({})
   const [showdetails, setShowdetails] = useState(false)
   const [showvisualizations, setShowvisualizations] = useState(true)
-  const [wavelengthColor, setWavelengthColor] = useState({})
+  // const [wavelengthColor, setWavelengthColor] = useState({})
+  const { wavelengthColor, setWavelengthColor } = useContext(CavityContext)
   const { is3D, setIs3D } = useContext(CavityContext)
   // logic controls:
   const [isLengthJittering, setIsLengthJittering] = useState(false)
