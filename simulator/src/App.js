@@ -257,6 +257,16 @@ function App() {
     fontSize: '1.2rem',
   }
 
+  const threeDBtnStyle = {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    zIndex: 1,
+    background: 'black',
+    color: 'white',
+    padding: '0.2rem 1rem',
+  }
+
   const infoObjects = {
     'laser power': {
       label: 'laser power',
@@ -561,7 +571,16 @@ function App() {
             {isBottomCollapsed ? '↑' : '↓'}
           </button>
         </div>
-        <div style={bottomStyle}>{is3D && <Simulator />}</div>
+        <div style={bottomStyle}>
+          <button
+            style={threeDBtnStyle}
+            onClick={() => setIs3D((x) => !x)}
+            className="threed-button"
+          >
+            {is3D ? '3D View' : '2D View'}
+          </button>
+          {is3D && <Simulator />}
+        </div>
       </div>
     </MathJaxContext>
   )
