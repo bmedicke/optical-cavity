@@ -18,6 +18,8 @@ const CavityScene = () => {
       <CameraController />
       <ambientLight />
       <pointLight position={[0, 50, 10]} intensity={1.5} />
+      <Mirror position={[POS_ITM, 0, 0]} />
+      <Mirror position={[POS_ETM, 0, 0]} />
     </>
   )
 }
