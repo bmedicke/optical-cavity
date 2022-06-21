@@ -48,7 +48,10 @@ function App() {
   const c = 299792458 // speed of light in vacuum, m/s.
 
   // configurable variables:
-  const [cavitylength, setCavitylength] = useState(150) // in nm.
+  // const [cavitylength, setCavitylength] = useState(150) // in nm.
+  //
+  // TRY CONTEXT VARIABLE INSTEAD .. WORKS
+  const { caviLength, setCaviLength } = useContext(CavityContext) // in nm.
   const [laserpower, setLaserpower] = useState(40) // in W.
   const [m1reflectivity, setM1reflectivity] = useState(0.9)
   const [m2reflectivity, setM2reflectivity] = useState(0.9)
