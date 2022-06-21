@@ -4,7 +4,9 @@ export const CavityContext = createContext({})
 
 export const CavityProvider = (props) => {
   const [caviLength, setCaviLength] = useState(150.0)
+
   const [is3D, setIs3D] = useState(true)
+  const [wavelengthColor, setWavelengthColor] = useState({})
 
   const value = useMemo(
     () => ({
@@ -12,8 +14,10 @@ export const CavityProvider = (props) => {
       setCaviLength,
       is3D,
       setIs3D,
+      wavelengthColor,
+      setWavelengthColor,
     }),
-    [caviLength, is3D]
+    [caviLength, is3D, wavelengthColor]
   )
   return <CavityContext.Provider value={value} {...props} />
 }
