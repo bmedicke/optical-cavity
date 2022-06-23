@@ -595,7 +595,7 @@ function App() {
             onClick={() => setIs3D((x) => !x)}
             className="threed-button"
           >
-            {is3D ? '3D View' : '2D View'}
+            {is3D ? 'switch to 2D' : 'switch to 3D'}
           </button>
           {is3D && <Simulator />}
         </div>
