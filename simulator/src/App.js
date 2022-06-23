@@ -314,10 +314,10 @@ function App() {
                       github-fork-ribbon
                       right-top`}
           href="https://github.com/bmedicke/optical-cavity"
-          data-ribbon="Fork me on GitHub"
-          title="Fork me on GitHub"
+          data-ribbon="Star me on GitHub"
+          title="Star me on GitHub"
         >
-          Fork me on GitHub
+          Star me on GitHub
         </a>
         {!isOverlayHidden && (
           <InfoOverlay
