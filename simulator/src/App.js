@@ -21,7 +21,7 @@ import {
 } from './Visualizations'
 import { MathJaxContext } from 'better-react-mathjax'
 import { rad2deg } from './utilities'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 function changeFavicon(wavelength) {
   const canvas = document.createElement('canvas')

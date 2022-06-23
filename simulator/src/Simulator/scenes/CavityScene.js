@@ -1,11 +1,10 @@
-//const [cavityLength, setCavityLength] = useState(length)
-import { useContext, useState, useEffect } from 'react'
-import { deg2rad } from '../../utilities.js'
-import { rgb2string } from '../../Visualizations.js'
 import CameraController from '../components/CameraController'
 import Mirror from '../components/Mirror'
 import Ray from '../components/Ray'
 import { CavityContext } from '../ctx/CavityContext'
+import { deg2rad } from '../../utilities.js'
+import { rgb2string } from '../../Visualizations.js'
+import { useContext, useState, useEffect } from 'react'
 
 // TO BE DONE : COLORING NOT YET FINISHED
 const CavityScene = () => {

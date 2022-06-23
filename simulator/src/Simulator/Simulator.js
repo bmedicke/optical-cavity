@@ -1,8 +1,8 @@
-import { useContextBridge } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
-import styles from './Simulator.module.scss'
-import { CavityContext } from './ctx/CavityContext'
 import CavityScene from './scenes/CavityScene'
+import styles from './Simulator.module.scss'
+import { Canvas } from '@react-three/fiber'
+import { CavityContext } from './ctx/CavityContext'
+import { useContextBridge } from '@react-three/drei'
 
 const Simulator = () => {
   const ContextBridge = useContextBridge(CavityContext)
