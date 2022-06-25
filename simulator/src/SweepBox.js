@@ -13,6 +13,8 @@ const SweepBox = ({
   isActive,
 }) => {
   const [isMovingLeft, setIsMovingLeft] = useState(false)
+  const [minValue, setIsMinValue] = useState(1)
+  const [maxValue, setIsMaxValue] = useState(1000)
   const [delay, setDelay] = useState(30)
 
   useInterval(() => {
@@ -20,12 +22,12 @@ const SweepBox = ({
       if (setter) {
         setter((value) => {
           let newValue = parseInt(value) + (isMovingLeft ? -1 : 1)
-          if (newValue < 1) {
+          if (newValue < minValue) {
             setIsMovingLeft((x) => !x)
-            newValue = 1
-          } else if (newValue > 1000) {
+            newValue = minValue
+          } else if (newValue > maxValue) {
             setIsMovingLeft((x) => !x)
-            newValue = 1000
+            newValue = maxValue
           }
           return newValue
         })
@@ -49,6 +51,22 @@ const SweepBox = ({
         <button onClick={() => setIsMovingLeft((x) => !x)}>
           {isMovingLeft ? 'move right' : 'move left'}
         </button>
+      </div>
+      <div className={'button-container'}>
+        <input
+          type="number"
+          value={minValue}
+          onChange={(e) => setIsMinValue(e.target.value)}
+          // TODO style it:
+          style={{ maxWidth: '35%' }}
+        />
+        <input
+          type="number"
+          value={maxValue}
+          onChange={(e) => setIsMaxValue(e.target.value)}
+          // TODO style it:
+          style={{ maxWidth: '35%' }}
+        />
       </div>
       <input
         type="range"
