@@ -57,12 +57,14 @@ const SweepBox = ({
           type="number"
           value={minValue}
           onChange={(e) => setIsMinValue(e.target.value)}
+          // TODO style it:
           style={{ maxWidth: '35%' }}
         />
         <input
           type="number"
           value={maxValue}
           onChange={(e) => setIsMaxValue(e.target.value)}
+          // TODO style it:
           style={{ maxWidth: '35%' }}
         />
       </div>
