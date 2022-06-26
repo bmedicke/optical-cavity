@@ -98,6 +98,10 @@ function App() {
         e.preventDefault()
         setIsLengthJittering((x) => !x)
         break
+      case '.':
+        e.preventDefault()
+        setIsBottomCollapsed((x) => !x)
+        break
       default:
     }
   }
