@@ -403,7 +403,7 @@ function App() {
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             isResult
-            formula={`\\(f = \\dfrac{c}{\\lambda}\\)`}
+            formula={`\\(\\nu = \\dfrac{c}{\\lambda}\\)`}
             unit="THz"
             value={Math.round((frequency / 1e12) * 100) / 100}
             canvasplot={<Wavelength wavelength={wavelength} />}
