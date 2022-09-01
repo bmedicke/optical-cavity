@@ -38,7 +38,7 @@ const SweepBox = ({
   return (
     <div
       className={styles.box}
-      style={hideCanvas ? { minHeight: '100px' } : { minHeight: '350px' }}
+      style={hideCanvas ? { minHeight: '140px' } : { minHeight: '350px' }}
     >
       <div className={styles.preCanvas}>
         <label>
