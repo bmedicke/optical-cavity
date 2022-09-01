@@ -46,7 +46,7 @@ const SweepBox = ({
         </label>
       </div>
       {!hideCanvas && <Sweep isMovingLeft={isMovingLeft} isActive={isActive} />}
-      <div className={'button-container'}>
+      <div className={styles.buttonContainer}>
         <button onClick={() => setIsActive((x) => !x)}>
           {isActive ? 'turn off' : 'turn on'}
         </button>
@@ -54,7 +54,7 @@ const SweepBox = ({
           {isMovingLeft ? 'move right' : 'move left'}
         </button>
       </div>
-      <div className={'button-container'}>
+      <div className={styles.buttonContainer}>
         <input
           type="number"
           value={minValue}
