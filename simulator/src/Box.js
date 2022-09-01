@@ -26,30 +26,32 @@ const Box = ({
   return (
     <div
       className={styles.box}
-      style={hideCanvas ? { minHeight: '100px' } : { minHeight: '300px' }}
+      style={hideCanvas ? { minHeight: '100px' } : { minHeight: '350px' }}
     >
-      <label htmlFor={'infoTODO'}>
-        <h1>{label}</h1>
-      </label>
-      <span className={styles.formula}>
-        {formula && showDetails && <Formula formula={formula} />}
-      </span>
-      <span>
-        {isResult ? (
-          <input type="number" disabled value={value} />
-        ) : (
-          <input
-            id="infoTODO"
-            type="number"
-            min={min}
-            max={max}
-            step={step}
-            onChange={setF}
-            value={value}
-          />
-        )}
-        {unit}
-      </span>
+      <div className={styles.preCanvas}>
+        <label htmlFor={'infoTODO'}>
+          <h1>{label}</h1>
+        </label>
+        <span className={styles.formula}>
+          {formula && showDetails && <Formula formula={formula} />}
+        </span>
+        <span>
+          {isResult ? (
+            <input type="number" disabled value={value} />
+          ) : (
+            <input
+              id="infoTODO"
+              type="number"
+              min={min}
+              max={max}
+              step={step}
+              onChange={setF}
+              value={value}
+            />
+          )}
+          {unit}
+        </span>
+      </div>
       {!hideCanvas && canvasplot}
       {!isResult && (
         <input

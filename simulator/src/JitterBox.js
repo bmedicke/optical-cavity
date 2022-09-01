@@ -39,11 +39,13 @@ const JitterBox = ({
   return (
     <div
       className={styles.box}
-      style={hideCanvas ? { minHeight: '100px' } : { minHeight: '300px' }}
+      style={hideCanvas ? { minHeight: '100px' } : { minHeight: '350px' }}
     >
-      <label>
-        <h1>{label}</h1>
-      </label>
+      <div className={styles.preCanvas}>
+        <label>
+          <h1>{label}</h1>
+        </label>
+      </div>
       {!hideCanvas && (
         <Jitter jitter={graphData} datapoints={datapoints} totaldelta={delta} />
       )}

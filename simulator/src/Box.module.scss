@@ -3,15 +3,22 @@
   display: inline-flex;
   flex-direction: column;
   margin: 2.5px 2.5px;
-  justify-content: space-evenly;
+  // justify-content: space-evenly;
   align-items: center;
   width: 220px;
   min-width: 220px;
   position: relative;
 }
 
+.preCanvas {
+  min-height: 70px;
+}
+
 .formula {
   font-size: 85%;
+}
+.formula span {
+  min-height: 65px;
 }
 
 .infoBtn {
