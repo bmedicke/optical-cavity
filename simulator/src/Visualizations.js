@@ -299,7 +299,7 @@ const Wavelength = (props) => {
     context.font = `${Math.round(canvas.width / 13)}px Lato`
     var text = ''
 
-    if (props.wavelength < 2) {
+    if (props.wavelength < 11) {
       text = 'x-ray'
     } else if (props.wavelength < 380) {
       text = 'ultraviolet'
