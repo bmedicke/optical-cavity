@@ -385,7 +385,7 @@ function App() {
             infoClick={infoClickHandler}
           />
           <Box
-            label="wave length"
+            label="wavelength"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
             min="1"
