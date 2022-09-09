@@ -176,7 +176,7 @@ function App() {
     // calculate the cavity finesse:
     const reflectivityproduct = math.multiply(m1reflectivity, m2reflectivity)
     const numerator = math.subtract(1, reflectivityproduct)
-    const denominator = math.multiply(2, math.sqrt(reflectivityproduct))
+    const denominator = math.multiply(2, math.nthRoot(4, reflectivityproduct))
 
     const outerNumerator = math.pi
     const outerDenominator = math.multiply(
@@ -495,7 +495,7 @@ function App() {
             label="maximum optical gain"
             rgb={wavelengthColor}
             hideCanvas={!showvisualizations}
-            formula={`\\(\\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2}\\right|\\)`}
+            formula={`\\(\\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{it_1}{1 - r_1 r_2}\\right|\\)`}
             isResult
             canvasplot={
               <Gain power={laserpower} gain={opticalgainRessonance} />
@@ -511,7 +511,7 @@ function App() {
             isResult
             unit=""
             formula={`\\(
-              \\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\left|\\dfrac{E_\\mathrm{cavity}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{it_1}{1 - r_1 r_2 e^{-2i\\phi}}\\right|
               \\)`}
             canvasplot={<Gain power={laserpower} gain={opticalgain} />}
             value={opticalgain}
@@ -524,7 +524,7 @@ function App() {
             isResult
             unit=""
             formula={`\\(
-              \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{2ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\left|\\dfrac{E_\\mathrm{reflected}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{-r_1 + r_2e^{-2i\\phi}}{1 - r_1 r_2 e^{-2i\\phi}}\\right|
               \\)`}
             canvasplot={<Gain power={laserpower} gain={reflectedgain} />}
             value={reflectedgain}
@@ -534,7 +534,7 @@ function App() {
             label="transmitted gain"
             rgb={wavelengthColor}
             formula={`\\(
-              \\left|\\dfrac{E_\\mathrm{transmitted}}{E_\\mathrm{laser}}\\right| = \\left|\\dfrac{t_1 t_2 e^{ikL}}{1 - r_1 r_2 e^{2ikL}}\\right|
+              \\left|\\dfrac{E_\\mathrm{transmitted}}{E_\\mathrm{in}}\\right| = \\left|\\dfrac{-t_1 t_2 e^{-i\\phi}}{1 - r_1 r_2 e^{-2i\\phi}}\\right|
               \\)`}
             hideCanvas={!showvisualizations}
             isResult
@@ -547,7 +547,7 @@ function App() {
             label="cavity finesse"
             rgb={wavelengthColor}
             formula={`\\(
-              \\mathcal{F} = \\dfrac{\\pi}{2 \\arcsin{\\left( \\dfrac{1 - r_1 r_2}{2 \\sqrt{r_1 r_2}}\\right)}}
+              \\mathcal{F}_{Airy} = \\dfrac{\\pi}{2 \\arcsin{\\left( \\dfrac{1 - r_1 r_2}{2 \\sqrt[4]{r_1 r_2}}\\right)}}
               \\)`}
             hideCanvas={!showvisualizations}
             isResult
