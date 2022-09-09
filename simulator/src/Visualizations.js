@@ -1,6 +1,7 @@
 import styles from './Visualizations.module.scss'
 import { useEffect, useRef } from 'react'
 
+// https://stackoverflow.com/questions/56820706/how-to-convert-from-color-wavelength-to-rgb-or-hsl
 const wavelength2rgb = (wl) => {
   var color
   const s = wl < 420 ? 0.3 + (0.7 * (wl - 380.0)) / (420.0 - 380.0) : 1.0
