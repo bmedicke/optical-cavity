@@ -324,8 +324,7 @@ const Wavelength = (props) => {
         ((Math.sin((x / canvas.width) * frequency * 2 * Math.PI) *
           (canvas.height / 2)) /
           (100 + context.lineWidth * 4)) *
-          50 +
-        canvas.height / 2
+          50 + canvas.height / 2
       x = i
       context.lineTo(x, y)
     }
