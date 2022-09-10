@@ -547,7 +547,7 @@ function App() {
             label="cavity finesse"
             rgb={wavelengthColor}
             formula={`\\(
-              \\mathcal{F}_{Airy} = \\dfrac{\\pi}{2 \\arcsin{\\left( \\dfrac{1 - r_1 r_2}{2 \\sqrt[4]{r_1 r_2}}\\right)}}
+              \\mathcal{F}_{Airy} = \\dfrac{\\pi}{2 \\arcsin{\\left( \\dfrac{1 - \\sqrt{r_1 r_2}}{2 \\sqrt[4]{r_1 r_2}}\\right)}}
               \\)`}
             hideCanvas={!showvisualizations}
             isResult
